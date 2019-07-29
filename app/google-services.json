@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "841705952148",
+    "firebase_url": "https://deporappcbba.firebaseio.com",
+    "project_id": "deporappcbba",
+    "storage_bucket": "deporappcbba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841705952148:android:e79bb27465bf0eca",
+        "android_client_info": {
+          "package_name": "io.github.n0g4y0.deporapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841705952148-s77tlj9jhuol81cahm3fmsc2cjkp9cp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-KCkeHHNnVdqlRYJl4C1Ylczh2etp_Pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841705952148-s77tlj9jhuol81cahm3fmsc2cjkp9cp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
