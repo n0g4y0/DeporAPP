@@ -55,6 +55,8 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
     />
+
+    <!--
     <TextView
             android:id="@+id/back_to_register_textview"
             android:text="Regresar al registro"
@@ -69,5 +71,6 @@
             android:textSize="16sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+      -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

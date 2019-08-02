@@ -27,7 +27,7 @@
     />
     <EditText
             android:id="@+id/email_edittext_register"
-            android:text="prueba@gmail.com"
+            android:text="test@gmail.com"
             android:inputType="textEmailAddress"
             android:hint="Email"
             android:paddingLeft="16dp"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.squareup.picasso.Picasso
+import io.github.n0g4y0.deporapp.registerlogin.LoginActivity
 import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 
@@ -29,6 +30,12 @@ class IntroActivity : AppCompatActivity() {
 
 
         val myintent = Intent(this,RegisterActivity::class.java)
+        startActivity(myintent)
+    }
+    fun openLogin(view:View){
+
+
+        val myintent = Intent(this, LoginActivity::class.java)
         startActivity(myintent)
     }
 }

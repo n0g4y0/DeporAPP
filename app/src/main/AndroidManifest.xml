@@ -15,6 +15,10 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".registerlogin.LoginActivity">
+            <!-- opcion para volver atras (feclita en la parte superior:) -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".IntroActivity"/>
         </activity>
         <activity android:name=".registerlogin.RegisterActivity">
         </activity>

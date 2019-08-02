@@ -17,9 +17,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // accion que hara cuando presionamos el boton de regresar al inicio, finalizamos el presente ACTIVITY:
-        back_to_register_textview.setOnClickListener {
-                finish()
-        }
+       /* back_to_register_textview.setOnClickListener {
+                //finaliza un ACTIVITY:
+                //finish()
+        }*/
 
         // accion cuando presionamos el boton de LOGUEO:
         login_button_login.setOnClickListener {
