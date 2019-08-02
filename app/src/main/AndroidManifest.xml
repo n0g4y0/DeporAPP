@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".registerlogin.RegisterActivity">
         </activity>
-        <activity android:name=".IntroActivity">
+        <activity android:name=".IntroActivity"
+                  android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -13,12 +13,13 @@ class IntroActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
         // añadiendo la imagen PNG al ImageView:
         Picasso.get()
-            .load(R.drawable.deporapp_intro)
+            .load(R.drawable.deporapp_intro_new)
             .resize(1000,1000)
             .onlyScaleDown()
             .centerCrop()
