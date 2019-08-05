@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:showIn="navigation_view">>
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_new_game"
+                android:icon="@drawable/ic_action_add_game"
+                android:title="Crear Encuentro"/>
+        <item
+                android:id="@+id/nav_cercanos"
+                android:icon="@drawable/ic_action_add_cercanos"
+                android:title="Cercanos"/>
+        <item
+                android:id="@+id/nav_my_games"
+                android:icon="@drawable/ic_action_add_my_games"
+                android:title="Mis Encuentros"/>
+        <item
+                android:id="@+id/nav_courts"
+                android:icon="@drawable/ic_action_courts"
+                android:title="Canchas Deportivas"/>
+        <item
+                android:id="@+id/nav_new_team"
+                android:icon="@drawable/ic_action_new_team"
+                android:title="Crear Equipo"/>
+    </group>
+    <item
+            android:title="Acerca">
+        <menu>
+            <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_action_profile"
+                    android:title="Perfil"/>
+            <item
+                    android:id="@+id/nav_about_us"
+                    android:icon="@drawable/ic_action_about_us"
+                    android:title="Acerca De"/>
+
+            <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_action_logout"
+                    android:title="Salir"/>
+
+        </menu>
+
+
+    </item>
+
+</menu>

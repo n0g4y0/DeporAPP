@@ -12,7 +12,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:label="@string/title_activity_menu">
         </activity>
         <activity android:name=".registerlogin.LoginActivity">
             <!-- opcion para volver atras (feclita en la parte superior:) -->
