@@ -8,6 +8,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -18,6 +21,7 @@ import io.github.n0g4y0.deporapp.model.User
 import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
+import kotlinx.android.synthetic.main.content_menu.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
@@ -73,7 +77,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
+    /*
+    * FUNCION PRINCIPAL DE LA APLICACION:
+    *
+    * */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +95,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
+
+        // las siguientes lineas, nos ayudan a agregar TABS al menu principal (mediante FRAGMENTS):
+        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+        viewpager_main.adapter = fragmentAdapter
+
+        tabs_main.setupWithViewPager(viewpager_main)
 
         // traer al usuario actual:
         fetchCurrentUser()
@@ -130,6 +143,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
 
+    }
+
+}
+
+/*
+*  esta CLASE, viene a representar el manejo de FRAGMENTS, en modo de PAGINAS, usa la clase FragmentAdapter
+* */
+
+internal class MyPagerAdapter(fm:FragmentManager): FragmentPagerAdapter(fm){
+
+    override fun getItem(position: Int): Fragment {
+        return when (position){
+            0 -> {
+                HomeFragment()
+            }
+            1 -> {
+                GamesFragment()
+            }
+            else ->{
+                return HomeFragment()
+            }
+        }
+    }
+
+    override fun getCount(): Int {
+        return 2
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when (position){
+            0 -> "Inicio"
+            1 -> "Encuentros"
+            else -> {
+                return "Inicio"
+            }
+
+        }
     }
 
 }
