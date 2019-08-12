@@ -1,10 +1,9 @@
-package io.github.n0g4y0.deporapp
+package io.github.n0g4y0.deporapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -17,7 +16,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.fragments.GamesFragment
+import io.github.n0g4y0.deporapp.fragments.HomeFragment
+import io.github.n0g4y0.deporapp.models.User
 import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
@@ -89,7 +91,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
 
         drawer_layout.addDrawerListener(toggle)

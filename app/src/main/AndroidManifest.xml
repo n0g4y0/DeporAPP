@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:label="@string/title_activity_menu">
         </activity>
@@ -20,11 +20,11 @@
             <!-- opcion para volver atras (feclita en la parte superior:) -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".IntroActivity"/>
+                    android:value=".activities.IntroActivity"/>
         </activity>
         <activity android:name=".registerlogin.RegisterActivity">
         </activity>
-        <activity android:name=".IntroActivity"
+        <activity android:name=".activities.IntroActivity"
                   android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.model
+package io.github.n0g4y0.deporapp.models
 
 
 class User(val uid:String, val username:String){

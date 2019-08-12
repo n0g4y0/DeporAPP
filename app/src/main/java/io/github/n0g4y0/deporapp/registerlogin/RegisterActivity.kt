@@ -7,10 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import io.github.n0g4y0.deporapp.MainActivity
+import io.github.n0g4y0.deporapp.activities.MainActivity
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.model.User
-import kotlinx.android.synthetic.main.activity_login.*
+import io.github.n0g4y0.deporapp.models.User
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -86,7 +85,7 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d(NAME_ACTIVITY,"finalmente guardamos al usuario en la BD de FIREBASE")
 
                 // iniciamos el activity principal:
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

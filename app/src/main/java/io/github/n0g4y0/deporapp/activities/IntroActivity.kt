@@ -1,10 +1,11 @@
-package io.github.n0g4y0.deporapp
+package io.github.n0g4y0.deporapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.squareup.picasso.Picasso
+import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.registerlogin.LoginActivity
 import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
 import kotlinx.android.synthetic.main.activity_intro.*
