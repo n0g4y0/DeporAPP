@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -62,6 +63,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_about_us -> {
+
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("Acerca De")
+                    .setMessage(R.string.descripcion_texview_about_fragment)
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show()
 
             }
         }
