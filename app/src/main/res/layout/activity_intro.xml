@@ -35,7 +35,6 @@
     <Button
             android:id="@+id/button_new_account"
             android:text="Crear Cuenta"
-            android:onClick="openRegister"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:textColor="@android:color/white"
@@ -49,7 +48,6 @@
     <Button
             android:id="@+id/button_show_login"
             android:text="INICIAR SESION"
-            android:onClick="openLogin"
             android:textColor="@android:color/white"
             android:background="@drawable/rounded_button"
             android:layout_marginLeft="16dp"

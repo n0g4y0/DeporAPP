@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import com.squareup.picasso.Picasso
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.registerlogin.LoginActivity
@@ -12,6 +13,9 @@ import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : AppCompatActivity() {
 
+
+    private lateinit var botonLogin : Button
+    private lateinit var botonRegistro : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -26,18 +30,19 @@ class IntroActivity : AppCompatActivity() {
             .centerCrop()
             .into(imagen_intro)
 
+        botonLogin = findViewById(R.id.button_show_login)
+        botonRegistro = findViewById(R.id.button_new_account)
+
+        botonLogin.setOnClickListener {
+            val myintent = Intent(this, LoginActivity::class.java)
+            startActivity(myintent)
+        }
+
+        botonRegistro.setOnClickListener {
+            val myintent = Intent(this,RegisterActivity::class.java)
+            startActivity(myintent)
+        }
+
     }
 
-    fun openRegister(view:View){
-
-
-        val myintent = Intent(this,RegisterActivity::class.java)
-        startActivity(myintent)
-    }
-    fun openLogin(view:View){
-
-
-        val myintent = Intent(this, LoginActivity::class.java)
-        startActivity(myintent)
-    }
 }
