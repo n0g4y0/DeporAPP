@@ -5,8 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".registerlogin.RegisterActivity"
-        android:background="@android:color/holo_green_light">
+        tools:context=".registerlogin.RegisterActivity">
 
 
 
@@ -58,7 +57,7 @@
     />
     <Button
             android:id="@+id/register_button"
-            android:text="REGISTER"
+            android:text="Registrar"
             android:paddingLeft="16dp"
             app:layout_constraintTop_toBottomOf="@+id/password_edittext_register"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -81,7 +80,6 @@
             android:layout_marginRight="32dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="0dp"
