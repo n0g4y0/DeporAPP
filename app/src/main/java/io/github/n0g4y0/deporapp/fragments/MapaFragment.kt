@@ -52,10 +52,12 @@ class MapaFragment : Fragment(),OnMapReadyCallback  {
         mMap = googleMap
         // añadiendo una marca en bolivia:
 
-        val bolivia = LatLng(-16.2362083,-68.0469867)
+        val cbba = LatLng(-17.3940469,-66.2339162)
         mMap.let {
-            it?.addMarker(MarkerOptions().position(bolivia).title("Marca en Bolivia"))
-            it?.moveCamera(CameraUpdateFactory.newLatLng(bolivia))
+            it?.addMarker(MarkerOptions().position(cbba).title("Marca en Bolivia"))
+            it?.moveCamera(CameraUpdateFactory.newLatLng(cbba))
+            
+
         }
 
 

@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.fragments.GamesFragment
 import io.github.n0g4y0.deporapp.fragments.HomeFragment
+import io.github.n0g4y0.deporapp.fragments.MapaFragment
 import io.github.n0g4y0.deporapp.models.User
 import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,6 +46,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // Handle the camera action
             }
             R.id.nav_cercanos -> {
+
+                // empezando a usar el FRAGMENT MANAGER:
+                val FragmentActual = supportFragmentManager.findFragmentById(R.id.contenedor_de_fragments)
+
+                if (FragmentActual == null){
+
+                    val fragment = MapaFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.contenedor_de_fragments,fragment)
+                        .addToBackStack(null)
+                        .commit()
+                }
 
             }
             R.id.nav_my_games -> {
@@ -95,6 +109,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // PRUEBAS PARA TRAER FARGMENTS:
+
+
+
         // para el NAVIGATION DRAWER:
         setSupportActionBar(toolbar)
 
