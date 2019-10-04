@@ -56,7 +56,7 @@ class MapaFragment : Fragment(),OnMapReadyCallback  {
         mMap.let {
             it?.addMarker(MarkerOptions().position(cbba).title("Marca en Bolivia"))
             it?.moveCamera(CameraUpdateFactory.newLatLng(cbba))
-            
+
 
         }
 
