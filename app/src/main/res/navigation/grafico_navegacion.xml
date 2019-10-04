@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/grafico_navegacion" app:startDestination="@id/placeholder">
+
+    <fragment android:id="@+id/menu_principal">
+        <action android:id="@+id/action_placeholder_to_placeholder2" app:destination="@id/placeholder2"/>
+    </fragment>
+    <fragment android:id="@+id/canchas_deportivas"/>
+</navigation>
