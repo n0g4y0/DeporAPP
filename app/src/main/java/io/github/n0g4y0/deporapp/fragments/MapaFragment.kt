@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import io.github.n0g4y0.deporapp.R
+import kotlinx.android.synthetic.main.fragment_mapa.*
 
 class MapaFragment : Fragment(),OnMapReadyCallback  {
 
@@ -19,8 +20,12 @@ class MapaFragment : Fragment(),OnMapReadyCallback  {
     private var mMapView : MapView? = null
     private var mView : View? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        mapa_view.onCreate(savedInstanceState)
+        mapa_view.onResume()
+        mapa_view.getMapAsync(this)
     }
 
     override fun onCreateView(
@@ -33,21 +38,7 @@ class MapaFragment : Fragment(),OnMapReadyCallback  {
 
         return view
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mMapView = mView?.findViewById(R.id.mapa_view) as MapView
-        if (mMapView != null ){
-            mMapView!!.onCreate(null)
-            mMapView!!.onResume()
-            mMapView!!.getMapAsync(this)
-        }
-    }
-
     override fun onMapReady(googleMap: GoogleMap?) {
-
-        MapsInitializer.initialize(context)
 
         mMap = googleMap
         // añadiendo una marca en bolivia:
