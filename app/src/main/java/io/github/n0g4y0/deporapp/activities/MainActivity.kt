@@ -127,12 +127,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
 
-        // las siguientes lineas, nos ayudan a agregar TABS al menu principal (mediante FRAGMENTS):
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
-        viewpager_main.adapter = fragmentAdapter
-
-        tabs_main.setupWithViewPager(viewpager_main)
-
         // traer al usuario actual:
         fetchCurrentUser()
 
@@ -178,39 +172,3 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 }
 
-/*
-*  esta CLASE, viene a representar el manejo de FRAGMENTS, en modo de PAGINAS, usa la clase FragmentAdapter
-* */
-
-internal class MyPagerAdapter(fm:FragmentManager): FragmentPagerAdapter(fm){
-
-    override fun getItem(position: Int): Fragment {
-        return when (position){
-            0 -> {
-                HomeFragment()
-            }
-            1 -> {
-                GamesFragment()
-            }
-            else ->{
-                return HomeFragment()
-            }
-        }
-    }
-
-    override fun getCount(): Int {
-        return 2
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position){
-            0 -> "Inicio"
-            1 -> "Encuentros"
-            else -> {
-                return "Inicio"
-            }
-
-        }
-    }
-
-}
