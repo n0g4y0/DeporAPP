@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import io.github.n0g4y0.deporapp.R
 
 
-class HomeFragment : Fragment() {
+class EncuentroFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_encuentro, container, false)
     }
 
 

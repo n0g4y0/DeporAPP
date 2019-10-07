@@ -3,15 +3,15 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.HomeFragment">
+             tools:context=".fragments.EncuentroFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-            android:text="Inicio fragment"
+            android:text="Encuentros  fragment"
             android:textColor="@android:color/black"
             android:textSize="30sp"
             android:layout_marginTop="55dp"
-            android:layout_marginLeft="55dp"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
