@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.registerlogin
+package io.github.n0g4y0.deporapp.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import io.github.n0g4y0.deporapp.activities.MainActivity
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.models.User
-import io.github.n0g4y0.deporapp.utils.login
+import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.common.login
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -28,12 +27,13 @@ class RegisterActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        supportActionBar?.title = NAME_ACTIVITY
+        supportActionBar?.title =
+            NAME_ACTIVITY
 
 
         // funcionalidad del edittext, nos llega al ACTIVITY de LOGEO, si ya tenemos cuenta:
         existe_cuenta_textview.setOnClickListener {
-            val myintent = Intent(this,LoginActivity::class.java)
+            val myintent = Intent(this, LoginActivity::class.java)
             startActivity(myintent)
         }
 

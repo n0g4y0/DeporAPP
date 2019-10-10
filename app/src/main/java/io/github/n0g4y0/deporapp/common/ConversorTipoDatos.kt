@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.utils
+package io.github.n0g4y0.deporapp.common
 
 import java.util.*
 

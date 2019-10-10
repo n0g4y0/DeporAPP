@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.fragments
+package io.github.n0g4y0.deporapp.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.models.Cancha
+import io.github.n0g4y0.deporapp.model.Cancha
 import java.util.*
 
 private const val TAG = "ListaCanchaFragment"

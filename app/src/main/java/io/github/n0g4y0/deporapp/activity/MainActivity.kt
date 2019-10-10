@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.activities
+package io.github.n0g4y0.deporapp.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -18,14 +15,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.fragments.GamesFragment
-import io.github.n0g4y0.deporapp.fragments.HomeFragment
-import io.github.n0g4y0.deporapp.fragments.MapaFragment
-import io.github.n0g4y0.deporapp.models.User
-import io.github.n0g4y0.deporapp.registerlogin.RegisterActivity
+import io.github.n0g4y0.deporapp.fragment.MapaFragment
+import io.github.n0g4y0.deporapp.model.User
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
-import kotlinx.android.synthetic.main.content_menu.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 

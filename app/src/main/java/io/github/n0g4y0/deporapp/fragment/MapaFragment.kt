@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.fragments
+package io.github.n0g4y0.deporapp.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

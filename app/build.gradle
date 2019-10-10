@@ -55,5 +55,11 @@ dependencies {
     //librerias para el navigation NAV:
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    //firestore
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
+    //para loguearse, con varios proveedores de cuentas
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    //para indepencia de clases
+    implementation 'org.koin:koin-android:1.0.2'
 }
 apply plugin: 'com.google.gms.google-services'
