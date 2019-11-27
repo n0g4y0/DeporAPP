@@ -1,5 +1,6 @@
 package io.github.n0g4y0.deporapp.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,8 +28,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     companion object {
         // variable para el usuario ACTUAL:
         var currentUser: User? = null
+        fun crearIntent(context: Context) = Intent(context, MainActivity::class.java)
 
     }
+
 
     /*
      * a partir de aqui, TODOS LOS CAMBIOS POSIBLES PARA EL NAVIGATION DRAWER:

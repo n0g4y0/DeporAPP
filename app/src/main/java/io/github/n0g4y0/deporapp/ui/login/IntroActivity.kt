@@ -1,14 +1,28 @@
 package io.github.n0g4y0.deporapp.ui.login
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.squareup.picasso.Picasso
 import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
+import io.github.n0g4y0.deporapp.firebase.auth.SOLICITUD_CODIGO_LOGIN
+import io.github.n0g4y0.deporapp.ui.Enrutador
+import io.github.n0g4y0.deporapp.ui.MainActivity
+import io.github.n0g4y0.deporapp.util.showToast
 import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : AppCompatActivity() {
+
+    private val enrutador by lazy { Enrutador() }
+    private val autentificacionManager by lazy { AutentificacionManager() }
+
+    companion object{
+        fun crearIntent(contexto: Context) = Intent(contexto, MainActivity::class.java)
+    }
 
 
     private lateinit var botonLogin : Button
@@ -28,18 +42,44 @@ class IntroActivity : AppCompatActivity() {
             .into(imagen_intro)
 
         botonLogin = findViewById(R.id.button_show_login)
-        botonRegistro = findViewById(R.id.button_new_account)
 
-        botonLogin.setOnClickListener {
-            val myintent = Intent(this, LoginActivity::class.java)
-            startActivity(myintent)
-        }
-
-        botonRegistro.setOnClickListener {
-            val myintent = Intent(this, RegisterActivity::class.java)
-            startActivity(myintent)
-        }
+        inicializar()
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == SOLICITUD_CODIGO_LOGIN){
+
+            if (resultCode == Activity.RESULT_OK){
+
+                enrutador.iniciarMenuPrincipal(this)
+
+            }else{
+                showToast(getString(R.string.inicio_sesion_fallida))
+            }
+
+        }
+    }
+
+
+
+    private fun inicializar() {
+        //setSupportActionBar()
+        continuarAlMenuPrincipalSiUsuarioEstaLogeado()
+        configurarLosListenersDeClicks()
+    }
+
+    private fun configurarLosListenersDeClicks() {
+
+        botonLogin.setOnClickListener { autentificacionManager.iniciarFlujoLogin(this) }
+
+    }
+
+    private fun continuarAlMenuPrincipalSiUsuarioEstaLogeado() = if (estaElUsuarioLogeado()) enrutador.iniciarMenuPrincipal(this) else Unit
+
+
+    private fun estaElUsuarioLogeado() = autentificacionManager.elUsuarioInicioSesion()
 
 }

@@ -29,4 +29,9 @@
     <string name="cancha_voley_label">Voley</string>
     <string name="nueva_cancha">Nueva Cancha</string>
 
+
+    <string name="inicio_sesion_fallida">Inicio de Sesion Fallida :( </string>
+
+
+
 </resources>
