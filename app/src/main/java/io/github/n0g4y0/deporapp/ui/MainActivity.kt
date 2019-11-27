@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.activity
+package io.github.n0g4y0.deporapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.fragment.MapaFragment
+import io.github.n0g4y0.deporapp.ui.login.RegisterActivity
+import io.github.n0g4y0.deporapp.ui.mapa.MapaFragment
 import io.github.n0g4y0.deporapp.model.User
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_menu.*

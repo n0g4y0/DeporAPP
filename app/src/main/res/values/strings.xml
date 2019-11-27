@@ -17,4 +17,16 @@
         geolocalizacion.
     </string>
 
+    <string name="cancha_titulo_label">Titulo</string>
+    <string name="cancha_titulo_hint">Titulo</string>
+    <string name="cancha_ubicacion_titulo">La Carmela</string>
+    <string name="cancha_ubicacion_label">Ubicacion</string>
+    <string name="cancha_foto_label">Foto</string>
+    <string name="cancha_deportes_label">deportes practicables</string>
+    <string name="cancha_futbol8_label">futbol 8</string>
+    <string name="cancha_futsal_label">futsal</string>
+    <string name="cancha_basquet_label">basquet</string>
+    <string name="cancha_voley_label">Voley</string>
+    <string name="nueva_cancha">Nueva Cancha</string>
+
 </resources>

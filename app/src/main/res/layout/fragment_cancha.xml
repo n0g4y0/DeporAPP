@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            <ImageView
+                    android:id="@+id/cancha_foto"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerInside"
+                    android:cropToPadding="true"
+                    android:background="@android:color/darker_gray"/>
+            <ImageButton
+                    android:id="@+id/cancha_camara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_camera"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Titulo"/>
+            <EditText
+                    android:id="@+id/cancha_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cancha_titulo_hint"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_ubicacion_label"/>
+    <Button
+            android:id="@+id/cancha_ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_ubicacion_titulo"/>
+    <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_foto_label"/>
+    <Button
+            android:id="@+id/cancha_foto_prueba"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_deportes_label"/>
+    <CheckBox
+            android:id="@+id/cancha_futbol8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_futbol8_label"/>
+    <CheckBox
+            android:id="@+id/cancha_futsal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_futsal_label"/>
+    <CheckBox
+            android:id="@+id/cancha_basquet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_basquet_label"/>
+    <CheckBox
+            android:id="@+id/cancha_voley"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancha_voley_label"/>
+
+
+</LinearLayout>

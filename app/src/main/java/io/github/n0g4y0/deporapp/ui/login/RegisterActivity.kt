@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.activity
+package io.github.n0g4y0.deporapp.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.User
-import io.github.n0g4y0.deporapp.common.login
+import io.github.n0g4y0.deporapp.util.login
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {

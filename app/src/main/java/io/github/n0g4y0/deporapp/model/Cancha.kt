@@ -5,9 +5,9 @@ import java.util.*
 data class Cancha(val id: UUID = UUID.randomUUID(),
                   var titulo: String = "",
                     //val ubicacion: Ubicacion,
-                  var deporte_futbol8: Boolean = false,
-                  var deporte_futsal: Boolean = false,
                   var date: Date = Date(),
+                  var deporte_futbol: Boolean = false,
+                  var deporte_futsal: Boolean = false,
                   var deporte_basquet: Boolean = false,
                   var deporte_voley: Boolean = false){
     val nombreArchivoFoto

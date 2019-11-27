@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.activity
+package io.github.n0g4y0.deporapp.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

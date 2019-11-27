@@ -22,19 +22,19 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCOx32gU6l0XeSKAuHDxacjBXQGYsDjGBE"/>
 
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".ui.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:label="@string/title_activity_menu">
         </activity>
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <!-- opcion para volver atras (feclita en la parte superior:) -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activity.IntroActivity"/>
+                    android:value=".ui.login.IntroActivity"/>
         </activity>
-        <activity android:name=".activity.RegisterActivity">
+        <activity android:name=".ui.login.RegisterActivity">
         </activity>
-        <activity android:name=".activity.IntroActivity"
+        <activity android:name=".ui.login.IntroActivity"
                   android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
