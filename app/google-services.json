@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:841705952148:android:e79bb27465bf0eca",
+        "mobilesdk_app_id": "1:841705952148:android:934413b41fc1c65d5f7581",
         "android_client_info": {
           "package_name": "io.github.n0g4y0.deporapp"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "841705952148-k5g1aamafovjrp14n32svtevn8g2tbto.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.n0g4y0.deporapp",
+            "certificate_hash": "f8c5632076fa60c9972ae5e6009fb82d56de6361"
+          }
+        },
         {
           "client_id": "841705952148-s77tlj9jhuol81cahm3fmsc2cjkp9cp9.apps.googleusercontent.com",
           "client_type": 3

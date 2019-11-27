@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.ui.login.RegisterActivity
 import io.github.n0g4y0.deporapp.ui.mapa.MapaFragment
 import io.github.n0g4y0.deporapp.model.User
@@ -23,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
-
     // variables globales
     companion object {
         // variable para el usuario ACTUAL:

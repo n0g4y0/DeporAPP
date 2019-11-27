@@ -11,7 +11,6 @@ import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.firebase.auth.SOLICITUD_CODIGO_LOGIN
 import io.github.n0g4y0.deporapp.ui.Enrutador
-import io.github.n0g4y0.deporapp.ui.MainActivity
 import io.github.n0g4y0.deporapp.util.showToast
 import kotlinx.android.synthetic.main.activity_intro.*
 
@@ -21,7 +20,7 @@ class IntroActivity : AppCompatActivity() {
     private val autentificacionManager by lazy { AutentificacionManager() }
 
     companion object{
-        fun crearIntent(contexto: Context) = Intent(contexto, MainActivity::class.java)
+        fun crearIntent(contexto: Context) = Intent(contexto, IntroActivity::class.java)
     }
 
 
@@ -50,7 +49,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == SOLICITUD_CODIGO_LOGIN){
+        if (requestCode == SOLICITUD_CODIGO_LOGIN){
 
             if (resultCode == Activity.RESULT_OK){
 
@@ -71,13 +70,14 @@ class IntroActivity : AppCompatActivity() {
         configurarLosListenersDeClicks()
     }
 
+
+    private fun continuarAlMenuPrincipalSiUsuarioEstaLogeado() = if (estaElUsuarioLogeado()) enrutador.iniciarMenuPrincipal(this) else Unit
+
     private fun configurarLosListenersDeClicks() {
 
         botonLogin.setOnClickListener { autentificacionManager.iniciarFlujoLogin(this) }
 
     }
-
-    private fun continuarAlMenuPrincipalSiUsuarioEstaLogeado() = if (estaElUsuarioLogeado()) enrutador.iniciarMenuPrincipal(this) else Unit
 
 
     private fun estaElUsuarioLogeado() = autentificacionManager.elUsuarioInicioSesion()

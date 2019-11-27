@@ -5,6 +5,8 @@ import android.app.Activity
 /*
 * esta clase sirve para iniciar ACTIVIDADES, como un enrutador que iniciara actividades
 *
+*
+*
 * */
 
 class Enrutador {
@@ -13,6 +15,5 @@ class Enrutador {
 
         val intent = MainActivity.crearIntent(activity)
         activity.startActivity(intent)
-
     }
 }
