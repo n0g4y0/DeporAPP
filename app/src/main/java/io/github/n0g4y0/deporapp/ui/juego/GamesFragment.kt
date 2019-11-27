@@ -1,4 +1,4 @@
-package io.github.n0g4y0.deporapp.fragment
+package io.github.n0g4y0.deporapp.ui.juego
 
 
 import android.os.Bundle
