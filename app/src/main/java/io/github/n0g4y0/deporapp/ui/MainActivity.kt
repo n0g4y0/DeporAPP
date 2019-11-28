@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationView
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
-import io.github.n0g4y0.deporapp.ui.mapa.MapaFragment
 import io.github.n0g4y0.deporapp.model.User
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         NavigationUI.setupActionBarWithNavController(this, controladorNav, drawer_layout)
 
-        NavigationUI.setupWithNavController(toolbar,controladorNav)
+        NavigationUI.setupWithNavController(toolbar,controladorNav,appBarConfiguration)
 
 
 
