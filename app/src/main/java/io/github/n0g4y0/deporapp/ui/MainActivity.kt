@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun configurarViewModel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // no joda
     }
 
     private fun configurarVistas() {
