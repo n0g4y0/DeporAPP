@@ -2,6 +2,7 @@ package io.github.n0g4y0.deporapp.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -67,6 +68,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // mostrando el menu de usuario
         headerBinding = DataBindingUtil.inflate(layoutInflater,R.layout.nav_header_main, activityMainBinding.navView,false)
 
+        //agrega el diseño HEADER a la cabecera del NAVIGATIONDRAWER:
+        activityMainBinding.navView.addHeaderView(headerBinding.root)
+
     }
 
     private fun configurarNavegacion() {
@@ -121,8 +125,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_courts -> {
 
+                controladorNav.navigate(R.id.mapaFragment)
+
             }
             R.id.nav_new_team -> {
+
+            }
+            R.id.nav_anuncios -> {
+
+                controladorNav.popBackStack(R.id.anuncioFragment,false)
 
             }
             R.id.nav_logout -> {
@@ -133,12 +144,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_about_us -> {
 
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle("Acerca De")
-                    .setMessage(R.string.descripcion_texview_about_fragment)
-                    .setPositiveButton("OK", null)
-                    .create()
-                    .show()
+                controladorNav.navigate(Uri.parse("deporapp://acerca"))
 
             }
         }
