@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val appBarConfiguration by lazy {
 
         AppBarConfiguration(
-            setOf(R.id.anuncioFragment, R.id.mapaFragment), drawer_layout
+            setOf(R.id.anuncioFragment, R.id.mapaFragment, R.id.listaCanchasFragment), drawer_layout
         )
 
     }
@@ -143,14 +143,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_cercanos -> {
 
-
+                controladorNav.navigate(R.id.mapaFragment)
             }
             R.id.nav_my_games -> {
 
             }
             R.id.nav_courts -> {
 
-                controladorNav.navigate(R.id.mapaFragment)
+                controladorNav.navigate(R.id.listaCanchasFragment)
 
             }
             R.id.nav_new_team -> {

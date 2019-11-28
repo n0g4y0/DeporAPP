@@ -9,14 +9,14 @@
     <fragment
             android:id="@+id/listaCanchasFragment"
             android:name="io.github.n0g4y0.deporapp.ui.cancha.ListaCanchasFragment"
-            android:label="fragment_lista_canchas"
+            android:label="canchas"
             tools:layout="@layout/fragment_lista_canchas" />
     <fragment
             android:id="@+id/anuncioFragment"
             android:name="io.github.n0g4y0.deporapp.ui.anuncio.AnuncioFragment"
-            android:label="AnuncioFragment" />
+            android:label="Anuncios" />
     <fragment
             android:id="@+id/mapaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.mapa.MapaFragment"
-            android:label="MapaFragment" />
+            android:label="Mapa" />
 </navigation>

@@ -32,5 +32,9 @@
 
     <string name="inicio_sesion_fallida">Inicio de Sesion Fallida :( </string>
 
+    <!-- crear Cancha, etiqueta -->
+
+    <string name="accion_crear_cancha">Agregar</string>
+
 
 </resources>
