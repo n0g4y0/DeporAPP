@@ -8,7 +8,7 @@
 
         <variable
                 name="viewModel"
-                type="io.github.n0g4y0.deporapp.viewmodel.UsuariosViewModel"/>
+                type="io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

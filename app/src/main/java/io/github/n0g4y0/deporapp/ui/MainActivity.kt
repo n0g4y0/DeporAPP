@@ -10,6 +10,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -18,12 +20,17 @@ import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
 import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.lang.IllegalArgumentException
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
+    private var deporappViewModel : DeporappViewModel? = null
+
+    // variable que controla la navegacion
     private val controladorNav by lazy { findNavController(R.id.nav_host_fragment) }
 
     private val appBarConfiguration by lazy {
@@ -84,8 +91,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    /*
+    *
+    * Se usara un archivo ViewModel comun, para todos los Fragments:
+    * */
     private fun configurarViewModel() {
-        // no joda
+        try {
+            // esta linea de codigo, asegura que utilizaremos este archivo para guardar datos, mientras dure la APP.
+            val viewModelProvider = ViewModelProvider(
+                        controladorNav.getViewModelStoreOwner(R.id.nav_graph),
+                        ViewModelProvider.AndroidViewModelFactory(application))
+
+            deporappViewModel = viewModelProvider.get(DeporappViewModel::class.java)
+
+            //linea muy util, si queremos editar la cabecera, no lo utilizaremos:
+            //headerBinding.viewModel = deporappViewModel
+
+
+        }catch (e: IllegalArgumentException){
+            e.printStackTrace()
+        }
     }
 
     private fun configurarVistas() {
