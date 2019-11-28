@@ -50,8 +50,10 @@ dependencies {
     api 'com.google.android.gms:play-services-base:16.1.0'  // para conexion FIREBASE
     api 'com.google.android.gms:play-services-auth:16.0.1' // para conexion FIREBASE
     api 'com.google.android.gms:play-services-identity:16.0.0' // para conexion FIREBASE
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01' // para el menu NAVIGATION DRAWER
-    implementation 'com.google.android.material:material:1.0.0-beta01' // para el menu NAVIGATION DRAWER
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    // para el menu NAVIGATION DRAWER
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    // para el menu NAVIGATION DRAWER
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
@@ -64,6 +66,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     //para indepencia de clases
     implementation 'org.koin:koin-android:1.0.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0' // extension para utilizar los ViewModel
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    // extension para utilizar los ViewModel
 }
 apply plugin: 'com.google.gms.google-services'
