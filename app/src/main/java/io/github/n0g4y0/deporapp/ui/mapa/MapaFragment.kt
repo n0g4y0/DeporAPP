@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import io.github.n0g4y0.deporapp.R
 import kotlinx.android.synthetic.main.fragment_mapa.*
 
-class MapaFragment : Fragment(),OnMapReadyCallback  {
+class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
     private var mMap: GoogleMap? = null                  //  the overall Google Maps Object
     private var myLocation: LatLng? = null              // my current GPS location
@@ -28,16 +28,7 @@ class MapaFragment : Fragment(),OnMapReadyCallback  {
         mapa_view.getMapAsync(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-       var view = inflater.inflate(R.layout.fragment_mapa,container,false)
-        mView = view
 
-        return view
-    }
     override fun onMapReady(googleMap: GoogleMap?) {
 
         mMap = googleMap
