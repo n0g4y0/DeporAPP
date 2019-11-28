@@ -100,18 +100,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_cercanos -> {
 
-                // empezando a usar el FRAGMENT MANAGER:
-                val FragmentActual = supportFragmentManager.findFragmentById(R.id.contenedor_de_fragments)
-
-                if (FragmentActual == null){
-
-                    val fragment = MapaFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.contenedor_de_fragments,fragment)
-                        .addToBackStack(null)
-                        .commit()
-                }
 
             }
             R.id.nav_my_games -> {
