@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import io.github.n0g4y0.deporapp.R
@@ -23,7 +24,15 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
-    private val navController by lazy { findNavController(R.id.nav_controller_view_tag) }
+    private val controladorNav by lazy { findNavController(R.id.nav_host_fragment) }
+
+    private val appBarConfiguration by lazy {
+
+        AppBarConfiguration(
+            setOf(R.id.anuncioFragment, R.id.mapaFragment), drawer_layout
+        )
+
+    }
 
     private lateinit var headerBinding : NavHeaderMainBinding
 
@@ -62,6 +71,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun configurarNavegacion() {
+
+        NavigationUI.setupActionBarWithNavController(this, controladorNav, drawer_layout)
+
+        NavigationUI.setupWithNavController(toolbar,controladorNav)
+
+
 
 
     }

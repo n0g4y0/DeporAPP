@@ -25,6 +25,10 @@
                 android:id="@+id/nav_new_team"
                 android:icon="@drawable/ic_action_new_team"
                 android:title="Crear Equipo"/>
+        <item
+                android:id="@+id/nav_anuncios"
+                android:icon="@drawable/fui_ic_twitter_bird_white_24dp"
+                android:title="Anuncios"/>
     </group>
     <item
             android:title="Acerca">
