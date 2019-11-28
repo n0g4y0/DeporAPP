@@ -15,7 +15,7 @@ private const val FOTO_SOLICITUD = 2
 
 //ponemos el diseño en el constructor, para evitar sobreESCRIBIR la funcion ONCREATEVIEW()
 
-class CanchaFragment : Fragment(R.layout.fragment_cancha) {
+class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha) {
 
     private lateinit var cancha : Cancha
     private lateinit var archivoFoto : File

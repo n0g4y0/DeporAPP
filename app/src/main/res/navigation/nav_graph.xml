@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
         app:startDestination="@id/anuncioFragment">
@@ -10,7 +10,11 @@
             android:id="@+id/listaCanchasFragment"
             android:name="io.github.n0g4y0.deporapp.ui.cancha.ListaCanchasFragment"
             android:label="canchas"
-            tools:layout="@layout/fragment_lista_canchas" />
+            tools:layout="@layout/fragment_lista_canchas" >
+        <action
+                android:id="@+id/action_listaCancha_hacia_crearCancha"
+                app:destination="@id/crearCanchaFragment" />
+    </fragment>
     <fragment
             android:id="@+id/anuncioFragment"
             android:name="io.github.n0g4y0.deporapp.ui.anuncio.AnuncioFragment"
@@ -19,4 +23,9 @@
             android:id="@+id/mapaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.mapa.MapaFragment"
             android:label="Mapa" />
+    <fragment
+            android:id="@+id/crearCanchaFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.cancha.CrearCanchaFragment"
+            android:label="Crear Cancha" />
+
 </navigation>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -39,8 +40,23 @@ class ListaCanchasFragment : Fragment(R.layout.fragment_lista_canchas) {
 
     }
 
+
+    /*
+    * funciones para manipular la creacion de canchas:
+    * */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.crear_cancha, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+
+            R.id.accion_crear_cancha -> findNavController().navigate(R.id.crearCanchaFragment)
+
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
