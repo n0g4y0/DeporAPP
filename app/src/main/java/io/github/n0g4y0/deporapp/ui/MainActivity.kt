@@ -164,9 +164,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_logout -> {
 
             }
-            R.id.nav_profile -> {
 
-            }
             R.id.nav_about_us -> {
 
                 controladorNav.navigate(Uri.parse("deporapp://acerca"))
