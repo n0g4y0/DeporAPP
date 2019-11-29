@@ -163,6 +163,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_logout -> {
 
+                cerrarSesion()
+
             }
 
             R.id.nav_about_us -> {
@@ -174,6 +176,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun cerrarSesion(){
+
+        AlertDialog.Builder(this)
+            .setMessage("Desea Cerrar Sesion?")
+            .setPositiveButton("OK"){ _,_ ->
+
+                deporappViewModel?.let {
+                    it.cerrarSession()
+                    finish()
+                }
+
+            }
+
+            .setNegativeButton("Cancelar",null)
+            .create().show()
+
     }
 
 }
