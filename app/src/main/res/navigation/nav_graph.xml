@@ -27,5 +27,6 @@
             android:id="@+id/crearCanchaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.cancha.CrearCanchaFragment"
             android:label="Crear Cancha" />
+    <include app:graph="@navigation/info_graph" />
 
 </navigation>
