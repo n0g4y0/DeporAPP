@@ -75,6 +75,7 @@ dependencies {
     //para indepencia de clases
     implementation 'org.koin:koin-android:1.0.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    // extension para utilizar los ViewModel
+    // para encontrar al usuario
+    implementation "com.google.android.libraries.places:places:1.0.0"
 }
 apply plugin: 'com.google.gms.google-services'
