@@ -9,7 +9,7 @@ import io.github.n0g4y0.deporapp.viewholder.AnuncioViewHolder
 
 class AnuncioAdapter: RecyclerView.Adapter<AnuncioViewHolder>() {
 
-    val listaAnuncios = arrayListOf("primer anuncio", "segundo anuncio","tercer anuncio", "aviso de trabajo")
+    val listaAnuncios = arrayListOf("pruebas de carga", "prueba de listeners","subida de imagenes out", "sin concluir Fragments")
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnuncioViewHolder {
@@ -27,7 +27,7 @@ class AnuncioAdapter: RecyclerView.Adapter<AnuncioViewHolder>() {
 
         holder.anuncioTitulo.text = (position + 1).toString()
 
-        holder.anuncioDescripcion.text = (position + 1).toString()
+        holder.anuncioDescripcion.text = listaAnuncios[position]
 
     }
 
