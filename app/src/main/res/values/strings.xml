@@ -35,6 +35,7 @@
     <!-- crear Cancha, etiqueta -->
 
     <string name="accion_crear_cancha">Agregar</string>
+    <string name="crear_cancha_boton_guardar">guardar</string>
 
 
 </resources>

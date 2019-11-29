@@ -100,5 +100,13 @@
             android:layout_height="wrap_content"
             android:text="@string/cancha_voley_label"/>
 
+    <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:foregroundTint="@color/colorPrimary"
+            android:text="@string/crear_cancha_boton_guardar"/>
+
 
 </LinearLayout>
