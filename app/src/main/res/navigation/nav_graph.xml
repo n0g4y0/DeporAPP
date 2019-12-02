@@ -26,7 +26,16 @@
     <fragment
             android:id="@+id/crearCanchaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.cancha.CrearCanchaFragment"
-            android:label="Crear Cancha" />
+            android:label="Crear Cancha" >
+        <action
+                android:id="@+id/action_crearCanchaFragment_to_enviarUbicacionFragment"
+                app:destination="@id/enviarUbicacionFragment" />
+    </fragment>
     <include app:graph="@navigation/info_graph" />
+    <dialog
+            android:id="@+id/enviarUbicacionFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.mapa.EnviarUbicacionFragment"
+            android:label="Enviar Ubicacion"
+            tools:layout="@layout/fragment_enviar_ubicacion" />
 
 </navigation>

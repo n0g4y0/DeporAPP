@@ -1,10 +1,14 @@
 package io.github.n0g4y0.deporapp.ui.cancha
 
 import android.net.Uri
+import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Cancha
+import kotlinx.android.synthetic.main.fragment_crear_cancha.*
 import java.io.File
 
 private const val TAG = "CanchaFragment"
@@ -30,6 +34,19 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha) {
 
     private lateinit var canchaFoto : ImageView
     private lateinit var canchaCamara : ImageButton
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        cancha_ubicacion.setOnClickListener {
+
+            findNavController().navigate(R.id.enviarUbicacionFragment)
+
+
+
+        }
+    }
 
 
 }
