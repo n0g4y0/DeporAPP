@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -21,8 +20,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 import io.github.n0g4y0.deporapp.R
@@ -36,6 +35,11 @@ import kotlinx.android.synthetic.main.fragment_enviar_ubicacion.*
 
 private const val DEFAULT_ZOOM = 18f
 
+
+
+private const val ARG_UBICACION_LAT = "lat"
+private const val ARG_UBICACION_LONG = "long"
+
 class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
 
 
@@ -48,10 +52,6 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    companion object {
-        private const val SOLICITAR_LOCALIZACION = 2
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +68,8 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
         binding.enviarMapaView.onCreate(savedInstanceState)
         binding.enviarMapaView.onResume()
         binding.enviarMapaView.getMapAsync(this)
+
+
 
 
         return binding.root
@@ -99,6 +101,8 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
 
         map = googleMap!!
         configurarLocalizacionCliente()
+        // funcion para manejar los Clicks en el mapa:
+        configurarMapListeners()
         getLocalizacionActual()
 
         // añadiendo una marca en bolivia:
@@ -113,8 +117,39 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
         }
     }
 
+    private fun configurarMapListeners() {
+
+        // esta linea, reacciona a los TAPS del usuario en el mapa:
+        map.setOnMapLongClickListener {latLng ->
+
+                nuevoMarcador(latLng)
+                enviarUbicacion(latLng)
 
 
+        }
+
+        //map.setOnInfoWindowClickListener { }
+    }
+
+    private fun enviarUbicacion(latLng: LatLng) {
+
+        deporappViewModel.ubicacionSeleccionada(latLng)
+
+
+    }
+
+
+    private fun nuevoMarcador(puntoMarcado: LatLng?) {
+
+        if (puntoMarcado != null){
+
+            map.addMarker(MarkerOptions().position(puntoMarcado))
+        }
+
+
+
+
+    }
 
 
     private fun getLocalizacionActual(){
@@ -166,6 +201,13 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
     private fun configurarLocalizacionCliente(){
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
     }
+
+
+    companion object {
+
+        private const val SOLICITAR_LOCALIZACION = 2
+    }
+
 
 
 }
