@@ -7,7 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <dist:module dist:instant="true"/>
 
@@ -18,6 +20,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="io.github.n0g4y0.deporapp.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
+
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCOx32gU6l0XeSKAuHDxacjBXQGYsDjGBE"/>

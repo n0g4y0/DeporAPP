@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+            name="deporapp_images"
+            path="Android/data/io.github.n0g4y0.deporapp/files/Pictures" />
+    <files-path
+            name="deporapp_images_internal"
+            path="/" />
+</paths>
