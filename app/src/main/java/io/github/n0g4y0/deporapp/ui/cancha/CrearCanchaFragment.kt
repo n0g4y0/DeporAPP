@@ -5,12 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.databinding.FragmentCrearCanchaBinding
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_cancha.*
@@ -28,6 +32,18 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
     private val deporappViewModel: DeporappViewModel by navGraphViewModels(R.id.nav_graph)
 
     private val seleccionArchivo : SeleccionArchivo by lazy { SeleccionArchivo(requireContext()) }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding: FragmentCrearCanchaBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_crear_cancha,container,false)
+
+        binding.viewModelnav = deporappViewModel
+        return binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
