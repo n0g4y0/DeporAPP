@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import androidx.navigation.navGraphViewModels
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.databinding.FragmentCrearCanchaBinding
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
+import io.github.n0g4y0.deporapp.util.getEscalarBitMap
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_cancha.*
 
@@ -93,8 +93,19 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == SOLICITUD_CODIGO_CAMERA){
-            val UriFoto = "file://${deporappViewModel.archivoImagenTemporal?.absolutePath}"
-                Log.d("valor",UriFoto)
+            val uriFoto = "file://${deporappViewModel.archivoImagenTemporal?.absolutePath}"
+                actualizarImagenViewActual()
+        }
+    }
+
+    private fun actualizarImagenViewActual() {
+        if (deporappViewModel.archivoImagenTemporal!!.exists()){
+
+            val bitmap = getEscalarBitMap(deporappViewModel.archivoImagenTemporal!!.path, requireActivity())
+            cancha_foto.setImageBitmap(bitmap)
+
+        }else{
+            cancha_foto.setImageDrawable(null)
         }
     }
 

@@ -1,6 +1,7 @@
 package io.github.n0g4y0.deporapp.viewmodel
 
 import android.app.Application
+import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
@@ -12,7 +13,9 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     private val authManager by lazy { AutentificacionManager() }
 
-    val ubicacion : MutableLiveData<LatLng> = MutableLiveData()
+    var ubicacion : MutableLiveData<LatLng> = MutableLiveData()
+
+    var ruta_foto_local: MutableLiveData<String> = MutableLiveData()
 
     private var deberiaBorrarImagen: Boolean = true
 
@@ -34,6 +37,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     fun ubicacionSeleccionada(nuevaUbicacion: LatLng){
         ubicacion.value = nuevaUbicacion
+    }
+
+    fun setRutaFotoActual(nuevo: String){
+        ruta_foto_local.value = nuevo
     }
 
 
