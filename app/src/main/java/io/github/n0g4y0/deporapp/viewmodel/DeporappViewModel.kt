@@ -6,12 +6,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
+import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
+import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import java.io.File
 
 
 class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
+
+    var tituloCrearCancha = ObservableField("")
+
     private val authManager by lazy { AutentificacionManager() }
+
+
 
     var ubicacion : MutableLiveData<LatLng> = MutableLiveData()
 
@@ -50,9 +57,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     }
 
-    fun onCapturaClick(){
 
-    }
 
 
 

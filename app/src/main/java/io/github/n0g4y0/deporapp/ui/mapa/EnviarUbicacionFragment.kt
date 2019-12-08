@@ -90,8 +90,6 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
         }
 
         boton_enviar.setOnClickListener {
-            // asi llamo al toast
-            Toast.makeText(activity,"hola",Toast.LENGTH_SHORT).show()
             dismiss()
         }
     }

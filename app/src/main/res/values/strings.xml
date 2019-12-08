@@ -36,6 +36,8 @@
 
     <string name="accion_crear_cancha">Agregar</string>
     <string name="crear_cancha_boton_guardar">guardar</string>
+    <string name="agregrado_exitoso_cancha">Guardado Exitosamente</string>
+    <string name="agregado_fallido_cancha">Problemas En el Guardado</string>
 
 
 </resources>

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <variable
-                name="viewModelnav"
-                type="io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel"/>
-    </data>
 
 <LinearLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -60,12 +54,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cancha_titulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/cancha_titulo_hint"/>
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:hint="Titulo"
+                    tools:text="Recipient"/>
+
         </LinearLayout>
+
+
+
     </LinearLayout>
 
     <TextView
@@ -106,7 +107,7 @@
             android:text="@string/cancha_voley_label"/>
 
     <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btn_guardar_cancha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
@@ -120,4 +121,3 @@
 
 </LinearLayout>
 
-</layout>

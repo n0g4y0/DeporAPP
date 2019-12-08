@@ -4,16 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.databinding.FragmentCrearCanchaBinding
+import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
+import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
 import io.github.n0g4y0.deporapp.util.getEscalarBitMap
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
@@ -33,16 +35,23 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
     private val seleccionArchivo : SeleccionArchivo by lazy { SeleccionArchivo(requireContext()) }
 
+    private var ubicacionACtual: LatLng? = null
+
+    private var urlImagenStorage : String? = null
+
+
+    private val firestore by lazy { FirestoreManager() }
+    private val storageManager by lazy { StorageManager() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentCrearCanchaBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_crear_cancha,container,false)
+        val view =  inflater.inflate(R.layout.fragment_crear_cancha,container,false)
 
-        binding.viewModelnav = deporappViewModel
-        return binding.root
+        return view
     }
 
 
@@ -60,12 +69,91 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
             findNavController().navigate(R.id.enviarUbicacionFragment)
         }
 
+        btn_guardar_cancha.setOnClickListener {
+
+            continuarGuardadoEnFirestore()
+            //terminando y volviendo al inicio:
+            findNavController().popBackStack(R.id.listaCanchasFragment,false)
+        }
+
 
     }
 
+    private fun empezarSubidaImagenStorage() {
+
+                //primero subimos el archivo:
+
+                var archivoTemporal = deporappViewModel.archivoImagenTemporal
+                archivoTemporal.let { archivoTemporal ->
+
+                    val uriDeFoto = seleccionArchivo.UriDelArchivo(archivoTemporal!!)
+                    storageManager.subirFoto(uriDeFoto, ::guardandoElUriDelArchivo)
+
+                }
+    }
+
+    private fun guardandoElUriDelArchivo(url: String){
+
+        urlImagenStorage = url
+
+        Log.d("url imagen","pasa por la imagen: " + urlImagenStorage)
+
+    }
+
+    private fun continuarGuardadoEnFirestore() {
+
+        Log.d("probando","pasa por aqui?")
+        // ahora guardamos en la BD, de firestore:
+        val titulo = cancha_titulo.text.toString().trim()
+        Log.d("probando",titulo)
+
+        val deporte_futbol = cancha_futbol8.isChecked
+        val deporte_futsal = cancha_futsal.isChecked
+        val deporte_basquet = cancha_basquet.isChecked
+        val deporte_voley = cancha_voley.isChecked
+
+        if (urlImagenStorage == null){
+
+            urlImagenStorage = "imagen URL no disponible"
+        }
+
+        firestore.run {
+
+            agregarCancha(
+                titulo,
+                urlImagenStorage!!,
+                ubicacionACtual?.latitude!!,
+                ubicacionACtual?.longitude!!,
+                deporte_futbol,
+                deporte_futsal,
+                deporte_basquet,
+                deporte_voley,
+                ::agregadoExitosoCancha,
+                ::agregadoFallidoCancha)
+        }
+
+
+        findNavController().popBackStack(R.id.listaCanchasFragment,false)
+
+    }
+
+
+
+    private fun agregadoExitosoCancha() {
+        //showToast(getString(R.string.posted_successfully))
+
+    }
+
+    private fun agregadoFallidoCancha() {
+        //showToast(getString(R.string.post_add_error))
+    }
+
+
+
     private fun capturarUbicacion() {
         deporappViewModel.ubicacion.observe(this, Observer { ubicacion ->
-            cancha_ubicacion.text = ubicacion.toString()
+            ubicacionACtual = ubicacion
+            cancha_ubicacion.text = "Ubicacion Guardada"
         })
     }
 
@@ -103,6 +191,7 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
             val bitmap = getEscalarBitMap(deporappViewModel.archivoImagenTemporal!!.path, requireActivity())
             cancha_foto.setImageBitmap(bitmap)
+            empezarSubidaImagenStorage()
 
         }else{
             cancha_foto.setImageDrawable(null)
@@ -112,6 +201,7 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
     companion object {
         private const val SOLICITUD_CODIGO_CAMERA = 1
+
     }
 
 

@@ -1,15 +1,19 @@
 package io.github.n0g4y0.deporapp.model
 
-import java.util.*
 
-data class Cancha(val id: UUID = UUID.randomUUID(),
+
+data class Cancha(val id: String = "",
                   var titulo: String = "",
-                    //val ubicacion: Ubicacion,
-                  var date: Date = Date(),
+                  var foto_url: String = "",
+                  var ubicacion_lat: Double = 0.0,
+                  var ubicacion_long: Double = 0.0,
                   var deporte_futbol: Boolean = false,
                   var deporte_futsal: Boolean = false,
                   var deporte_basquet: Boolean = false,
-                  var deporte_voley: Boolean = false){
+                  var deporte_voley: Boolean = false,
+                  var fecha: Long = 0L,
+                  var creador: String = ""
+){
     val nombreArchivoFoto
         get() = "IMG_$id.jpg"
 }
