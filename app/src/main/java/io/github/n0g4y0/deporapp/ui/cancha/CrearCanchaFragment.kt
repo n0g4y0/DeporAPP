@@ -72,8 +72,6 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
         btn_guardar_cancha.setOnClickListener {
 
             continuarGuardadoEnFirestore()
-            //terminando y volviendo al inicio:
-            findNavController().popBackStack(R.id.listaCanchasFragment,false)
         }
 
 
@@ -132,7 +130,8 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
                 ::agregadoFallidoCancha)
         }
 
-
+        //limpiando el setText del boton ubicacion de cancha:
+        cancha_ubicacion.setText(R.string.cancha_ubicacion_titulo)
         findNavController().popBackStack(R.id.listaCanchasFragment,false)
 
     }

@@ -19,7 +19,7 @@
 
     <string name="cancha_titulo_label">Titulo</string>
     <string name="cancha_titulo_hint">Titulo</string>
-    <string name="cancha_ubicacion_titulo">La Carmela</string>
+    <string name="cancha_ubicacion_titulo">Ingrese La Ubicacion</string>
     <string name="cancha_ubicacion_label">Ubicacion</string>
     <string name="cancha_foto_label">Foto</string>
     <string name="cancha_deportes_label">deportes practicables</string>
