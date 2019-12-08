@@ -110,8 +110,6 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
             val update = CameraUpdateFactory.newLatLngZoom(cbba, 18.0f)
 
             it?.moveCamera(update)
-            it?.addMarker(MarkerOptions().position(cbba).title("prueba"))
-
         }
     }
 
