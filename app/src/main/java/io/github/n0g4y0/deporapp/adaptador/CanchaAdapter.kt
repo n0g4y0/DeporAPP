@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewholder.CanchaViewHolder
-import kotlinx.android.synthetic.main.view_holder_cancha.view.*
 
-class CanchaAdapter(): RecyclerView.Adapter<CanchaViewHolder>() {
+class CanchaAdapter(private val fechaUtils: DateUtils): RecyclerView.Adapter<CanchaViewHolder>() {
 
-    private val lista: MutableList<Cancha> = mutableListOf()
+    private val listaCanchas: MutableList<Cancha> = mutableListOf()
 
     private var itemClickListener: ((Cancha) -> Unit)? = null
 
@@ -17,23 +17,13 @@ class CanchaAdapter(): RecyclerView.Adapter<CanchaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CanchaViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CanchaViewHolder(inflater, parent)
+        return CanchaViewHolder(inflater, parent,fechaUtils)
     }
 
-    override fun onBindViewHolder(holder: CanchaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CanchaViewHolder, position: Int){
 
-        val item = lista[position]
-
-
-        holder.itemView.setOnClickListener {
-
-            itemClickListener?.invoke(item)
-
-        }
-
+        val item = listaCanchas[position]
         holder.bind(item)
-
-
 
     }
 
@@ -43,12 +33,12 @@ class CanchaAdapter(): RecyclerView.Adapter<CanchaViewHolder>() {
 
     }
 
-    override fun getItemCount(): Int = lista.size
+    override fun getItemCount(): Int = listaCanchas.size
 
 
     fun actualizar(listaDeItems: List<Cancha>){
-        lista.clear()
-        lista.addAll(listaDeItems)
+        listaCanchas.clear()
+        listaCanchas.addAll(listaDeItems)
         notifyDataSetChanged()
     }
 

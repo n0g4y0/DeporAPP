@@ -3,21 +3,22 @@ package io.github.n0g4y0.deporapp.viewmodel
 import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
+import io.github.n0g4y0.deporapp.model.Cancha
 import java.io.File
 
 
 class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
 
-    var tituloCrearCancha = ObservableField("")
-
     private val authManager by lazy { AutentificacionManager() }
 
+    private val firestore by lazy { FirestoreManager() }
 
 
     var ubicacion : MutableLiveData<LatLng> = MutableLiveData()
@@ -54,6 +55,12 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
     fun cerrarSession(){
 
         authManager.cerrarSesion(this.app)
+
+    }
+
+    fun getListaCanchas(): LiveData<List<Cancha>>{
+
+        return firestore.enCambiosDeValorCanchas()
 
     }
 
