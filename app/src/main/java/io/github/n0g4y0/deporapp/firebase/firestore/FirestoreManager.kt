@@ -8,10 +8,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.QuerySnapshot
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
+import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
 
 
 private const val COLECCION_CANCHAS = "canchas"
+private const val COLECCION_ANUNCIOS = "anuncios"
+
+
+
 
 // valores estaticos, canchas:
 private const val CLAVE_ID = "id"
@@ -27,7 +32,18 @@ private const val CLAVE_FECHA = "fecha_timestamp"
 private const val CLAVE_CREADOR = "autor"
 
 
+// valores estaticos, anuncios:
+
+private const val CLAVE_ID_ANUNCIO = "id"
+private const val CLAVE_TITULO_ANUNCIO = "titulo"
+private const val CLAVE_TITULO_DESCRIPCION = "descripcion"
+
+
+
+
+
 private lateinit var registrosCanchas: ListenerRegistration
+private lateinit var registrosAnuncios: ListenerRegistration
 
 class FirestoreManager {
 
@@ -35,6 +51,8 @@ class FirestoreManager {
     private val baseDeDato = FirebaseFirestore.getInstance()
 
     private val valoresCanchas = MutableLiveData<List<Cancha>>()
+
+    private val valoresAnuncios = MutableLiveData<List<Anuncio>>()
 
 
 
@@ -81,6 +99,12 @@ class FirestoreManager {
 
     }
 
+    fun cambiosDeValorAnuncios(): LiveData<List<Anuncio>>{
+        escucharPorCambiosEnValoresAnuncios()
+        return valoresAnuncios
+    }
+
+
 
 
     private fun escucharPorCambiosEnValoresCanchas() {
@@ -111,6 +135,34 @@ class FirestoreManager {
                 }
             })
 
+    }
+
+    private fun escucharPorCambiosEnValoresAnuncios() {
+        registrosAnuncios = baseDeDato.collection(COLECCION_ANUNCIOS)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+                // 4
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+                // 5
+                if (valor.isEmpty) {
+
+                    // 6
+                    valoresAnuncios.postValue(emptyList())
+                } else {
+                    // 7
+                    val anuncios = ArrayList<Anuncio>()
+                    // 8
+                    for (doc in valor) {
+                        // 9
+                        val anuncio = doc.toObject(Anuncio::class.java)
+                        anuncios.add(anuncio)
+                    }
+                    // 10
+                    valoresAnuncios.postValue(anuncios)
+                }
+            })
     }
 
 

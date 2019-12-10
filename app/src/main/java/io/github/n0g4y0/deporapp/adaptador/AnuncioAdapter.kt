@@ -9,27 +9,33 @@ import io.github.n0g4y0.deporapp.viewholder.AnuncioViewHolder
 
 class AnuncioAdapter: RecyclerView.Adapter<AnuncioViewHolder>() {
 
-    val listaAnuncios = arrayListOf("pruebas de carga", "prueba de listeners","subida de imagenes out", "sin concluir Fragments")
+    private val listaAnuncios: MutableList<Anuncio> = mutableListOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnuncioViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_anuncio,parent,false)
-
-        return AnuncioViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        return AnuncioViewHolder(inflater, parent)
     }
 
-    override fun getItemCount(): Int {
-        return listaAnuncios.size
-    }
+    override fun onBindViewHolder(holder: AnuncioViewHolder, position: Int){
 
-    override fun onBindViewHolder(holder: AnuncioViewHolder, position: Int) {
-
-        holder.anuncioTitulo.text = (position + 1).toString()
-
-        holder.anuncioDescripcion.text = listaAnuncios[position]
+        val item = listaAnuncios[position]
+        holder.bind(item)
 
     }
+
+    override fun getItemCount() = listaAnuncios.size
+
+
+    fun actualizar(listaDeItems: List<Anuncio>){
+        listaAnuncios.clear()
+        listaAnuncios.addAll(listaDeItems)
+        notifyDataSetChanged()
+    }
+
+
+
 
 
 
