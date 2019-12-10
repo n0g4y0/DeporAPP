@@ -11,8 +11,8 @@ data class Cancha(val id: String = "",
                   var deporte_futsal: Boolean = false,
                   var deporte_basquet: Boolean = false,
                   var deporte_voley: Boolean = false,
-                  var fecha: Long = 0L,
-                  var creador: String = ""
+                  var fecha_timestamp: Long = 0L,
+                  var autor: String = ""
 ){
     val nombreArchivoFoto
         get() = "IMG_$id.jpg"
