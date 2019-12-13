@@ -125,7 +125,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+
+            AlertDialog.Builder(this)
+                .setMessage("Salir?")
+                .setPositiveButton("OK"){ _,_ ->
+                    deporappViewModel?.let {
+                        it.cerrarSession()
+                        super.onBackPressed()
+                        moveTaskToBack(true) // esta linea cierra todos los activities.
+                    }
+
+                }
+
+                .setNegativeButton("Cancelar",null)
+                .create().show()
+
         }
     }
 
@@ -181,7 +195,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun cerrarSesion(){
 
         AlertDialog.Builder(this)
-            .setMessage("Desea Cerrar Sesion?")
+            .setMessage("Cerrar Sesion?")
             .setPositiveButton("OK"){ _,_ ->
 
                 deporappViewModel?.let {
