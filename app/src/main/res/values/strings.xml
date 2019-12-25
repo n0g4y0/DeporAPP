@@ -35,9 +35,13 @@
     <!-- crear Cancha, etiqueta -->
 
     <string name="accion_crear_cancha">Agregar</string>
+    <string name="accion_crear_equipo_label">Agregar</string>
     <string name="crear_cancha_boton_guardar">guardar</string>
     <string name="agregrado_exitoso_cancha">Guardado Exitosamente</string>
     <string name="agregado_fallido_cancha">Problemas En el Guardado</string>
+    <string name="nombre_equipo">Nombre</string>
+    <string name="descripcion_equipo_hint">Notas/Reglas/Bienvenida</string>
+    <string name="accion_crear_equipo">Crear Equipo</string>
 
 
 </resources>

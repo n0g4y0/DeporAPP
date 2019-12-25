@@ -18,9 +18,9 @@ class AnuncioViewHolder (inflater: LayoutInflater, parent: ViewGroup):
 
     fun bind(anuncio: Anuncio){
 
-        itemView.tv_titulo_anuncio.text = anuncio.titulo
-        itemView.tv_descripcion.text = anuncio.descripcion
-        itemView.tv_fecha.text = conversorFecha.parse(anuncio.fecha)
+        itemView.tv_nombre_equipo.text = anuncio.titulo
+        itemView.tv_descripcion_equipo.text = anuncio.descripcion
+        itemView.tv_fecha_equipo.text = conversorFecha.parse(anuncio.fecha)
 
     }
 

@@ -1,6 +1,5 @@
 package io.github.n0g4y0.deporapp.viewholder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,7 @@ class CanchaViewHolder(inflater: LayoutInflater, parent: ViewGroup, private val 
     fun bind(cancha: Cancha){
 
         itemView.tv_titulo.text = cancha.titulo
-        itemView.tv_fecha.text = dateUtils.mapToNormalisedDateText(cancha.fecha_timestamp)
+        itemView.tv_fecha_equipo.text = dateUtils.mapToNormalisedDateText(cancha.fecha_timestamp)
 
 
     }

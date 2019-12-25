@@ -37,5 +37,18 @@
             android:name="io.github.n0g4y0.deporapp.ui.mapa.EnviarUbicacionFragment"
             android:label="Enviar Ubicacion"
             tools:layout="@layout/fragment_enviar_ubicacion" />
+    <fragment
+            android:id="@+id/listaEquipoFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.equipo.ListaEquiposFragment"
+            android:label="Lista de Equipos"
+            tools:layout="@layout/fragment_lista_equipo" >
+        <action
+                android:id="@+id/action_listaEquipoFragment_to_crearEquipoFragment"
+                app:destination="@id/crearEquipoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/crearEquipoFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.equipo.CrearEquipoFragment"
+            android:label="Crear Equipo" />
 
 </navigation>
