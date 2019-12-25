@@ -4,6 +4,7 @@ package io.github.n0g4y0.deporapp.ui.equipo
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import io.github.n0g4y0.deporapp.model.Equipo
 import io.github.n0g4y0.deporapp.util.DateTimeHelper
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_lista_equipo.*
+import kotlinx.android.synthetic.main.view_holder_equipo.view.*
 
 
 class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipo) {
@@ -30,6 +32,14 @@ class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipo) {
 
         equipos_recycler_view.layoutManager = LinearLayoutManager(context)
         equipos_recycler_view.adapter = adaptador
+
+        deporappViewModel?.getListaEquipos().observe(this, Observer { listaEquipos: List<Equipo> ->
+
+            adaptador.actualizar(listaEquipos)
+        })
+
+
+
     }
 
     // funcion que muestra el menu, el icono de MAS CANCHA:
@@ -55,13 +65,12 @@ class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipo) {
 *
 * */
     private inner class EquipoViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-    : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_anuncio ,parent ,false)){
+    : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_equipo ,parent ,false)){
 
-    private lateinit var equipo: Equipo
-
-    private val conversorFecha =  DateTimeHelper()
 
     fun bind(equipo: Equipo){
+
+        itemView.tv_nombre_equipo.text = equipo.nombre
 
     }
 
