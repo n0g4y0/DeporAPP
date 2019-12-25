@@ -40,6 +40,8 @@ class AutentificacionManager {
 
     fun getUsuarioActual() = firebaseAuth.currentUser?.displayName ?: ""
 
+    fun getIdUsuarioActual() = firebaseAuth.currentUser?.uid ?: ""
+
     fun cerrarSesion(contexto: Context){
 
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()

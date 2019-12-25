@@ -2,7 +2,6 @@ package io.github.n0g4y0.deporapp.firebase.firestore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -10,10 +9,12 @@ import com.google.firebase.firestore.QuerySnapshot
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.model.Equipo
 
 
 private const val COLECCION_CANCHAS = "canchas"
 private const val COLECCION_ANUNCIOS = "anuncios"
+private const val COLECCION_EQUIPOS = "equipos"
 
 
 
@@ -38,12 +39,19 @@ private const val CLAVE_ID_ANUNCIO = "id"
 private const val CLAVE_TITULO_ANUNCIO = "titulo"
 private const val CLAVE_TITULO_DESCRIPCION = "descripcion"
 
+// valores staticos, equipos:
+
+private const val CLAVE_EQUIPO_NOMRE = "nombre"
+private const val CLAVE_DESCRIPCION_EQUIPO = "descripcion"
+private const val CLAVE_ID_ADMIN = "idAdmin"
+
 
 
 
 
 private lateinit var registrosCanchas: ListenerRegistration
 private lateinit var registrosAnuncios: ListenerRegistration
+private lateinit var registrosEquipos: ListenerRegistration
 
 class FirestoreManager {
 
@@ -53,6 +61,8 @@ class FirestoreManager {
     private val valoresCanchas = MutableLiveData<List<Cancha>>()
 
     private val valoresAnuncios = MutableLiveData<List<Anuncio>>()
+
+    private val valoresEquipos = MutableLiveData<List<Equipo>>()
 
 
 
@@ -103,6 +113,78 @@ class FirestoreManager {
         escucharPorCambiosEnValoresAnuncios()
         return valoresAnuncios
     }
+
+    /*
+    * funciones para manipular datos referidos a Equipos
+    *
+    * */
+
+    fun agregarEquipo(nombre: String,
+                      descripcion: String,
+                      siFutbol: Boolean,
+                      siFutsal: Boolean,
+                      siBasquet: Boolean,
+                      siVoley: Boolean,
+                      enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
+
+        val referenciaDocumento = baseDeDato.collection(COLECCION_EQUIPOS).document()
+
+        val equipo = HashMap<String,Any>()
+
+        equipo[CLAVE_ID] = referenciaDocumento.id
+        equipo[CLAVE_EQUIPO_NOMRE] = nombre
+        equipo[CLAVE_DESCRIPCION_EQUIPO] = descripcion
+        equipo[CLAVE_ID_ADMIN] = authManager.getIdUsuarioActual()
+        equipo[CLAVE_FUTBOL] = siFutbol
+        equipo[CLAVE_FUTSAL] = siFutsal
+        equipo[CLAVE_BASQUET] = siBasquet
+        equipo[CLAVE_VOLEY] = siVoley
+        equipo[CLAVE_FECHA] = getTiempoActual()
+
+
+        referenciaDocumento
+            .set(equipo)
+            .addOnSuccessListener { enAcciondeExito() }
+            .addOnFailureListener { enAcciondeFracaso() }
+    }
+
+    fun cambiosDeValorEquipos(): LiveData<List<Equipo>>{
+        escucharPorCambiosEnValoresEquipos()
+        return valoresEquipos
+    }
+
+
+
+    private fun escucharPorCambiosEnValoresEquipos() {
+
+        registrosEquipos = baseDeDato.collection(COLECCION_EQUIPOS)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+                if (valor.isEmpty) {
+
+                    valoresEquipos.postValue(emptyList())
+
+                } else {
+
+                    val equipos = ArrayList<Equipo>()
+
+                    for (doc in valor) {
+                        val equipo = doc.toObject(Equipo::class.java)
+                        equipos.add(equipo)
+                    }
+
+                    valoresEquipos.postValue(equipos)
+                }
+            })
+
+    }
+
+
 
 
 

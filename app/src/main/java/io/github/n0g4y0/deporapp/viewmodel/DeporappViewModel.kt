@@ -11,6 +11,7 @@ import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.model.Equipo
 import java.io.File
 
 
@@ -44,6 +45,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
     }
 
 
+
     fun ubicacionSeleccionada(nuevaUbicacion: LatLng){
         ubicacion.value = nuevaUbicacion
     }
@@ -69,7 +71,38 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
         return firestore.cambiosDeValorAnuncios()
     }
 
+    fun getListaEquipos(): LiveData<List<Equipo>>{
 
+        return firestore.cambiosDeValorEquipos()
+        
+    }
+    fun agregarEquipo(nombre: String,
+                      descripcion: String,
+                      siFutbol: Boolean,
+                      siFutsal: Boolean,
+                      siBasquet: Boolean,
+                      siVoley: Boolean
+                      ){
+
+        return firestore.agregarEquipo(nombre,descripcion,siFutbol,siFutsal,siBasquet,siVoley, ::agregadoExitosoCancha, ::agregadoFallidoCancha)
+
+    }
+
+
+
+
+
+
+    // mensajes exito o fracaso, subida al FIRESTORE
+
+    private fun agregadoExitosoCancha() {
+        //showToast(getString(R.string.posted_successfully))
+
+    }
+
+    private fun agregadoFallidoCancha() {
+        //showToast(getString(R.string.post_add_error))
+    }
 
 
 
