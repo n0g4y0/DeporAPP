@@ -24,6 +24,8 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
 
     var fechaActual: Date? = null
 
+    var horaActual: Date? = null
+
     private val fechaUtils = DateUtils()
 
 
@@ -31,8 +33,14 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         super.onViewCreated(view, savedInstanceState)
 
         getFechaActualEncuentro()
+        getHoraActualEncuentro()
+
         et_fecha_encuentro.setOnClickListener {
             findNavController().navigate(R.id.datePickerFragment)
+        }
+
+        et_hora_encuentro.setOnClickListener {
+            findNavController().navigate(R.id.timePickerFragment)
         }
     }
 
@@ -41,6 +49,16 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         deporappViewModel.fechaEncuentro.observe(this, Observer { fechaActualEncuentro ->
                 fechaActual = fechaActualEncuentro
                 et_fecha_encuentro.setText(fechaUtils.convertirFechaAString(fechaActual!!))
+
+
+        })
+    }
+
+    private fun getHoraActualEncuentro(){
+
+        deporappViewModel.horaEncuentro.observe(this, Observer { horaActualEncuentro ->
+            horaActual = horaActualEncuentro
+            et_hora_encuentro.setText(fechaUtils.convertirHoraAString(horaActual!!))
 
 
         })

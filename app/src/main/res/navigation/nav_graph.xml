@@ -67,5 +67,9 @@
             android:id="@+id/datePickerFragment"
             android:name="io.github.n0g4y0.deporapp.util.DatePickerFragment"
             android:label="Fecha" />
+    <dialog
+            android:id="@+id/timePickerFragment"
+            android:name="io.github.n0g4y0.deporapp.util.TimePickerFragment"
+            android:label="Hora" />
 
 </navigation>

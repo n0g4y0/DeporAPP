@@ -1,6 +1,7 @@
 package io.github.n0g4y0.deporapp.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -41,6 +42,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
         }
 
     var fechaEncuentro: MutableLiveData<Date> = MutableLiveData()
+    var horaEncuentro: MutableLiveData<Date> = MutableLiveData()
 
 
     /*
@@ -120,6 +122,11 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     fun setFechaEncuentro(nuevaFecha: Date){
         fechaEncuentro.value = nuevaFecha
+    }
+
+    fun setHoraEncuentro(nuevaHora: Date){
+        horaEncuentro.value = nuevaHora
+
     }
 
 

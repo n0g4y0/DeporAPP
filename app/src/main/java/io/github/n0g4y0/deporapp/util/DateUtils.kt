@@ -22,4 +22,12 @@ class DateUtils {
 
         return formatter.format(fecha)
     }
+    fun convertirHoraAString(hora: Date): String{
+
+        var formato: String = "HH:mm"
+
+        val formatter = SimpleDateFormat(formato, Locale.US)
+
+        return formatter.format(hora)
+    }
 }
