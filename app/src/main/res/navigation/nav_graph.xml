@@ -63,5 +63,9 @@
             android:id="@+id/crearJuegoFragment"
             android:name="io.github.n0g4y0.deporapp.ui.encuentro.CrearJuegoFragment"
             android:label="Crear Encuentro" />
+    <dialog
+            android:id="@+id/datePickerFragment"
+            android:name="io.github.n0g4y0.deporapp.util.DatePickerFragment"
+            android:label="Fecha" />
 
 </navigation>

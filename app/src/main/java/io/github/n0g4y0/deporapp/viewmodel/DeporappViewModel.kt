@@ -13,10 +13,14 @@ import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
 import io.github.n0g4y0.deporapp.model.Equipo
 import java.io.File
+import java.util.*
 
 
 class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
+    /*
+    * VARIABLES GLOBALES
+    * */
 
     private val authManager by lazy { AutentificacionManager() }
 
@@ -35,6 +39,15 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
             field = value
             deberiaBorrarImagen = true
         }
+
+    var fechaEncuentro: MutableLiveData<Date> = MutableLiveData()
+
+
+    /*
+    * Funciones:
+    *
+    * */
+
 
     private fun borrarFotoTemporal() {
         if (deberiaBorrarImagen) {
@@ -104,6 +117,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
         //showToast(getString(R.string.post_add_error))
     }
 
+
+    fun setFechaEncuentro(nuevaFecha: Date){
+        fechaEncuentro.value = nuevaFecha
+    }
 
 
 
