@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/accion_crear_encuentro"
+            android:orderInCategory="100"
+            android:tooltipText="@string/accion_crear_encuentro"
+            android:icon="@drawable/ic_action_add_game"
+            android:title="@string/accion_crear_encuentro"
+            app:showAsAction="ifRoom"/>
+</menu>

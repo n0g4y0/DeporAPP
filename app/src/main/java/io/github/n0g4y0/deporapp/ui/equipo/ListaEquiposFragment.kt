@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Equipo
-import io.github.n0g4y0.deporapp.util.DateTimeHelper
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
-import kotlinx.android.synthetic.main.fragment_lista_equipo.*
+import kotlinx.android.synthetic.main.fragment_lista_equipos.*
 import kotlinx.android.synthetic.main.view_holder_equipo.view.*
 
 
-class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipo) {
+class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipos) {
 
     private val deporappViewModel: DeporappViewModel by navGraphViewModels(R.id.nav_graph)
 

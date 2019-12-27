@@ -161,6 +161,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_my_games -> {
 
+                controladorNav.navigate(R.id.listaJuegosFragment)
+
             }
             R.id.nav_courts -> {
 

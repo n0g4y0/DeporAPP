@@ -42,6 +42,17 @@
     <string name="nombre_equipo">Nombre</string>
     <string name="descripcion_equipo_hint">Notas/Reglas/Bienvenida</string>
     <string name="accion_crear_equipo">Crear Equipo</string>
+    <string name="accion_crear_encuentro">Crear Encuentro</string>
+
+
+    <string name="deporte_prompt">Selecciona un Deporte</string>
+
+    <string-array name="deporte_arrays">
+        <item>Futbol</item>
+        <item>Futsal</item>
+        <item>Basquet</item>
+        <item>Voley</item>
+    </string-array>
 
 
 </resources>

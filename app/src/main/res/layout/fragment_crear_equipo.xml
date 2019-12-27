@@ -28,7 +28,7 @@
                 tools:text="Nombre"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutTitle"
+            android:id="@+id/layout_cancha_encuentro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/descripcion_equipo_hint"
@@ -55,7 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_cancha_encuentro" />
 
     <Switch
             android:id="@+id/sw_futsal"
