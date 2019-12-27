@@ -16,7 +16,9 @@ class DateUtils {
 
     fun convertirFechaAString(fecha: Date): String{
 
-        var formato: String = "yyyy-MM-dd"
+        //yyyy-MM-dd
+
+        var formato: String = "dd-MM-yyyy"
 
         val formatter = SimpleDateFormat(formato, Locale.US)
 

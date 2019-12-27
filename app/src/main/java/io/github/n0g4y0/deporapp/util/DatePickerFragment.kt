@@ -18,8 +18,13 @@ class DatePickerFragment: DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
+
+        // val picker: DatePicker? = null
+        // picker?.minDate = System.currentTimeMillis() - 1000
+
         val fechaListener = DatePickerDialog.OnDateSetListener {
-                _: DatePicker, anio: Int, mes: Int, dia: Int ->
+                _: DatePicker , anio: Int, mes: Int, dia: Int ->
+
             val fechaResultado : Date = GregorianCalendar(anio, mes, dia).time
 
             deporappViewModel.setFechaEncuentro(fechaResultado)
@@ -36,7 +41,6 @@ class DatePickerFragment: DialogFragment() {
 
         return DatePickerDialog(
             requireContext(),
-            // el valor NULL es porque todavia no le cambiamos la fecha, los otros datos, son los POR DEFECTO.
             fechaListener,
             anioInicial,
             mesInicial,

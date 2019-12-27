@@ -65,7 +65,7 @@ class ListaCanchasFragment : Fragment(R.layout.fragment_lista_canchas) {
 
         when(item.itemId){
 
-            R.id.accion_crear_cancha -> findNavController().navigate(R.id.crearEquipoFragment)
+            R.id.accion_crear_cancha -> findNavController().navigate(R.id.crearCanchaFragment)
 
         }
 
