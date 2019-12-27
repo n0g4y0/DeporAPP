@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_juego.*
 import java.text.SimpleDateFormat
@@ -22,6 +23,8 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
     private val deporappViewModel: DeporappViewModel by navGraphViewModels(R.id.nav_graph)
 
     var fechaActual: Date? = null
+
+    private val fechaUtils = DateUtils()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,21 +40,14 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
 
         deporappViewModel.fechaEncuentro.observe(this, Observer { fechaActualEncuentro ->
                 fechaActual = fechaActualEncuentro
-                et_fecha_encuentro.setText(convertirFechaAString(fechaActual!!))
+                et_fecha_encuentro.setText(fechaUtils.convertirFechaAString(fechaActual!!))
 
 
         })
 
     }
 
-    private fun convertirFechaAString(fecha: Date): String{
 
-        var formato: String = "yyyy-MM-dd"
-
-        val formatter = SimpleDateFormat(formato, Locale.US)
-
-        return formatter.format(fecha)
-    }
 
 
 
