@@ -1,14 +1,9 @@
 package io.github.n0g4y0.deporapp.model
 
 
-class User(val uid:String, val username:String){
-
-constructor():this("","")
-
-
-
-    override fun toString(): String {
-        return username
-    }
-
-}
+data class User(
+    val id: String = "",
+    var nombre: String = "",
+    var correo: String = "",
+    var foto_url: String = ""
+)
