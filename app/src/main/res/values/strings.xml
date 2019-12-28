@@ -43,6 +43,8 @@
     <string name="descripcion_equipo_hint">Notas/Reglas/Bienvenida</string>
     <string name="accion_crear_equipo">Crear Equipo</string>
     <string name="accion_crear_encuentro">Crear Encuentro</string>
+    <string name="accion_tipo_encuentro_privado">SI</string>
+    <string name="accion_tipo_encuentro_publico">NO</string>
 
 
     <string name="deporte_prompt">Selecciona un Deporte</string>

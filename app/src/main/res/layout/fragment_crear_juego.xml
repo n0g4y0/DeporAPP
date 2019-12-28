@@ -130,10 +130,11 @@
                 android:minLines="3"
                 android:maxLines="5"
                 android:scrollbars="vertical"
+                android:layout_marginBottom="@dimen/text_size_large"
                 />
     </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_spinner_encuentro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,7 +160,28 @@
                         android:prompt="@string/deporte_prompt"
                         android:layout_marginBottom="50dp"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_tipo_encuentro"
+            android:padding="8dp"
+            android:layout_marginBottom="@dimen/text_size_large"
+            app:layout_constraintTop_toBottomOf="@+id/layout_spinner_encuentro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Switch
+                android:id="@+id/tipo_encuentro"
+                android:switchPadding="@dimen/text_size_large"
+                android:showText="true"
+                android:textOn="@string/accion_tipo_encuentro_privado"
+                android:textOff="@string/accion_tipo_encuentro_publico"
+
+                android:text="El Encuentro Sera Privado?"
+                android:textSize="@dimen/margin_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_size_large"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                     android:id="@+id/btn_Crear_encuentro"
@@ -171,7 +193,7 @@
                     android:text="Crear"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_spinner_encuentro"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_tipo_encuentro"
                     app:layout_constraintVertical_bias="0.333" />
 
             <Button
@@ -184,7 +206,7 @@
                     android:text="Cancelar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_spinner_encuentro"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_tipo_encuentro"
                     app:layout_constraintVertical_bias="0.333" />
 
 
