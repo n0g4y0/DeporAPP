@@ -71,5 +71,14 @@
             android:id="@+id/timePickerFragment"
             android:name="io.github.n0g4y0.deporapp.util.TimePickerFragment"
             android:label="Hora" />
+    <fragment
+            android:id="@+id/seleccionCanchaFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.cancha.SeleccionCanchaFragment"
+            android:label="Seleccionar Cancha"
+            tools:layout="@layout/fragment_seleccion_cancha" >
+        <action
+                android:id="@+id/action_seleccionCancha_a_crearJuego"
+                app:destination="@id/crearJuegoFragment" />
+    </fragment>
 
 </navigation>

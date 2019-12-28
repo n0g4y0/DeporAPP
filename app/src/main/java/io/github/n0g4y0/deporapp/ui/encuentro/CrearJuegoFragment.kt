@@ -35,6 +35,11 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         getFechaActualEncuentro()
         getHoraActualEncuentro()
 
+        et_cancha_encuentro.setOnClickListener {
+            findNavController().navigate(R.id.seleccionCanchaFragment)
+        }
+
+
         et_fecha_encuentro.setOnClickListener {
             findNavController().navigate(R.id.datePickerFragment)
         }
@@ -42,6 +47,7 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         et_hora_encuentro.setOnClickListener {
             findNavController().navigate(R.id.timePickerFragment)
         }
+
     }
 
     private fun getFechaActualEncuentro(){

@@ -34,6 +34,8 @@ class ListaCanchasFragment : Fragment(R.layout.fragment_lista_canchas) {
         setHasOptionsMenu(true)
         adaptador.setItemClickListener {
 
+            Log.d("prueba","prueba de click")
+
         }
 
         canchas_recycler_view.layoutManager = LinearLayoutManager(context)
