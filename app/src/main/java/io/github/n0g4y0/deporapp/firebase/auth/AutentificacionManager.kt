@@ -6,6 +6,7 @@ import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 
 const val   SOLICITUD_CODIGO_LOGIN = 1000
 
@@ -19,6 +20,8 @@ const val   SOLICITUD_CODIGO_LOGIN = 1000
 class AutentificacionManager {
 
     private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val firestore by lazy { FirestoreManager() }
 
     private val proveedores = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
@@ -41,6 +44,29 @@ class AutentificacionManager {
     fun getUsuarioActual() = firebaseAuth.currentUser?.displayName ?: ""
 
     fun getIdUsuarioActual() = firebaseAuth.currentUser?.uid ?: ""
+
+    fun guardarUsuarioEnFirestore(contexto: Context){
+
+       if (firestore.estaIdUsuario(getIdUsuarioActual())){
+
+           firestore.agregarUsuario(firebaseAuth.currentUser?.uid!!,
+               firebaseAuth.currentUser?.displayName!!,
+               firebaseAuth.currentUser?.email!!,
+               firebaseAuth.currentUser?.photoUrl!!.toString(),
+               ::agregadoExitoso , ::agregadoFallido)
+       }
+
+    }
+
+
+    private fun agregadoExitoso() {
+        //showToast(getString(R.string.posted_successfully))
+
+    }
+
+    private fun agregadoFallido() {
+        //showToast(getString(R.string.post_add_error))
+    }
 
     fun cerrarSesion(contexto: Context){
 

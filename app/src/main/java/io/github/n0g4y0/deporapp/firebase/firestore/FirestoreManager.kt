@@ -1,7 +1,9 @@
 package io.github.n0g4y0.deporapp.firebase.firestore
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -15,6 +17,7 @@ import io.github.n0g4y0.deporapp.model.Equipo
 private const val COLECCION_CANCHAS = "canchas"
 private const val COLECCION_ANUNCIOS = "anuncios"
 private const val COLECCION_EQUIPOS = "equipos"
+private const val COLECCION_USUARIOS = "usuarios"
 
 
 
@@ -46,12 +49,22 @@ private const val CLAVE_DESCRIPCION_EQUIPO = "descripcion"
 private const val CLAVE_ID_ADMIN = "idAdmin"
 
 
+// valores estaticos, usuarios:
+
+private const val CLAVE_ID_USUARIO = "id"
+private const val CLAVE_NOMBRE_USUARIO = "nombre"
+private const val CLAVE_CORREO_USUARIO = "correo"
+private const val CLAVE_FOTO_URL_USUARIO = "foto_url"
+private const val CLAVE_NUMERO_USUARIO = "telefono"
+
 
 
 
 private lateinit var registrosCanchas: ListenerRegistration
 private lateinit var registrosAnuncios: ListenerRegistration
 private lateinit var registrosEquipos: ListenerRegistration
+
+private lateinit var registrosUsuarios: ListenerRegistration
 
 class FirestoreManager {
 
@@ -246,6 +259,63 @@ class FirestoreManager {
                 }
             })
     }
+
+
+    /*
+    * agregar al usuario a la base de datos:
+    *
+    * */
+
+    fun agregarUsuario(id: String,
+                       nombre: String,
+                      correo: String,
+                      foto_url: String,
+                      enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
+
+        val referenciaDocumento = baseDeDato.collection(COLECCION_USUARIOS).document()
+
+        val usuarios = HashMap<String,Any>()
+
+        usuarios[CLAVE_ID] = id
+        usuarios[CLAVE_NOMBRE_USUARIO] = nombre
+        usuarios[CLAVE_CORREO_USUARIO] = correo
+        usuarios[CLAVE_FOTO_URL_USUARIO] = foto_url
+        usuarios[CLAVE_FECHA] = getTiempoActual()
+
+
+        referenciaDocumento
+            .set(usuarios)
+            .addOnSuccessListener { enAcciondeExito() }
+            .addOnFailureListener { enAcciondeFracaso() }
+    }
+
+    fun estaIdUsuario(idUsuario: String): Boolean{
+
+        var res: Boolean = true
+
+        registrosUsuarios = baseDeDato.collection(COLECCION_USUARIOS)
+            .whereEqualTo(CLAVE_ID_USUARIO,idUsuario)
+            .limit(1)
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+                if (valor.isEmpty) {
+
+                    Log.d("prueba","esto esta vacio")
+
+                }
+                else{
+                    res = false
+                    Log.d("prueba","esto esta NO vacio")
+                }
+            })
+
+        return res
+    }
+
 
 
 

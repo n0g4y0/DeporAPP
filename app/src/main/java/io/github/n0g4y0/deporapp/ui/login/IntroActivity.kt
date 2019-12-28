@@ -53,6 +53,7 @@ class IntroActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK){
 
+                guardarUsuarioEnFirestore()
                 enrutador.iniciarMenuPrincipal(this)
 
             }else{
@@ -71,7 +72,18 @@ class IntroActivity : AppCompatActivity() {
     }
 
 
-    private fun continuarAlMenuPrincipalSiUsuarioEstaLogeado() = if (estaElUsuarioLogeado()) enrutador.iniciarMenuPrincipal(this) else Unit
+    private fun continuarAlMenuPrincipalSiUsuarioEstaLogeado(){
+
+        if (estaElUsuarioLogeado()){
+            enrutador.iniciarMenuPrincipal(this)
+        }  else{
+            Unit
+        }
+    }
+
+    private fun guardarUsuarioEnFirestore() {
+        autentificacionManager.guardarUsuarioEnFirestore(this)
+    }
 
     private fun configurarLosListenersDeClicks() {
 
