@@ -45,6 +45,9 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
     var horaEncuentro: MutableLiveData<Date> = MutableLiveData()
 
 
+    var idCanchaEncuentro: MutableLiveData<Cancha> = MutableLiveData()
+
+
     /*
     * Funciones:
     *
@@ -126,6 +129,19 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     fun setHoraEncuentro(nuevaHora: Date){
         horaEncuentro.value = nuevaHora
+
+    }
+
+    fun setIdCanchaEncuentro(nuevoId: Cancha){
+        idCanchaEncuentro.value = nuevoId
+    }
+
+    fun reiniciarLasVariablesMutables(){
+        ubicacion.value = null
+        ruta_foto_local.value = null
+        fechaEncuentro.value = null
+        horaEncuentro.value = null
+        idCanchaEncuentro.value = null
 
     }
 

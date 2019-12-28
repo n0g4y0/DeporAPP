@@ -48,8 +48,11 @@ class SeleccionCanchaFragment : Fragment(R.layout.fragment_seleccion_cancha) {
 
 
         adaptador.setItemClickListener {cancha ->
-            findNavController().popBackStack(R.id.crearJuegoFragment,false)
+
+            deporappViewModel.setIdCanchaEncuentro(cancha)
             Log.d("prueba","prueba de click")
+            findNavController().popBackStack(R.id.crearJuegoFragment,false)
+
         }
 
 
