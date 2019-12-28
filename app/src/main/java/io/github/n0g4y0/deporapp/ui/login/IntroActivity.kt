@@ -13,6 +13,8 @@ import io.github.n0g4y0.deporapp.firebase.auth.SOLICITUD_CODIGO_LOGIN
 import io.github.n0g4y0.deporapp.ui.Enrutador
 import io.github.n0g4y0.deporapp.util.showToast
 import kotlinx.android.synthetic.main.activity_intro.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class IntroActivity : AppCompatActivity() {
 
@@ -53,7 +55,10 @@ class IntroActivity : AppCompatActivity() {
 
             if (resultCode == Activity.RESULT_OK){
 
-                guardarUsuarioEnFirestore()
+                GlobalScope.launch {
+                    guardarUsuarioEnFirestore()
+                }
+
                 enrutador.iniciarMenuPrincipal(this)
 
             }else{
@@ -81,7 +86,8 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    private fun guardarUsuarioEnFirestore() {
+    private suspend fun guardarUsuarioEnFirestore() {
+
         autentificacionManager.guardarUsuarioEnFirestore(this)
     }
 

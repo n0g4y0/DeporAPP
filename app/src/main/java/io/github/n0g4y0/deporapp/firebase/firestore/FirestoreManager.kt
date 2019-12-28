@@ -4,14 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
 import io.github.n0g4y0.deporapp.model.Equipo
+import kotlinx.coroutines.tasks.await
 
 
 private const val COLECCION_CANCHAS = "canchas"
@@ -289,31 +287,15 @@ class FirestoreManager {
             .addOnFailureListener { enAcciondeFracaso() }
     }
 
-    fun estaIdUsuario(idUsuario: String): Boolean{
+    suspend fun estaIdUsuario(idUsuario: String): Boolean{
 
-        var res: Boolean = true
+        try {
+            val usuarios = baseDeDato.collection(COLECCION_USUARIOS).whereEqualTo(CLAVE_ID_USUARIO,idUsuario).get().await()
+            return usuarios.isEmpty
+            }catch (e: FirebaseFirestoreException){
+                return false
+            }
 
-        registrosUsuarios = baseDeDato.collection(COLECCION_USUARIOS)
-            .whereEqualTo(CLAVE_ID_USUARIO,idUsuario)
-            .limit(1)
-            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
-
-                if (error != null || valor == null) {
-                    return@EventListener
-                }
-
-                if (valor.isEmpty) {
-
-                    Log.d("prueba","esto esta vacio")
-
-                }
-                else{
-                    res = false
-                    Log.d("prueba","esto esta NO vacio")
-                }
-            })
-
-        return res
     }
 
 

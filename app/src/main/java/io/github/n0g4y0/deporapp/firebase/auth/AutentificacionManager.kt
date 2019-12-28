@@ -45,7 +45,8 @@ class AutentificacionManager {
 
     fun getIdUsuarioActual() = firebaseAuth.currentUser?.uid ?: ""
 
-    fun guardarUsuarioEnFirestore(contexto: Context){
+    suspend fun guardarUsuarioEnFirestore(contexto: Context){
+
 
        if (firestore.estaIdUsuario(getIdUsuarioActual())){
 
