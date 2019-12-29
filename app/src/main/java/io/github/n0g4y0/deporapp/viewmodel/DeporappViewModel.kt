@@ -1,17 +1,15 @@
 package io.github.n0g4y0.deporapp.viewmodel
 
 import android.app.Application
-import android.util.Log
-import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
-import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import io.github.n0g4y0.deporapp.model.Anuncio
 import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.model.Encuentro
 import io.github.n0g4y0.deporapp.model.Equipo
 import java.io.File
 import java.util.*
@@ -102,7 +100,30 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
                       siVoley: Boolean
                       ){
 
-        return firestore.agregarEquipo(nombre,descripcion,siFutbol,siFutsal,siBasquet,siVoley, ::agregadoExitosoCancha, ::agregadoFallidoCancha)
+        return firestore.agregarEquipo(nombre,descripcion,siFutbol,siFutsal,siBasquet,siVoley, ::agregadoExitoso, ::agregadoFallido)
+
+    }
+
+    /*
+    * el agregado mas importante, los encuentros deportivos:
+    * */
+
+    fun agregarEncuentro(
+        nombre: String,
+        idCancha:String,
+        fecha: Long,
+        hora: Long,
+        cupos: Int,
+        nota: String,
+        deporte: String,
+        esPrivado: Boolean){
+
+        return firestore.agregarEncuentro(nombre,idCancha,fecha,hora,cupos,nota,deporte,esPrivado,::agregadoExitoso, ::agregadoFallido)
+
+    }
+    fun getListaEncuentros(): LiveData<List<Encuentro>>{
+
+        return firestore.cambiosDeValorEncuentros()
 
     }
 
@@ -113,12 +134,12 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     // mensajes exito o fracaso, subida al FIRESTORE
 
-    private fun agregadoExitosoCancha() {
+    private fun agregadoExitoso() {
         //showToast(getString(R.string.posted_successfully))
 
     }
 
-    private fun agregadoFallidoCancha() {
+    private fun agregadoFallido() {
         //showToast(getString(R.string.post_add_error))
     }
 

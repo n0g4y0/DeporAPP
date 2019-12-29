@@ -54,6 +54,52 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
             findNavController().navigate(R.id.timePickerFragment)
         }
 
+        btn_Crear_encuentro.setOnClickListener {
+            guardarEncuentro()
+        }
+
+        btn_cancelar_encuentro.setOnClickListener {
+
+            findNavController().popBackStack()
+
+        }
+
+    }
+
+    private fun guardarEncuentro() {
+
+        val nombreEncuentro = et_nombre_encuentro.text.toString().trim()
+        val idCancha = canchaEncuentro?.id
+        val fecha = fechaActual?.time
+        val hora = horaActual?.time
+        val cupos = et_cupo_encuentro.text.toString().toInt()
+        val nota_adicional = et_nota_encuentro.text.toString().trim()
+        val deporte_practicado = spinner_deporte_encuentro.selectedItem.toString()
+        val seraPrivado = tipo_encuentro.isChecked
+
+        AlertDialog.Builder(requireContext())
+            .setMessage("Crear Encuentro?")
+            .setPositiveButton("OK"){ _,_ ->
+
+                deporappViewModel?.let {
+                    it.agregarEncuentro(
+                        nombreEncuentro,
+                        idCancha!!,
+                        fecha!!,
+                        hora!!,
+                        cupos,
+                        nota_adicional,
+                        deporte_practicado,
+                        seraPrivado
+                        )
+                    findNavController().popBackStack(R.id.listaJuegosFragment,false)
+
+                }
+            }
+            .setNegativeButton("Cancelar",null)
+            .create().show()
+
+
     }
 
     private fun getFechaActualEncuentro(){

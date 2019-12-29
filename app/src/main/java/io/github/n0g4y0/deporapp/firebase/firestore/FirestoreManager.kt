@@ -1,14 +1,10 @@
 package io.github.n0g4y0.deporapp.firebase.firestore
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.*
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
-import io.github.n0g4y0.deporapp.model.Anuncio
-import io.github.n0g4y0.deporapp.model.Cancha
-import io.github.n0g4y0.deporapp.model.Equipo
+import io.github.n0g4y0.deporapp.model.*
 import kotlinx.coroutines.tasks.await
 
 
@@ -16,6 +12,7 @@ private const val COLECCION_CANCHAS = "canchas"
 private const val COLECCION_ANUNCIOS = "anuncios"
 private const val COLECCION_EQUIPOS = "equipos"
 private const val COLECCION_USUARIOS = "usuarios"
+private const val COLECCION_ENCUENTROS = "encuentros"
 
 
 
@@ -55,6 +52,20 @@ private const val CLAVE_CORREO_USUARIO = "correo"
 private const val CLAVE_FOTO_URL_USUARIO = "foto_url"
 private const val CLAVE_NUMERO_USUARIO = "telefono"
 
+// valores estaticos, encuentros deportivos:
+
+private const val CLAVE_ID_ENCUENTRO = "id"
+private const val CLAVE_NOMBRE_ENCUENTRO = "nombre"
+private const val CLAVE_ID_CANCHA_ENCUENTRO = "id_cancha"
+private const val CLAVE_FECHA_ENCUENTRO = "fecha"
+private const val CLAVE_HORA_ENCUENTRO = "hora"
+private const val CLAVE_CUPOS_ENCUENTRO = "cupos"
+private const val CLAVE_NOTA_ENCUENTRO = "nota"
+private const val CLAVE_DEPORTE_ENCUENTRO = "deporte"
+private const val CLAVE_TIPO_ENCUENTRO = "esPrivado"
+private const val CLAVE_ID_CREADOR_ENCUENTRO = "id_creador"
+private const val CLAVE_FECHA_CREACION_ENCUENTRO = "fecha_creacion"
+
 
 
 
@@ -63,6 +74,7 @@ private lateinit var registrosAnuncios: ListenerRegistration
 private lateinit var registrosEquipos: ListenerRegistration
 
 private lateinit var registrosUsuarios: ListenerRegistration
+private lateinit var registrosEncuentros: ListenerRegistration
 
 class FirestoreManager {
 
@@ -74,6 +86,10 @@ class FirestoreManager {
     private val valoresAnuncios = MutableLiveData<List<Anuncio>>()
 
     private val valoresEquipos = MutableLiveData<List<Equipo>>()
+
+    private val valoresUsuarios = MutableLiveData<List<User>>()
+
+    private val valoresEncuentros = MutableLiveData<List<Encuentro>>()
 
 
 
@@ -295,6 +311,79 @@ class FirestoreManager {
             }catch (e: FirebaseFirestoreException){
                 return false
             }
+
+    }
+
+    /*
+    * Agregando los metodos para manipular los encuentros deportivos:
+    *
+    * */
+
+    fun agregarEncuentro(
+                        nombre: String,
+                        idCancha:String,
+                         fecha: Long,
+                         hora: Long,
+                         cupos: Int,
+                         nota: String,
+                         deporte: String,
+                         esPrivado: Boolean,
+                       enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
+
+        val referenciaDocumento = baseDeDato.collection(COLECCION_ENCUENTROS).document()
+
+        val encuentro = HashMap<String,Any>()
+
+        encuentro[CLAVE_ID_ENCUENTRO] = referenciaDocumento.id
+        encuentro[CLAVE_NOMBRE_ENCUENTRO] = nombre
+        encuentro[CLAVE_ID_CANCHA_ENCUENTRO] = idCancha
+        encuentro[CLAVE_FECHA_ENCUENTRO] = fecha
+        encuentro[CLAVE_HORA_ENCUENTRO] = hora
+        encuentro[CLAVE_CUPOS_ENCUENTRO] = cupos
+        encuentro[CLAVE_NOTA_ENCUENTRO] = nota
+        encuentro[CLAVE_DEPORTE_ENCUENTRO] = deporte
+        encuentro[CLAVE_TIPO_ENCUENTRO] = esPrivado
+        encuentro[CLAVE_ID_CREADOR_ENCUENTRO] = authManager.getIdUsuarioActual()
+        encuentro[CLAVE_FECHA_CREACION_ENCUENTRO] = getTiempoActual()
+
+
+        referenciaDocumento
+            .set(encuentro)
+            .addOnSuccessListener { enAcciondeExito() }
+            .addOnFailureListener { enAcciondeFracaso() }
+    }
+
+    fun cambiosDeValorEncuentros(): LiveData<List<Encuentro>>{
+        escucharPorCambiosEnValoresEncuentros()
+        return valoresEncuentros
+    }
+
+    private fun escucharPorCambiosEnValoresEncuentros() {
+
+        registrosEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+                if (valor.isEmpty) {
+
+                    valoresEncuentros.postValue(emptyList())
+
+                } else {
+
+                    val encuentros = ArrayList<Encuentro>()
+
+                    for (doc in valor) {
+                        val encuentro = doc.toObject(Encuentro::class.java)
+                        encuentros.add(encuentro)
+                    }
+
+                    valoresEncuentros.postValue(encuentros)
+                }
+            })
 
     }
 
