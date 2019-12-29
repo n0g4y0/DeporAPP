@@ -387,8 +387,43 @@ class FirestoreManager {
 
     }
 
+    /*
+    * funciones de consulta de uso comun:
+    * */
 
+    suspend fun buscarUsuarioPorID(idUsuario: String): User{
 
+            val snapshot = baseDeDato.collection(COLECCION_USUARIOS).whereEqualTo(CLAVE_ID_USUARIO,idUsuario).get().await()
+            if (!snapshot.isEmpty) {
+                val usuarios = ArrayList<User>()
+
+                for (doc in snapshot){
+                    val usuario = doc.toObject(User::class.java)
+                    usuarios.add(usuario)
+                }
+
+                return usuarios.first()
+            }else{
+                return User()
+            }
+    }
+
+    suspend fun buscarCanchaPorID(idCancha: String): Cancha{
+
+        val snapshot = baseDeDato.collection(COLECCION_CANCHAS).whereEqualTo(CLAVE_ID,idCancha).get().await()
+        if (!snapshot.isEmpty) {
+            val canchas = ArrayList<Cancha>()
+
+            for (doc in snapshot){
+                val cancha = doc.toObject(Cancha::class.java)
+                canchas.add(cancha)
+            }
+
+            return canchas.first()
+        }else{
+            return Cancha()
+        }
+    }
 
 
     private fun getTiempoActual() = System.currentTimeMillis()
