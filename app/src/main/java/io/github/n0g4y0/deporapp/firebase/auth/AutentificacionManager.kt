@@ -39,11 +39,19 @@ class AutentificacionManager {
             )
     }
 
+    fun getIdUsuarioActual() = firebaseAuth.currentUser?.uid ?: ""
+
     fun elUsuarioInicioSesion() = firebaseAuth.currentUser != null
 
-    fun getUsuarioActual() = firebaseAuth.currentUser?.displayName ?: ""
+    fun getNombreUsuarioActual() = firebaseAuth.currentUser?.displayName ?: ""
 
-    fun getIdUsuarioActual() = firebaseAuth.currentUser?.uid ?: ""
+    fun getFotoUrlUsuarioActual() = firebaseAuth.currentUser?.photoUrl
+
+    fun getCorreoUsuarioActual() = firebaseAuth.currentUser?.email
+
+
+
+
 
     suspend fun guardarUsuarioEnFirestore(contexto: Context){
 

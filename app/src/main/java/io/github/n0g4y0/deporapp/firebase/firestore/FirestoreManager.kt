@@ -117,7 +117,7 @@ class FirestoreManager {
         cancha[CLAVE_BASQUET] = siBasquet
         cancha[CLAVE_VOLEY] = siVoley
         cancha[CLAVE_FECHA] = getTiempoActual()
-        cancha[CLAVE_CREADOR] = authManager.getUsuarioActual()
+        cancha[CLAVE_CREADOR] = authManager.getNombreUsuarioActual()
 
 
         referenciaDocumento

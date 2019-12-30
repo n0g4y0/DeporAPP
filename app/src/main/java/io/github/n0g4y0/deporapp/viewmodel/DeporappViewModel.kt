@@ -1,6 +1,8 @@
 package io.github.n0g4y0.deporapp.viewmodel
 
 import android.app.Application
+import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,9 +20,9 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
     * VARIABLES GLOBALES
     * */
 
-    private val authManager by lazy { AutentificacionManager() }
+    private val authManager = AutentificacionManager()
 
-    private val firestore by lazy { FirestoreManager() }
+    private val firestore = FirestoreManager()
 
 
     var ubicacion : MutableLiveData<LatLng> = MutableLiveData()
@@ -41,6 +43,12 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
 
     var idCanchaEncuentro: MutableLiveData<Cancha> = MutableLiveData()
+
+
+    var fotoPerfilUsuarioActual = ObservableField("")
+    var nombreUsuarioActual = ObservableField("")
+    var correoUsuarioActual = ObservableField("")
+
 
 
     /*
@@ -163,11 +171,32 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     }
 
+    fun getIdUsuarioActual(): String{
+        return authManager.getIdUsuarioActual()
+        Log.d("prueba","prueba de " + getPhotoUrlUsuarioActual())
+    }
+
+    fun getNombreUsuarioActual(): String{
+        return authManager.getNombreUsuarioActual()
+    }
+    fun getPhotoUrlUsuarioActual(): String{
+        return authManager.getFotoUrlUsuarioActual().toString()
+    }
+    fun getCorreoUsuarioActual(): String{
+        return authManager.getCorreoUsuarioActual()!!
+    }
+
     suspend fun buscarUsuarioPorID(id: String): User{
         return firestore.buscarUsuarioPorID(id)
     }
     suspend fun buscarCanchaPorId(id: String): Cancha{
         return firestore.buscarCanchaPorID(id)
+    }
+
+    fun cargarPerfil(){
+        //fotoPerfilUsuarioActual.set(getPhotoUrlUsuarioActual())
+        nombreUsuarioActual.set(getNombreUsuarioActual())
+        correoUsuarioActual.set(getCorreoUsuarioActual())
     }
 
 

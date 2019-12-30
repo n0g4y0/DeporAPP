@@ -9,20 +9,24 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
 import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.util.ImageBinding
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 
@@ -78,16 +82,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //agrega el diseño HEADER a la cabecera del NAVIGATIONDRAWER:
         activityMainBinding.navView.addHeaderView(headerBinding.root)
 
+
     }
+
+
 
     private fun configurarNavegacion() {
 
         NavigationUI.setupActionBarWithNavController(this, controladorNav, drawer_layout)
 
         NavigationUI.setupWithNavController(toolbar,controladorNav,appBarConfiguration)
-
-
-
 
     }
 
@@ -105,12 +109,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             deporappViewModel = viewModelProvider.get(DeporappViewModel::class.java)
 
             //linea muy util, si queremos editar la cabecera, no lo utilizaremos:
-            //headerBinding.viewModel = deporappViewModel
+            headerBinding.viewModel = deporappViewModel
+            Log.d("prueba","prueba de de " + deporappViewModel?.getPhotoUrlUsuarioActual())
+            configurarPerfilUsuario()
 
 
         }catch (e: IllegalArgumentException){
             e.printStackTrace()
         }
+    }
+
+    private fun configurarPerfilUsuario() {
+
+        //ImageBinding.setImageUrl(headerBinding.imageViewPerfil,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
+        //Log.d("prueba","prueba de subido correctamente " )
+        deporappViewModel?.cargarPerfil()
+        //ImageBinding.setImageUrl(headerBinding.imageViewFoto,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
     }
 
     private fun configurarVistas() {
