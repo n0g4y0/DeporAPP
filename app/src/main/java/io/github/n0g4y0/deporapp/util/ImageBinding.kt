@@ -10,10 +10,9 @@ object ImageBinding {
     @BindingAdapter("app:imageUrl")
     fun setImageUrl(imageView: ImageView, url: String) {
         if (url.isNotEmpty()) {
-            Log.d("prueba","prueba de imagen no vacia " )
             Picasso.get()
                 .load(url)
-                .fit()
+                .resize(200,200)
                 .centerInside()
                 .into(imageView)
         }

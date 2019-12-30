@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.model.*
+import io.github.n0g4y0.deporapp.util.ImageUtils
 import java.io.File
 import java.util.*
 
@@ -194,9 +195,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
     }
 
     fun cargarPerfil(){
-        //fotoPerfilUsuarioActual.set(getPhotoUrlUsuarioActual())
+
         nombreUsuarioActual.set(getNombreUsuarioActual())
         correoUsuarioActual.set(getCorreoUsuarioActual())
+        fotoPerfilUsuarioActual.set(getPhotoUrlUsuarioActual())
     }
 
 

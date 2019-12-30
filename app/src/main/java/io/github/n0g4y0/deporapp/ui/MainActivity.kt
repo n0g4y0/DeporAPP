@@ -22,6 +22,7 @@ import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
 import io.github.n0g4y0.deporapp.model.User
 import io.github.n0g4y0.deporapp.util.ImageBinding
+import io.github.n0g4y0.deporapp.util.ImageUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -124,6 +125,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //ImageBinding.setImageUrl(headerBinding.imageViewPerfil,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
         //Log.d("prueba","prueba de subido correctamente " )
         deporappViewModel?.cargarPerfil()
+        //ImageUtils.cambiarImageViewDesdeUrl(headerBinding.imageViewFoto,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
         //ImageBinding.setImageUrl(headerBinding.imageViewFoto,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
     }
 

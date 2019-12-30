@@ -7,6 +7,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
