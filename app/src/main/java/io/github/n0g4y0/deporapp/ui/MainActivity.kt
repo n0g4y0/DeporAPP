@@ -122,11 +122,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun configurarPerfilUsuario() {
 
-        //ImageBinding.setImageUrl(headerBinding.imageViewPerfil,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
-        //Log.d("prueba","prueba de subido correctamente " )
         deporappViewModel?.cargarPerfil()
-        //ImageUtils.cambiarImageViewDesdeUrl(headerBinding.imageViewFoto,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
-        //ImageBinding.setImageUrl(headerBinding.imageViewFoto,deporappViewModel?.getPhotoUrlUsuarioActual()!!)
+
     }
 
     private fun configurarVistas() {
