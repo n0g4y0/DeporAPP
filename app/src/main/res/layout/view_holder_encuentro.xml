@@ -1,94 +1,273 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_height="match_parent"
+        android:background="#FFF9F9"
         android:orientation="vertical"
-        app:cardCornerRadius="@dimen/margin_small">
+        android:padding="8dp">
+<androidx.cardview.widget.CardView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="266dp"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
             android:orientation="vertical"
-            android:padding="@dimen/margin_medium">
+            android:padding="14dp">
 
-        <TextView
-                android:id="@+id/tv_nombre_encuentro"
-                android:layout_width="0dp"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="1"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Titulo" />
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tv_nombre_encuentro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="Nombre Encuentro"
+                    android:textColor="#070707"
+                    android:textSize="24dp" />
+
+        </LinearLayout>
 
 
-        <TextView
-                android:id="@+id/tv_ubicacion_encuentro"
-                android:layout_width="135dp"
-                android:layout_height="71dp"
-                android:gravity="right"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="2019-08-01\n11:30 AM" />
-
-        <TextView
-                android:id="@+id/tv_hora_encuentro"
-                android:layout_width="80dp"
-                android:layout_height="66dp"
-                android:gravity="right"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_fecha_equipo"
-                app:layout_constraintStart_toEndOf="@+id/tv_fecha_encuentro"
-                tools:text=" 11:30 PM " />
-
-        <TextView
-                android:id="@+id/tv_fecha_encuentro"
-                android:layout_width="80dp"
-                android:layout_height="66dp"
-                android:gravity="right"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="8 de julio \n Martes " />
-
-        <ImageButton
-                android:id="@+id/ib_unirse_encuento"
-                android:layout_width="115dp"
-                android:layout_height="39dp"
-                android:layout_marginEnd="132dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nombre_encuentro"
-                app:srcCompat="@drawable/ic_action_add_game" />
-
-        <ImageView
-                android:id="@+id/ib_foto_perfil_creador_encuentro"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nombre_encuentro"
-                app:srcCompat="@mipmap/equipo_default_picture" />
-
-        <TextView
-                android:id="@+id/cupos_encuentro"
-                android:layout_width="73dp"
-                android:layout_height="59dp"
-                android:layout_marginTop="13dp"
-                android:text="Le Faltan \n 13"
-                android:textStyle="italic|bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_fecha_equipo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nombre_encuentro" />
+                android:orientation="horizontal">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="15"
+                                android:textColor="#070707"
+                                android:textSize="20dp" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Diciembre"
+                                android:textColor="#070707"
+                                android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="18:00"
+                                android:textColor="#070707"
+                                android:textSize="20dp" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Hrs"
+                                android:textColor="#070707"
+                                android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical">
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_action_courts"
+                                android:textSize="20dp" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Localizacion"
+                                android:textColor="#070707"
+                                android:textSize="12dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@mipmap/user_profile_default"
+                        app:civ_border_width="2dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="13 cupos"
+                        android:textColor="#070707" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Futsal"
+                        android:textColor="#070707" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Creado Por:"
+                        android:textColor="#070707" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="usuario"
+                        android:textColor="#070707"
+                        android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/btn_default"
+                    android:text="Calificar/Comentar"
+                    android:textSize="12dp" />
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="74dp"
+                    android:layout_marginRight="@dimen/text_size_large"
+                    android:background="@drawable/btn_default"
+                    android:text="Postular"
+                    android:textSize="12dp" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>
+
+</LinearLayout>
