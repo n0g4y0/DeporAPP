@@ -75,7 +75,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto_bold"
                                 android:text="15"
-                                android:textColor="#070707"
+                                android:textColor="#FFFFFF"
                                 android:textSize="20dp" />
 
                         <TextView
@@ -84,7 +84,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Diciembre"
-                                android:textColor="#070707"
+                                android:textColor="@color/cardview_light_background"
                                 android:textSize="14dp" />
                     </LinearLayout>
 
@@ -101,7 +101,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto_bold"
                                 android:text="18:00"
-                                android:textColor="#070707"
+                                android:textColor="@color/cardview_light_background"
                                 android:textSize="20dp" />
 
                         <TextView
@@ -110,7 +110,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Hrs"
-                                android:textColor="#070707"
+                                android:textColor="@color/cardview_light_background"
                                 android:textSize="14dp" />
                     </LinearLayout>
 
@@ -134,7 +134,7 @@
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Localizacion"
-                                android:textColor="#070707"
+                                android:textColor="@color/cardview_light_background"
                                 android:textSize="12dp" />
                     </LinearLayout>
 
@@ -248,6 +248,7 @@
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/btn_default"
                     android:text="Calificar/Comentar"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="12dp" />
 
             <Button
@@ -259,6 +260,7 @@
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="74dp"
                     android:layout_marginRight="@dimen/text_size_large"
+                    android:textColor="@color/cardview_light_background"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:background="@drawable/btn_default"
                     android:text="Postular"
