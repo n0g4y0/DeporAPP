@@ -62,7 +62,7 @@ dependencies {
     api 'com.google.android.gms:play-services-identity:16.0.0' // para conexion FIREBASE
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     // para el menu NAVIGATION DRAWER
-    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'com.google.android.material:material:1.1.0-beta02'
     // para el menu NAVIGATION DRAWER
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
@@ -86,5 +86,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:18.2.0'
     //mejoras a la libreria firebase
     implementation 'com.google.firebase:firebase-common-ktx:16.1.0'
+    // implementando el viewpager2:
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'
