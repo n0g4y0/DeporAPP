@@ -168,10 +168,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_new_game -> {
                 controladorNav.navigate(R.id.crearJuegoFragment)
             }
-            R.id.nav_cercanos -> {
 
-                controladorNav.navigate(R.id.mapaFragment)
-            }
             R.id.nav_my_games -> {
 
                 controladorNav.navigate(R.id.listaJuegosFragment)
@@ -181,6 +178,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 controladorNav.navigate(R.id.listaCanchasFragment)
 
+            }
+            R.id.nav_cercanos -> {
+
+                controladorNav.navigate(R.id.mapaFragment)
             }
             R.id.nav_new_team -> {
 
