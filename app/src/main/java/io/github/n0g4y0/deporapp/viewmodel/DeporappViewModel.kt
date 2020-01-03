@@ -133,6 +133,20 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     }
 
+    fun getListaEncuentrosPendientes(): LiveData<List<Encuentro>>{
+
+        return firestore.listenerCambiosDeValorEncuentrosPendientes()
+
+    }
+
+    fun getListaEncuentrosConcluidos(): LiveData<List<Encuentro>>{
+
+        return firestore.listenerCambiosDeValorEncuentrosConcluidos()
+
+    }
+
+
+
 
 
 

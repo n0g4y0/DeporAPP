@@ -2,7 +2,10 @@ package io.github.n0g4y0.deporapp.firebase.firestore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.ServerValue
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.model.value.ServerTimestampValue
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.*
 import kotlinx.coroutines.tasks.await
@@ -76,6 +79,9 @@ private lateinit var registrosEquipos: ListenerRegistration
 private lateinit var registrosUsuarios: ListenerRegistration
 private lateinit var registrosEncuentros: ListenerRegistration
 
+private lateinit var registrosEncuentrosPendientes : ListenerRegistration
+private lateinit var registrosEncuentrosConcluidos : ListenerRegistration
+
 class FirestoreManager {
 
     private val authManager = AutentificacionManager()
@@ -90,6 +96,10 @@ class FirestoreManager {
     private val valoresUsuarios = MutableLiveData<List<User>>()
 
     private val valoresEncuentros = MutableLiveData<List<Encuentro>>()
+
+    private val valoresEncuentrosPendientes = MutableLiveData<List<Encuentro>>()
+    private val valoresEncuentrosConcluidos = MutableLiveData<List<Encuentro>>()
+
 
 
 
@@ -361,12 +371,16 @@ class FirestoreManager {
     private fun escucharPorCambiosEnValoresEncuentros() {
 
         registrosEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
+            .whereEqualTo(CLAVE_TIPO_ENCUENTRO,false)
+            .whereGreaterThanOrEqualTo(CLAVE_FECHA_ENCUENTRO,getTiempoActual())
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 
                 if (error != null || valor == null) {
                     return@EventListener
                 }
+
+
 
                 if (valor.isEmpty) {
 
@@ -386,6 +400,87 @@ class FirestoreManager {
             })
 
     }
+
+
+    fun listenerCambiosDeValorEncuentrosPendientes(): LiveData<List<Encuentro>>{
+        listenerDeValoresEncuentrosPendientes()
+        return valoresEncuentrosPendientes
+    }
+
+    private fun listenerDeValoresEncuentrosPendientes() {
+
+        registrosEncuentrosPendientes = baseDeDato.collection(COLECCION_ENCUENTROS)
+            .whereEqualTo(CLAVE_ID_CREADOR_ENCUENTRO,authManager.getIdUsuarioActual())
+            .whereGreaterThanOrEqualTo(CLAVE_FECHA_ENCUENTRO,getTiempoActual())
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+
+
+                if (valor.isEmpty) {
+
+                    valoresEncuentrosPendientes.postValue(emptyList())
+
+                } else {
+
+                    val encuentros = ArrayList<Encuentro>()
+
+                    for (doc in valor) {
+                        val encuentro = doc.toObject(Encuentro::class.java)
+                        encuentros.add(encuentro)
+                    }
+
+                    valoresEncuentrosPendientes.postValue(encuentros)
+                }
+            })
+
+    }
+
+
+
+    fun listenerCambiosDeValorEncuentrosConcluidos(): LiveData<List<Encuentro>>{
+        listenerDeValoresEncuentrosConcluidos()
+        return valoresEncuentrosConcluidos
+    }
+
+    private fun listenerDeValoresEncuentrosConcluidos() {
+
+        registrosEncuentrosConcluidos = baseDeDato.collection(COLECCION_ENCUENTROS)
+            .whereEqualTo(CLAVE_ID_CREADOR_ENCUENTRO,authManager.getIdUsuarioActual())
+            .whereLessThan(CLAVE_FECHA_ENCUENTRO,getTiempoActual())
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+
+
+                if (valor.isEmpty) {
+
+                    valoresEncuentrosConcluidos.postValue(emptyList())
+
+                } else {
+
+                    val encuentros = ArrayList<Encuentro>()
+
+                    for (doc in valor) {
+                        val encuentro = doc.toObject(Encuentro::class.java)
+                        encuentros.add(encuentro)
+                    }
+
+                    valoresEncuentrosConcluidos.postValue(encuentros)
+                }
+            })
+
+    }
+
+
 
     /*
     * funciones de consulta de uso comun:
