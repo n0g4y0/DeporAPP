@@ -24,10 +24,6 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:menu="@menu/activity_main_drawer"/>
-    <ExpandableListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/nav_header_height"/>
     <!-- app:headerLayout="@layout/nav_header_main" -->
 </androidx.drawerlayout.widget.DrawerLayout>
 

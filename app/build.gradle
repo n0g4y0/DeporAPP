@@ -86,7 +86,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:18.2.0'
     //mejoras a la libreria firebase
     implementation 'com.google.firebase:firebase-common-ktx:16.1.0'
-    //agregando el viewpager2, para los encuentros concluidos y pendientes:
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

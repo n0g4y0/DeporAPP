@@ -18,7 +18,6 @@ import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.adaptador.ViewPagerAdapter
 import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
 import io.github.n0g4y0.deporapp.model.User
@@ -27,7 +26,6 @@ import io.github.n0g4y0.deporapp.util.ImageUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_encuentros_pager.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val appBarConfiguration by lazy {
 
         AppBarConfiguration(
-            setOf(R.id.listaJuegosFragment), drawer_layout
+            setOf(R.id.anuncioFragment), drawer_layout
         )
 
     }
@@ -168,18 +166,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.nav_new_game -> {
-                controladorNav.navigate(R.id.crearJuegoFragment)
-            }
-            R.id.nav_my_games -> {
-
-          //      controladorNav.navigate(R.id.encuentrosPagerFragment)
-
+                // Handle the camera action
             }
             R.id.nav_cercanos -> {
 
                 controladorNav.navigate(R.id.mapaFragment)
             }
+            R.id.nav_my_games -> {
 
+                controladorNav.navigate(R.id.listaJuegosFragment)
+
+            }
             R.id.nav_courts -> {
 
                 controladorNav.navigate(R.id.listaCanchasFragment)
@@ -192,7 +189,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_anuncios -> {
 
-                controladorNav.navigate(R.id.anuncioFragment)
+                controladorNav.popBackStack(R.id.anuncioFragment,false)
 
             }
             R.id.nav_logout -> {
