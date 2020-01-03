@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val appBarConfiguration by lazy {
 
         AppBarConfiguration(
-            setOf(R.id.anuncioFragment), drawer_layout
+            setOf(R.id.listaJuegosFragment), drawer_layout
         )
 
     }
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (item.itemId) {
             R.id.nav_new_game -> {
-                // Handle the camera action
+                controladorNav.navigate(R.id.crearJuegoFragment)
             }
             R.id.nav_cercanos -> {
 
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_anuncios -> {
 
-                controladorNav.popBackStack(R.id.anuncioFragment,false)
+                controladorNav.navigate(R.id.anuncioFragment)
 
             }
             R.id.nav_logout -> {
