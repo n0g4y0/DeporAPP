@@ -57,4 +57,10 @@
     </string-array>
 
 
+    <string-array name="fragment_titulos_tab">
+        <item>Pendientes</item>
+        <item>Concluidos</item>
+    </string-array>
+
+
 </resources>

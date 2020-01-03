@@ -10,13 +10,15 @@
                 android:icon="@drawable/ic_action_add_game"
                 android:title="Crear Encuentro"/>
         <item
+                android:id="@+id/nav_my_games"
+                android:icon="@drawable/ic_action_courts"
+                android:title="Mis Encuentros"/>
+
+        <item
                 android:id="@+id/nav_cercanos"
                 android:icon="@drawable/ic_action_add_cercanos"
                 android:title="Cercanos"/>
-        <item
-                android:id="@+id/nav_my_games"
-                android:icon="@drawable/ic_action_add_my_games"
-                android:title="Mis Encuentros"/>
+
         <item
                 android:id="@+id/nav_courts"
                 android:icon="@drawable/ic_action_courts"
@@ -30,6 +32,7 @@
                 android:icon="@drawable/fui_ic_twitter_bird_white_24dp"
                 android:title="Anuncios"/>
     </group>
+
     <item
             android:title="Acerca">
         <menu>
