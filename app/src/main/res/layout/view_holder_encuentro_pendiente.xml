@@ -70,6 +70,7 @@
                                 android:orientation="vertical">
 
                             <TextView
+                                    android:id="@+id/tv_dia_encuentro_pendiente"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -79,6 +80,7 @@
                                     android:textSize="20dp" />
 
                             <TextView
+                                    android:id="@+id/tv_nombre_mes_encuentro_pendiente"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -96,6 +98,7 @@
                                 android:orientation="vertical">
 
                             <TextView
+                                    android:id="@+id/tv_hora_encuentro_pendiente"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -174,6 +177,7 @@
 
 
                     <TextView
+                            android:id="@+id/tv_cantidad_cupos_encuentro_pendiente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -191,6 +195,7 @@
                         android:orientation="horizontal">
 
                     <TextView
+                            android:id="@+id/tv_deporte_practicar_encuentro_pendiente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"

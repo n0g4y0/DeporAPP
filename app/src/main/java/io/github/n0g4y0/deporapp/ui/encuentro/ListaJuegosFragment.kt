@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
+import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
-import kotlinx.android.synthetic.main.fragment_lista_comentario.view.*
+import kotlinx.android.synthetic.main.fragment_crear_juego.view.*
 import kotlinx.android.synthetic.main.fragment_lista_juegos.*
 import kotlinx.android.synthetic.main.view_holder_encuentro.view.*
 
@@ -112,9 +113,19 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
         : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_encuentro ,parent ,false)){
 
 
+        var conversor = DateUtils()
+
         fun bind(encuentro: Encuentro){
 
             itemView.tv_nombre_encuentro.text = encuentro.nombre
+            itemView.tv_dia_encuentro.text = conversor.convertirTimestampDia(encuentro.fecha)
+            itemView.tv_nombre_mes_encuentro.text = conversor.convertirTimestampNombreMes(encuentro.fecha)
+            itemView.tv_cantidad_cupos_encuentro.text = "${encuentro.cupos} Cupos"
+            itemView.tv_hora_encuentro.text = conversor.convertirTimeStampAHora(encuentro.hora)
+            itemView.tv_deporte_practicar_encuentro.text = encuentro.deporte
+            itemView.tv_nota_adicional_encuentro.text = encuentro.nota
+
+
             itemView.btn_comentar_encuentro.setOnClickListener {
                     findNavController().navigate(R.id.listaComentarioFragment)
             }

@@ -32,4 +32,31 @@ class DateUtils {
 
         return formatter.format(hora)
     }
+
+    fun convertirTimeStampAHora(dato: Long): String{
+        var formato: String = "HH:mm"
+
+        val formatter = SimpleDateFormat(formato, Locale.US)
+
+        return formatter.format(dato)
+    }
+
+    fun convertirTimestampNombreMes(dato: Long): String{
+
+
+        var formato: String = "MMMM"
+
+        // esta linea de abajo traduce a idioma español, el dia del mes (en este caso)
+        val formatter = SimpleDateFormat(formato, Locale.forLanguageTag("es-ES"))
+
+        return formatter.format(dato)
+    }
+
+
+    fun convertirTimestampDia(dato: Long):String{
+        var formato = "dd"
+        val formatter = SimpleDateFormat(formato, Locale.US)
+        return  formatter.format(dato)
+    }
+
 }

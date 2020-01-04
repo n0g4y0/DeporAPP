@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
+import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_lista_juegos.*
 import kotlinx.android.synthetic.main.fragment_lista_pendientes.*
@@ -100,9 +101,16 @@ class ListaPendientesFragment : Fragment(R.layout.fragment_lista_pendientes) {
         : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_encuentro_pendiente ,parent ,false)){
 
 
+        var conversor = DateUtils()
+
         fun bind(encuentro: Encuentro){
 
             itemView.tv_nombre_encuentro_pendiente.text = encuentro.nombre
+            itemView.tv_dia_encuentro_pendiente.text = conversor.convertirTimestampDia(encuentro.fecha)
+            itemView.tv_nombre_mes_encuentro_pendiente.text = conversor.convertirTimestampNombreMes(encuentro.fecha)
+            itemView.tv_hora_encuentro_pendiente.text = conversor.convertirTimeStampAHora(encuentro.hora)
+            itemView.tv_cantidad_cupos_encuentro_pendiente.text = "${encuentro.cupos} Cupos"
+            itemView.tv_deporte_practicar_encuentro_pendiente.text = encuentro.deporte
 
         }
 
