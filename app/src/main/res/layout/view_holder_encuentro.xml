@@ -239,6 +239,7 @@
                 android:orientation="horizontal">
 
             <Button
+                    android:id="@+id/btn_comentar_encuentro"
                     android:layout_width="140dp"
                     android:layout_height="29dp"
                     android:layout_alignParentStart="true"

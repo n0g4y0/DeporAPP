@@ -85,5 +85,14 @@
             android:name="io.github.n0g4y0.deporapp.ui.encuentro.EncuentrosViewPagerFragment"
             android:label="Mis Encuentros"
             tools:layout="@layout/fragment_encuentros_view_pager" />
+    <fragment
+            android:id="@+id/listaComentarioFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.comentario.ListaComentarioFragment"
+            android:label="Calificar y Comentar" />
+    <dialog
+            android:id="@+id/comentarioFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.comentario.ComentarioFragment"
+            android:label="Comentario"
+            tools:layout="@layout/fragment_comentario" />
 
 </navigation>

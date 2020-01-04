@@ -48,6 +48,7 @@
 
 
     <string name="deporte_prompt">Selecciona un Deporte</string>
+    <string name="descripcion_comentario">Descripcion</string>
 
     <string-array name="deporte_arrays">
         <item>Futbol</item>

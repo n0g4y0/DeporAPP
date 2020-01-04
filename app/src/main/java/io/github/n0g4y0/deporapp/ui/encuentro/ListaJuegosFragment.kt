@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
+import kotlinx.android.synthetic.main.fragment_lista_comentario.view.*
 import kotlinx.android.synthetic.main.fragment_lista_juegos.*
 import kotlinx.android.synthetic.main.view_holder_encuentro.view.*
 
@@ -114,6 +115,9 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
         fun bind(encuentro: Encuentro){
 
             itemView.tv_nombre_encuentro.text = encuentro.nombre
+            itemView.btn_comentar_encuentro.setOnClickListener {
+                    findNavController().navigate(R.id.listaComentarioFragment)
+            }
 
         }
 
