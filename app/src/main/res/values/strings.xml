@@ -47,6 +47,14 @@
     <string name="accion_tipo_encuentro_publico">NO</string>
     <string name="lorem_small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in nisi at turpis.</string>
 
+    <string name="error_firestore"> ERROR producido en la FIRESTORE</string>
+    <string name="cancelar_proceso_firestore"> Se cancelo el proceso en FIRESTORE</string>
+    <string name="comentario_creado_firestore_exitosamente"> comentario subido correctamente </string>
+    <string name="comentario_creado_firestore_error"> comentario tuvo un error </string>
+    <string name="comentario_creado_firestore_cancelado"> comentario fue cancelado </string>
+
+
+
 
     <string name="deporte_prompt">Selecciona un Deporte</string>
     <string name="descripcion_comentario">Descripcion</string>

@@ -7,15 +7,99 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
+import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
+import io.github.n0g4y0.deporapp.firebase.corutinas.ConsultasRepositorio
+import io.github.n0g4y0.deporapp.firebase.corutinas.ConsultasRepositorioImpl
+import io.github.n0g4y0.deporapp.firebase.corutinas.Result
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.model.*
 import io.github.n0g4y0.deporapp.util.ImageUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 
-class DeporappViewModel(val app: Application): AndroidViewModel(app) {
+class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineScope {
+
+    /*
+    * variables para trabajar con corutinas:
+    *
+    * */
+    val consultasRepositorio : ConsultasRepositorio = ConsultasRepositorioImpl()
+
+    // configurar el contexto de la corutina:
+    private val compositeJob = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + compositeJob
+
+    // corutina JOBs
+    private var getUsuarioJob: Job? = null
+    private var crearEncuentroJob: Job? = null
+
+    //live-data
+
+    private val _codigo_texto_a_mostrar = MutableLiveData<Int>()
+    val codigo_texto_a_mostrar : LiveData<Int> = _codigo_texto_a_mostrar
+
+    private val _usuarioConsultado = MutableLiveData<User>()
+    val usuarioConsultado : LiveData<User> = _usuarioConsultado
+
+
+
+    // traer al usuario con determinado ID:
+    fun traerAlUsuarioDesdeFirestore(idUsuario: String){
+        if (getUsuarioJob?.isActive == true) getUsuarioJob?.cancel()
+
+        getUsuarioJob = launch {
+                    when(val resultado = consultasRepositorio.getUsuarioPorID(idUsuario)) {
+
+                        is Result.Success -> _usuarioConsultado.value = resultado.data
+
+                        is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
+
+                        is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.cancelar_proceso_firestore
+
+                    }
+        }
+
+    }
+
+    // crear usuario en firestore, por medio de corutinas:
+
+    fun crearComentarioEnFirestoreConHilos(
+        puntuacion: Float,
+        descripcion: String,
+        id_encuentro: String,
+        id_usuario: String){
+
+        val fechaActual = System.currentTimeMillis()
+
+        val id = UUID.randomUUID().toString()
+        val comentario = Comentario(id = id,puntuacion = puntuacion, descripcion = descripcion,fecha = fechaActual,id_encuentro = id_encuentro, id_usuario = id_usuario)
+
+        if (crearEncuentroJob?.isActive == true) crearEncuentroJob?.cancel()
+        crearEncuentroJob = launch {
+            when(consultasRepositorio.crearComentario(comentario)){
+
+                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_exitosamente
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_error
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_cancelado
+
+            }
+        }
+
+
+
+    }
+
+
 
     /*
     * VARIABLES GLOBALES
@@ -215,12 +299,6 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
         return authManager.getCorreoUsuarioActual()!!
     }
 
-    suspend fun buscarUsuarioPorID(id: String): User{
-        return firestore.buscarUsuarioPorID(id)
-    }
-    suspend fun buscarCanchaPorId(id: String): Cancha{
-        return firestore.buscarCanchaPorID(id)
-    }
 
     fun cargarPerfil(){
 
