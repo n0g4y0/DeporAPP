@@ -2,10 +2,7 @@ package io.github.n0g4y0.deporapp.firebase.firestore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.ServerValue
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.model.value.ServerTimestampValue
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.*
 import kotlinx.coroutines.tasks.await
@@ -16,6 +13,8 @@ private const val COLECCION_ANUNCIOS = "anuncios"
 private const val COLECCION_EQUIPOS = "equipos"
 private const val COLECCION_USUARIOS = "usuarios"
 private const val COLECCION_ENCUENTROS = "encuentros"
+private const val COLECCION_COMENTARIOS = "comentarios"
+
 
 
 
@@ -70,6 +69,16 @@ private const val CLAVE_ID_CREADOR_ENCUENTRO = "id_creador"
 private const val CLAVE_FECHA_CREACION_ENCUENTRO = "fecha_creacion"
 
 
+// valores estaticos, comentarios sobre encuentros:
+
+private const val CLAVE_ID_COMENTARIO = "id"
+private const val CLAVE_PUNTUACION_COMENTARIO = "puntuacion"
+private const val CLAVE_DESCRIPCION_COMENTARIO = "descripcion"
+private const val CLAVE_FECHA_COMENTARIO = "fecha"
+private const val CLAVE_ID_ENCUENTRO_COMENTARIO = "id_encuentro"
+private const val CLAVE_ID_USUARIO_COMENTARIO = "id_usuario"
+
+
 
 
 private lateinit var registrosCanchas: ListenerRegistration
@@ -78,6 +87,7 @@ private lateinit var registrosEquipos: ListenerRegistration
 
 private lateinit var registrosUsuarios: ListenerRegistration
 private lateinit var registrosEncuentros: ListenerRegistration
+private lateinit var registrosComentarios: ListenerRegistration
 
 private lateinit var registrosEncuentrosPendientes : ListenerRegistration
 private lateinit var registrosEncuentrosConcluidos : ListenerRegistration
@@ -99,6 +109,8 @@ class FirestoreManager {
 
     private val valoresEncuentrosPendientes = MutableLiveData<List<Encuentro>>()
     private val valoresEncuentrosConcluidos = MutableLiveData<List<Encuentro>>()
+
+    private val valoresComentarios = MutableLiveData<List<Comentario>>()
 
 
 
@@ -479,6 +491,75 @@ class FirestoreManager {
             })
 
     }
+
+
+
+    fun agregarComentario(
+        puntuacion: Float,
+        descripcion:String,
+        id_encuentro: String,
+        id_usuario: String,
+        enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
+
+        val referenciaDocumento = baseDeDato.collection(COLECCION_COMENTARIOS).document()
+
+        val comentario = HashMap<String,Any>()
+
+        comentario[CLAVE_ID_COMENTARIO] = referenciaDocumento.id
+        comentario[CLAVE_PUNTUACION_COMENTARIO] = puntuacion
+        comentario[CLAVE_DESCRIPCION_COMENTARIO] = descripcion
+        comentario[CLAVE_FECHA_COMENTARIO] = getTiempoActual()
+        comentario[CLAVE_ID_ENCUENTRO_COMENTARIO] = id_encuentro
+        comentario[CLAVE_ID_USUARIO_COMENTARIO] = id_usuario
+
+
+
+        referenciaDocumento
+            .set(comentario)
+            .addOnSuccessListener { enAcciondeExito() }
+            .addOnFailureListener { enAcciondeFracaso() }
+    }
+
+
+
+    fun listenerCambiosDeValorComentarios(idEncuentro: String): LiveData<List<Comentario>>{
+        listenerDeValoresComentarios(idEncuentro)
+        return valoresComentarios
+    }
+
+    private fun listenerDeValoresComentarios(idEncuentro: String) {
+
+        registrosComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
+            .whereEqualTo(CLAVE_ID_USUARIO_COMENTARIO,idEncuentro)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+
+
+                if (valor.isEmpty) {
+
+                    valoresComentarios.postValue(emptyList())
+
+                } else {
+
+                    val comentarios = ArrayList<Comentario>()
+
+                    for (doc in valor) {
+                        val comentario = doc.toObject(Comentario::class.java)
+                        comentarios.add(comentario)
+                    }
+
+                    valoresComentarios.postValue(comentarios)
+                }
+            })
+
+    }
+
+
 
 
 

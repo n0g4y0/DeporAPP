@@ -6,6 +6,7 @@ data class Comentario(val id: String = "",
                   var puntuacion: Float = 0f,
                   var descripcion: String = "",
                   var fecha: Long = 0L,
-                  var id_encuentro: String = ""
+                  var id_encuentro: String = "",
+                  var id_usuario: String = ""
 
 )

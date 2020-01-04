@@ -45,6 +45,7 @@
     <string name="accion_crear_encuentro">Crear Encuentro</string>
     <string name="accion_tipo_encuentro_privado">SI</string>
     <string name="accion_tipo_encuentro_publico">NO</string>
+    <string name="lorem_small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in nisi at turpis.</string>
 
 
     <string name="deporte_prompt">Selecciona un Deporte</string>

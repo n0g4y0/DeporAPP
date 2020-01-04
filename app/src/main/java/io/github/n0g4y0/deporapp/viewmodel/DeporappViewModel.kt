@@ -145,6 +145,20 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app) {
 
     }
 
+    fun agregarComentario(
+        puntuacion: Float,
+        descripcion: String,
+        id_encuentro: String,
+        id_usuario: String) {
+
+        return firestore.agregarComentario(puntuacion,descripcion,id_encuentro,id_usuario,::agregadoExitoso, ::agregadoFallido)
+    }
+
+    fun getListaComentariosEncuentro(idEncuentro: String): LiveData<List<Comentario>>{
+
+        return firestore.listenerCambiosDeValorComentarios(idEncuentro)
+    }
+
 
 
 
