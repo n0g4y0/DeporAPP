@@ -68,6 +68,10 @@ private const val CLAVE_DEPORTE_ENCUENTRO = "deporte"
 private const val CLAVE_TIPO_ENCUENTRO = "esPrivado"
 private const val CLAVE_ID_CREADOR_ENCUENTRO = "id_creador"
 private const val CLAVE_FECHA_CREACION_ENCUENTRO = "fecha_creacion"
+private const val CLAVE_LAT_ENCUENTRO = "fk_cancha_lat"
+private const val CLAVE_LNG_ENCUENTRO = "fk_cancha_lng"
+private const val CLAVE_NICK_ENCUENTRO = "fk_usuario_nick"
+private const val CLAVE_FOTO_URL_ENCUENTRO = "fk_usuario_foto_url"
 
 
 // valores estaticos, comentarios sobre encuentros:
@@ -359,6 +363,10 @@ class FirestoreManager {
                          nota: String,
                          deporte: String,
                          esPrivado: Boolean,
+                        fk_cancha_lat: Double,
+                        fk_cancha_lng: Double,
+                        fk_usuario_nick: String,
+                        fk_usuario_foto_url: String,
                        enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
 
         val referenciaDocumento = baseDeDato.collection(COLECCION_ENCUENTROS).document()
@@ -376,6 +384,10 @@ class FirestoreManager {
         encuentro[CLAVE_TIPO_ENCUENTRO] = esPrivado
         encuentro[CLAVE_ID_CREADOR_ENCUENTRO] = authManager.getIdUsuarioActual()
         encuentro[CLAVE_FECHA_CREACION_ENCUENTRO] = getTiempoActual()
+        encuentro[CLAVE_LAT_ENCUENTRO] = fk_cancha_lat
+        encuentro[CLAVE_LNG_ENCUENTRO] = fk_cancha_lng
+        encuentro[CLAVE_NICK_ENCUENTRO] = fk_usuario_nick
+        encuentro[CLAVE_FOTO_URL_ENCUENTRO] = fk_usuario_foto_url
 
 
         referenciaDocumento
@@ -393,7 +405,6 @@ class FirestoreManager {
 
         registrosEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
             .whereEqualTo(CLAVE_TIPO_ENCUENTRO,false)
-            .whereGreaterThanOrEqualTo(CLAVE_FECHA_ENCUENTRO,getTiempoActual())
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 

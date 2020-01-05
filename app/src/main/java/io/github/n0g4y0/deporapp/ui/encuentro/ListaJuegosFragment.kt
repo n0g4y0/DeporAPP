@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
 import io.github.n0g4y0.deporapp.util.DateUtils
+import io.github.n0g4y0.deporapp.util.ImageBinding
+import io.github.n0g4y0.deporapp.util.ImageUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_lista_juegos.*
 import kotlinx.android.synthetic.main.view_holder_encuentro.view.*
@@ -125,6 +127,9 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
             itemView.tv_hora_encuentro.text = conversor.convertirTimeStampAHora(encuentro.hora)
             itemView.tv_deporte_practicar_encuentro.text = encuentro.deporte
             itemView.tv_nota_adicional_encuentro.text = encuentro.nota
+            itemView.tv_apodo_usuario_encuentro.text = encuentro.fk_usuario_nick
+            ImageBinding.setImageUrl(itemView.iv_perfil_foto_encuentro,encuentro.fk_usuario_foto_url)
+
 
 
             itemView.btn_comentar_encuentro.setOnClickListener {

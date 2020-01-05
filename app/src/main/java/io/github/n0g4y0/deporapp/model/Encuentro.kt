@@ -11,5 +11,10 @@ data class Encuentro(
     var deporte: String = "",
     var esPrivado: Boolean = false,
     var id_creador: String = "",
-    var fecha_creacion: Long = 0L
+    var fecha_creacion: Long = 0L,
+    var fk_cancha_lat: Double = 0.0,
+    var fk_cancha_lng: Double = 0.0,
+    var fk_usuario_nick: String = "",
+    var fk_usuario_foto_url: String = ""
+
 )

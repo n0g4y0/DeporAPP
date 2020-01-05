@@ -77,6 +77,12 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         val deporte_practicado = spinner_deporte_encuentro.selectedItem.toString()
         val seraPrivado = tipo_encuentro.isChecked
 
+        val fk_cancha_lat = canchaEncuentro?.ubicacion_lat
+        val fk_cancha_lng = canchaEncuentro?.ubicacion_long
+
+        val fk_usuario_nick = deporappViewModel.getApodoUsuarioActual()
+        val fk_usuario_foto_url = deporappViewModel.getPhotoUrlUsuarioActual()
+
         AlertDialog.Builder(requireContext())
             .setMessage("Crear Encuentro?")
             .setPositiveButton("OK"){ _,_ ->
@@ -90,7 +96,11 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
                         cupos,
                         nota_adicional,
                         deporte_practicado,
-                        seraPrivado
+                        seraPrivado,
+                        fk_cancha_lat!!,
+                        fk_cancha_lng!!,
+                        fk_usuario_nick,
+                        fk_usuario_foto_url
                         )
                     findNavController().popBackStack(R.id.listaJuegosFragment,false)
 

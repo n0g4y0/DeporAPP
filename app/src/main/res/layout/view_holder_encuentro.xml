@@ -152,6 +152,7 @@
                     android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_perfil_foto_encuentro"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
@@ -223,6 +224,7 @@
                         android:textColor="#070707" />
 
                 <TextView
+                        android:id="@+id/tv_apodo_usuario_encuentro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

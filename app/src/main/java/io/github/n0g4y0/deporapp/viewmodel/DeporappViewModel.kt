@@ -205,9 +205,13 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         cupos: Int,
         nota: String,
         deporte: String,
-        esPrivado: Boolean){
+        esPrivado: Boolean,
+        fk_cancha_lat: Double,
+        fk_cancha_lng: Double,
+        fk_usuario_nick: String,
+        fk_usuario_foto_url: String){
 
-        return firestore.agregarEncuentro(nombre,idCancha,fecha,hora,cupos,nota,deporte,esPrivado,::agregadoExitoso, ::agregadoFallido)
+        return firestore.agregarEncuentro(nombre,idCancha,fecha,hora,cupos,nota,deporte,esPrivado,fk_cancha_lat,fk_cancha_lng,fk_usuario_nick,fk_usuario_foto_url,::agregadoExitoso, ::agregadoFallido)
 
     }
     fun getListaEncuentros(): LiveData<List<Encuentro>>{
@@ -296,6 +300,9 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     }
     fun getCorreoUsuarioActual(): String{
         return authManager.getCorreoUsuarioActual()!!
+    }
+    fun getApodoUsuarioActual(): String{
+        return getCorreoUsuarioActual().substringBefore('@')
     }
 
 
