@@ -109,6 +109,7 @@ class ListaConcluidosFragment : Fragment(R.layout.fragment_lista_concluidos) {
             itemView.tv_hora_encuentro_concluido.text = conversor.convertirTimeStampAHora(encuentro.hora)
             itemView.tv_cantidad_cupos_encuentro_concluido.text = "${encuentro.cupos} Cupos"
             itemView.tv_deporte_practicar_encuentro_concluido.text = encuentro.deporte
+            itemView.tv_apodo_usuario_encuentro_concluido.text = encuentro.fk_usuario_nick
 
         }
 

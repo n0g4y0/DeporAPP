@@ -111,6 +111,7 @@ class ListaPendientesFragment : Fragment(R.layout.fragment_lista_pendientes) {
             itemView.tv_hora_encuentro_pendiente.text = conversor.convertirTimeStampAHora(encuentro.hora)
             itemView.tv_cantidad_cupos_encuentro_pendiente.text = "${encuentro.cupos} Cupos"
             itemView.tv_deporte_practicar_encuentro_pendiente.text = encuentro.deporte
+            itemView.tv_apodo_usuario_encuentro_pendiente.text = encuentro.fk_usuario_nick
 
         }
 

@@ -222,6 +222,7 @@
                             android:textColor="#070707" />
 
                     <TextView
+                            android:id="@+id/tv_apodo_usuario_encuentro_pendiente"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
