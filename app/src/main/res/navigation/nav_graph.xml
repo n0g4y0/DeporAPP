@@ -130,14 +130,6 @@
                 android:name="id_encuentro_actual"
                 app:argType="string"
                 app:nullable="true" />
-        <argument
-                android:name="id_usuario_actual"
-                app:argType="string"
-                app:nullable="true" />
-        <argument
-                android:name="apodo_usuario_actual"
-                app:argType="string"
-                app:nullable="true" />
     </dialog>
 
 </navigation>

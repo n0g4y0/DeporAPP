@@ -53,8 +53,6 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
 
             val bundle = Bundle()
             bundle.putString("id_encuentro_actual",argus?.idEncuentro)
-            bundle.putString("id_usuario_actual",argus?.idUsuario)
-            bundle.putString("apodo_usuario_actual",argus?.apodo)
 
             findNavController().navigate(R.id.action_ListaComentario_to_Comentario,bundle)
         }
@@ -84,7 +82,7 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         recyclerView_lista_comentario.adapter = adaptador
 
 
-        deporappViewModel?.getListaComentariosEncuentro(idEncuentro).observe(this, Observer { listaComentarios: List<Comentario> ->
+        deporappViewModel.getListaComentariosEncuentro(idEncuentro).observe(this, Observer { listaComentarios: List<Comentario> ->
 
             adaptador.actualizar(listaComentarios)
         })
@@ -104,7 +102,7 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
        * primero creamos el adaptador:
        *
        * */
-    private inner class ListaComentariosAdapter: RecyclerView.Adapter<ListaComentarioFragment.ListaComentariosViewHolder>(){
+    private inner class ListaComentariosAdapter: RecyclerView.Adapter<ListaComentariosViewHolder>(){
 
 
         private val listaComentarios: MutableList<Comentario> = mutableListOf()
