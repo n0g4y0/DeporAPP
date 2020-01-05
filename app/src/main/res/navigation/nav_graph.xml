@@ -58,6 +58,12 @@
         <action
                 android:id="@+id/action_listaJuegosFragment_to_crearJuegoFragment"
                 app:destination="@id/crearJuegoFragment" />
+        <action
+                android:id="@+id/action_encuentro_to_comentarios"
+                app:destination="@id/listaComentarioFragment"
+                app:enterAnim="@anim/fui_slide_in_right"
+                app:exitAnim="@anim/fui_slide_out_left"
+                app:popUpToInclusive="false" />
     </fragment>
     <fragment
             android:id="@+id/crearJuegoFragment"
@@ -88,7 +94,26 @@
     <fragment
             android:id="@+id/listaComentarioFragment"
             android:name="io.github.n0g4y0.deporapp.ui.comentario.ListaComentarioFragment"
-            android:label="Calificar y Comentar" />
+            android:label="Calificar y Comentar" >
+        <argument
+                android:name="id_encuentro"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="nombre"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="fecha"
+                app:argType="long" />
+        <argument
+                android:name="hora"
+                app:argType="long" />
+        <argument
+                android:name="apodo"
+                app:argType="string"
+                app:nullable="true" />
+    </fragment>
     <dialog
             android:id="@+id/comentarioFragment"
             android:name="io.github.n0g4y0.deporapp.ui.comentario.ComentarioFragment"

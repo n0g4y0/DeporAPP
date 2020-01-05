@@ -143,7 +143,15 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
 
             itemView.btn_comentar_encuentro.setOnClickListener {
-                    findNavController().navigate(R.id.listaComentarioFragment)
+
+                    val bundle = Bundle()
+                    bundle.putString("id_encuentro",encuentro.id)
+                    bundle.putString("nombre",encuentro.nombre)
+                    bundle.putLong("fecha", encuentro.fecha)
+                    bundle.putLong("hora", encuentro.hora)
+                    bundle.putString("apodo", encuentro.fk_usuario_nick)
+
+                    findNavController().navigate(R.id.action_encuentro_to_comentarios,bundle)
             }
 
         }
