@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
+import io.github.n0g4y0.deporapp.model.User
 import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_juego.view.*
@@ -70,7 +71,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
     * primero creamos el adaptador:
     *
     * */
-    private inner class EncuentroAdapter: RecyclerView.Adapter<ListaJuegosFragment.EncuentroViewHolder>(){
+    private inner class EncuentroAdapter(): RecyclerView.Adapter<ListaJuegosFragment.EncuentroViewHolder>(){
 
 
         private val listaEncuentros: MutableList<Encuentro> = mutableListOf()
@@ -114,6 +115,8 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
 
         var conversor = DateUtils()
+
+
 
         fun bind(encuentro: Encuentro){
 
