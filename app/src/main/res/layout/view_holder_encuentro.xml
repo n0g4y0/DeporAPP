@@ -266,43 +266,49 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="42dp"
                 android:layout_marginTop="@dimen/margin_small"
                 android:orientation="horizontal">
 
             <Button
                     android:id="@+id/btn_comentar_encuentro"
-                    android:layout_width="140dp"
-                    android:layout_height="29dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_width="148dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="6dp"
                     android:background="@drawable/btn_default"
                     android:text="Calificar/Comentar"
                     android:textColor="@color/cardview_light_background"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.4" />
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="29dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:layout_marginEnd="74dp"
-                    android:layout_marginRight="@dimen/text_size_large"
-                    android:textColor="@color/cardview_light_background"
-                    android:layout_marginBottom="@dimen/margin_small"
+                    android:id="@+id/button"
+                    android:layout_width="148dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_toEndOf="@+id/btn_comentar_encuentro"
                     android:background="@drawable/btn_default"
                     android:text="Postular"
-                    android:textSize="12dp" />
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_comentar_encuentro"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

@@ -6,6 +6,8 @@ import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 
 const val   SOLICITUD_CODIGO_LOGIN = 1000
