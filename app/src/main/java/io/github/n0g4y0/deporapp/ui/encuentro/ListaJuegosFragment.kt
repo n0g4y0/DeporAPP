@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Encuentro
-import io.github.n0g4y0.deporapp.model.User
 import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
-import kotlinx.android.synthetic.main.fragment_crear_juego.view.*
 import kotlinx.android.synthetic.main.fragment_lista_juegos.*
 import kotlinx.android.synthetic.main.view_holder_encuentro.view.*
 

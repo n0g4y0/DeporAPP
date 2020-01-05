@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Comentario
-import io.github.n0g4y0.deporapp.model.User
 import io.github.n0g4y0.deporapp.util.DateTimeHelper
-import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
-import kotlinx.android.synthetic.main.fragment_comentario.*
 import kotlinx.android.synthetic.main.fragment_lista_comentario.*
 import kotlinx.android.synthetic.main.view_holder_comentario.view.*
 

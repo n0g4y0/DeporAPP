@@ -53,6 +53,7 @@ private const val CLAVE_NOMBRE_USUARIO = "nombre"
 private const val CLAVE_CORREO_USUARIO = "correo"
 private const val CLAVE_FOTO_URL_USUARIO = "foto_url"
 private const val CLAVE_NUMERO_USUARIO = "telefono"
+private const val CLAVE_APODO_USUARIO = "apodo"
 
 // valores estaticos, encuentros deportivos:
 
@@ -103,7 +104,7 @@ class FirestoreManager {
 
     private val valoresEquipos = MutableLiveData<List<Equipo>>()
 
-    private val valoresUsuarios = MutableLiveData<List<User>>()
+    private val valoresUsuarios = MutableLiveData<List<Usuario>>()
 
     private val valoresEncuentros = MutableLiveData<List<Encuentro>>()
 
@@ -317,12 +318,20 @@ class FirestoreManager {
         usuarios[CLAVE_CORREO_USUARIO] = correo
         usuarios[CLAVE_FOTO_URL_USUARIO] = foto_url
         usuarios[CLAVE_FECHA] = getTiempoActual()
+        usuarios[CLAVE_APODO_USUARIO] = obtenerApodoDesdeCorreo(correo)
 
 
         referenciaDocumento
             .set(usuarios)
             .addOnSuccessListener { enAcciondeExito() }
             .addOnFailureListener { enAcciondeFracaso() }
+    }
+
+    private fun obtenerApodoDesdeCorreo(correo: String): String {
+
+        return correo.substringBefore('@')
+
+
     }
 
     suspend fun estaIdUsuario(idUsuario: String): Boolean{
@@ -567,20 +576,20 @@ class FirestoreManager {
     * funciones de consulta de uso comun:
     * */
 
-    suspend fun buscarUsuarioPorID(idUsuario: String): User{
+    suspend fun buscarUsuarioPorID(idUsuario: String): Usuario{
 
             val snapshot = baseDeDato.collection(COLECCION_USUARIOS).whereEqualTo(CLAVE_ID_USUARIO,idUsuario).get().await()
             if (!snapshot.isEmpty) {
-                val usuarios = ArrayList<User>()
+                val usuarios = ArrayList<Usuario>()
 
                 for (doc in snapshot){
-                    val usuario = doc.toObject(User::class.java)
+                    val usuario = doc.toObject(Usuario::class.java)
                     usuarios.add(usuario)
                 }
 
                 return usuarios.first()
             }else{
-                return User()
+                return Usuario()
             }
     }
 

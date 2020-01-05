@@ -9,25 +9,19 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.databinding.ActivityMainBinding
 import io.github.n0g4y0.deporapp.databinding.NavHeaderMainBinding
-import io.github.n0g4y0.deporapp.model.User
-import io.github.n0g4y0.deporapp.util.ImageBinding
-import io.github.n0g4y0.deporapp.util.ImageUtils
+import io.github.n0g4y0.deporapp.model.Usuario
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 
@@ -53,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // variables globales
     companion object {
         // variable para el usuario ACTUAL:
-        var currentUser: User? = null
+        var currentUsuario: Usuario? = null
         fun crearIntent(context: Context) = Intent(context, MainActivity::class.java)
 
     }

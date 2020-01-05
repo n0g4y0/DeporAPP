@@ -14,7 +14,6 @@ import io.github.n0g4y0.deporapp.firebase.corutinas.ConsultasRepositorioImpl
 import io.github.n0g4y0.deporapp.firebase.corutinas.Result
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.model.*
-import io.github.n0g4y0.deporapp.util.ImageUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -46,8 +45,8 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     private val _codigo_texto_a_mostrar = MutableLiveData<Int>()
     val codigo_texto_a_mostrar : LiveData<Int> = _codigo_texto_a_mostrar
 
-    private val _usuarioConsultado = MutableLiveData<User>()
-    val usuarioConsultado : LiveData<User> = _usuarioConsultado
+    private val _usuarioConsultado = MutableLiveData<Usuario>()
+    val usuarioConsultado : LiveData<Usuario> = _usuarioConsultado
 
 
 

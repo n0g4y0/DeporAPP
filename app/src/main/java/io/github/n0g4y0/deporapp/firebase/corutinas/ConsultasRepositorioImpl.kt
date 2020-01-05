@@ -4,7 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.Cancha
 import io.github.n0g4y0.deporapp.model.Comentario
-import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.model.Usuario
 
 
 private const val COLECCION_USUARIOS = "usuarios"
@@ -29,12 +29,12 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
 
 
 
-    override suspend fun getUsuarioPorID(idUsuario : String): Result<User> {
+    override suspend fun getUsuarioPorID(idUsuario : String): Result<Usuario> {
 
         return when (val documentoResultanteSnapshot = coleccionUsuarios.document(idUsuario).get().await()){
 
             is Result.Success -> {
-                    val usuario = documentoResultanteSnapshot.data.toObject(User::class.java)!!
+                    val usuario = documentoResultanteSnapshot.data.toObject(Usuario::class.java)!!
                     Result.Success(usuario)
             }
 

@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import io.github.n0g4y0.deporapp.R
-import io.github.n0g4y0.deporapp.model.User
+import io.github.n0g4y0.deporapp.model.Usuario
 import io.github.n0g4y0.deporapp.util.login
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -82,7 +82,7 @@ class RegisterActivity : AppCompatActivity() {
         // creando una instancia de la base de datos de FIREBASE:
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         // creo una variables que contendra al usuario:
-        val user = User(uid,username_edittext_register.text.toString())
+        val user = Usuario(uid,username_edittext_register.text.toString())
 
         // modificamos la referencia de la BD de FIREBASE:
         ref.setValue(user)
