@@ -113,11 +113,31 @@
                 android:name="apodo"
                 app:argType="string"
                 app:nullable="true" />
+        <action
+                android:id="@+id/action_ListaComentario_to_Comentario"
+                app:destination="@id/comentarioFragment" />
+        <argument
+                android:name="id_usuario"
+                app:argType="string"
+                app:nullable="true" />
     </fragment>
     <dialog
             android:id="@+id/comentarioFragment"
             android:name="io.github.n0g4y0.deporapp.ui.comentario.ComentarioFragment"
             android:label="Comentario"
-            tools:layout="@layout/fragment_comentario" />
+            tools:layout="@layout/fragment_comentario" >
+        <argument
+                android:name="id_encuentro_actual"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="id_usuario_actual"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="apodo_usuario_actual"
+                app:argType="string"
+                app:nullable="true" />
+    </dialog>
 
 </navigation>

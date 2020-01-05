@@ -150,6 +150,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                     bundle.putLong("fecha", encuentro.fecha)
                     bundle.putLong("hora", encuentro.hora)
                     bundle.putString("apodo", encuentro.fk_usuario_nick)
+                    bundle.putString("id_usuario",encuentro.id_creador)
 
                     findNavController().navigate(R.id.action_encuentro_to_comentarios,bundle)
             }

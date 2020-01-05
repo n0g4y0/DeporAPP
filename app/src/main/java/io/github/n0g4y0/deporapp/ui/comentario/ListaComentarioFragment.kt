@@ -50,7 +50,13 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         setHasOptionsMenu(true)
 
         btn_comentar_lista_comentario.setOnClickListener {
-            findNavController().navigate(R.id.comentarioFragment)
+
+            val bundle = Bundle()
+            bundle.putString("id_encuentro_actual",argus?.idEncuentro)
+            bundle.putString("id_usuario_actual",argus?.idUsuario)
+            bundle.putString("apodo_usuario_actual",argus?.apodo)
+
+            findNavController().navigate(R.id.action_ListaComentario_to_Comentario,bundle)
         }
 
         arguments?.let {
@@ -141,14 +147,15 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_comentario,parent ,false)){
 
 
-        var conversor = DateTimeHelper()
+        var conversor = DateUtils()
 
         fun bind(comentario: Comentario){
 
 
             itemView.tv_puntuacion_comentario.rating = comentario.puntuacion
-            itemView.tv_fecha_publicacion_comentario.text = conversor.parse(comentario.fecha)
+            itemView.tv_fecha_publicacion_comentario.text = conversor.convertirTimestampsAStringCompleto(comentario.fecha)
             itemView.tv_descripcion_comentario.text = comentario.descripcion
+            itemView.tv_apodo_usuario_comentario.text = comentario.apodo_usuario
 
 
         }

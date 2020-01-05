@@ -550,7 +550,7 @@ class FirestoreManager {
     private fun listenerDeValoresComentarios(idEncuentro: String) {
 
         registrosComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
-            .whereEqualTo(CLAVE_ID_USUARIO_COMENTARIO,idEncuentro)
+            .whereEqualTo(CLAVE_ID_ENCUENTRO_COMENTARIO,idEncuentro)
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 

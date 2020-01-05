@@ -74,12 +74,13 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         puntuacion: Float,
         descripcion: String,
         id_encuentro: String,
-        id_usuario: String){
+        id_usuario: String,
+        apodo_usuario: String){
 
         val fechaActual = System.currentTimeMillis()
 
         val id = UUID.randomUUID().toString()
-        val comentario = Comentario(id = id,puntuacion = puntuacion, descripcion = descripcion,fecha = fechaActual,id_encuentro = id_encuentro, id_usuario = id_usuario)
+        val comentario = Comentario(id = id,puntuacion = puntuacion, descripcion = descripcion,fecha = fechaActual,id_encuentro = id_encuentro, id_usuario = id_usuario, apodo_usuario = apodo_usuario)
 
         if (crearEncuentroJob?.isActive == true) crearEncuentroJob?.cancel()
         crearEncuentroJob = launch {

@@ -59,4 +59,10 @@ class DateUtils {
         return  formatter.format(dato)
     }
 
+    fun convertirTimestampsAStringCompleto(dato: Long): String{
+        var formato = "dd-MM-yyyy HH:mm"
+        val formatter = SimpleDateFormat(formato, Locale.US)
+        return  formatter.format(dato)
+    }
+
 }
