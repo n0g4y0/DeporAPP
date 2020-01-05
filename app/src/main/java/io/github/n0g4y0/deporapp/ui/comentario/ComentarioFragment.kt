@@ -2,11 +2,13 @@ package io.github.n0g4y0.deporapp.ui.comentario
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
 
 import io.github.n0g4y0.deporapp.R
@@ -66,6 +68,17 @@ class ComentarioFragment : DialogFragment() {
 
 
         deporappViewModel.crearComentarioEnFirestoreConHilos(puntuacion,descripcion,idEncuentro!!,idUsuario!!,apodoUsuario!!)
+
+        // las siguientes lineas, evitan que un determinado usuario, vuelva a comentar:
+        deporappViewModel.elUsuarioCalificoEncuentro(idEncuentro,idUsuario)
+        deporappViewModel.comentoElUsuario.observe(this, Observer { respuesta ->
+
+
+            if (!respuesta) {
+                btn_enviar_actual_comentario.visibility = View.GONE
+            }
+        })
+
     }
 
 

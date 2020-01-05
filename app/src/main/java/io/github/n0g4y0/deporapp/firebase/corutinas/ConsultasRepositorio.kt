@@ -14,4 +14,6 @@ interface ConsultasRepositorio {
 
     suspend fun crearComentario(comentario: Comentario): Result<Void?>
 
+    suspend fun esteUsuarioYaComentoEncuentro(id_encuentro: String, id_usuario: String): Result<Boolean>
+
 }

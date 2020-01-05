@@ -39,6 +39,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     // corutina JOBs
     private var getUsuarioJob: Job? = null
     private var crearEncuentroJob: Job? = null
+    private var preguntarUsuarioEnComentarioJob: Job? = null
 
     //live-data
 
@@ -47,6 +48,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     private val _usuarioConsultado = MutableLiveData<Usuario>()
     val usuarioConsultado : LiveData<Usuario> = _usuarioConsultado
+
+
+    private val _comentoElUsuario = MutableLiveData<Boolean>()
+    val comentoElUsuario : LiveData<Boolean> = _comentoElUsuario
 
 
 
@@ -96,6 +101,26 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         }
 
 
+
+    }
+
+    fun elUsuarioCalificoEncuentro(id_encuentro: String,id_usuario: String){
+
+        if (preguntarUsuarioEnComentarioJob?.isActive == true) preguntarUsuarioEnComentarioJob?.cancel()
+
+
+        preguntarUsuarioEnComentarioJob = launch {
+
+            when(val dato = consultasRepositorio.esteUsuarioYaComentoEncuentro(id_encuentro,id_usuario)){
+
+                is Result.Success -> _comentoElUsuario.value = dato.data
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.msj_default_error
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.msj_default_cancelado
+
+            }
+        }
 
     }
 
@@ -305,6 +330,8 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     fun getApodoUsuarioActual(): String{
         return getCorreoUsuarioActual().substringBefore('@')
     }
+
+
 
 
     fun cargarPerfil(){

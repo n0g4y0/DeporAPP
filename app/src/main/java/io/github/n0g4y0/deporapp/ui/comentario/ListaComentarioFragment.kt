@@ -2,6 +2,7 @@ package io.github.n0g4y0.deporapp.ui.comentario
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_lista_comentario.*
 import kotlinx.android.synthetic.main.view_holder_comentario.view.*
+import kotlinx.coroutines.runBlocking
 
 /**
  *
@@ -47,15 +49,6 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setHasOptionsMenu(true)
-
-        btn_comentar_lista_comentario.setOnClickListener {
-
-            val bundle = Bundle()
-            bundle.putString("id_encuentro_actual",argus?.idEncuentro)
-
-            findNavController().navigate(R.id.action_ListaComentario_to_Comentario,bundle)
-        }
 
         arguments?.let {
 
@@ -73,7 +66,30 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
 
         }
 
-        //Toast.makeText(context,"" + argus?.idEncuentro,Toast.LENGTH_SHORT).show()
+
+
+        deporappViewModel.elUsuarioCalificoEncuentro(argus?.idEncuentro!!,deporappViewModel.getIdUsuarioActual())
+
+        deporappViewModel.comentoElUsuario.observe(this, Observer { respuesta ->
+            Log.d("prueba","el usuario ha comentado alguna vez :  $respuesta ")
+
+            if (!respuesta) {
+                btn_comentar_lista_comentario.visibility = View.GONE
+            }
+        })
+
+
+        setHasOptionsMenu(true)
+
+        btn_comentar_lista_comentario.setOnClickListener {
+
+            val bundle = Bundle()
+            bundle.putString("id_encuentro_actual",argus?.idEncuentro)
+
+            findNavController().navigate(R.id.action_ListaComentario_to_Comentario,bundle)
+        }
+
+
 
         val idEncuentro = argus?.idEncuentro!!
 

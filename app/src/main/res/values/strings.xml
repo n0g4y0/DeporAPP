@@ -53,6 +53,10 @@
     <string name="comentario_creado_firestore_error"> comentario tuvo un error </string>
     <string name="comentario_creado_firestore_cancelado"> comentario fue cancelado </string>
 
+    <string name="msj_default_cancelado"> la operacion fue cancelada </string>
+    <string name="msj_default_error"> la operacion tuvo un error </string>
+    <string name="msj_default_exitoso"> la operacion fue ejecutado correctamente </string>
+
 
 
 

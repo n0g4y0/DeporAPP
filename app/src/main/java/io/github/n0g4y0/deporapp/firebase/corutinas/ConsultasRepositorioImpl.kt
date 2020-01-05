@@ -19,13 +19,35 @@ private const val CLAVE_TITULO = "titulo"
 
 class ConsultasRepositorioImpl: ConsultasRepositorio {
 
-
     private val authManager = AutentificacionManager()
     private val baseDeDato = FirebaseFirestore.getInstance()
 
     private val coleccionUsuarios = baseDeDato.collection(COLECCION_USUARIOS)
     private val coleccionEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
     private val coleccionComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
+
+
+    override suspend fun esteUsuarioYaComentoEncuentro(
+        id_encuentro: String,
+        id_usuario: String
+    ): Result<Boolean> {
+
+        return when (val listaComentariosSnapshot = coleccionComentarios.whereEqualTo("id_usuario",id_usuario).whereEqualTo("id_encuentro",id_encuentro).get().await()){
+
+
+            is Result.Success -> {
+                val existen = listaComentariosSnapshot.data.toObjects(Comentario::class.java)
+
+                Result.Success(existen.isEmpty())
+            }
+
+            is Result.Error -> Result.Error(listaComentariosSnapshot.exception)
+
+            is Result.Canceled -> Result.Canceled (listaComentariosSnapshot.exception)
+        }
+
+
+    }
 
 
 
@@ -50,7 +72,11 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document().set(comentario).await()
+    override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document(comentario.id).set(comentario).await()
+
+
+
+
 
 
 
