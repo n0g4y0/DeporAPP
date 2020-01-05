@@ -1,6 +1,8 @@
 package io.github.n0g4y0.deporapp.ui.encuentro
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -129,6 +131,14 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
             itemView.tv_nota_adicional_encuentro.text = encuentro.nota
             itemView.tv_apodo_usuario_encuentro.text = encuentro.fk_usuario_nick
             ImageBinding.setImageUrl(itemView.iv_perfil_foto_encuentro,encuentro.fk_usuario_foto_url)
+
+            itemView.abrir_localizacion_encuentro.setOnClickListener {
+
+                val codigoUbicacion = "geo:${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}?q=${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}(Cancha)"
+                val intent = Intent(android.content.Intent.ACTION_VIEW,Uri.parse(codigoUbicacion))
+                startActivity(intent)
+
+            }
 
 
 

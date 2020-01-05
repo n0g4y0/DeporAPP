@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFF9F9"
+        android:background="@color/backgroundLight"
         android:orientation="vertical"
         android:padding="8dp">
 <androidx.cardview.widget.CardView
@@ -118,6 +118,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                            android:id="@+id/abrir_localizacion_encuentro"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="16dp"
