@@ -134,7 +134,8 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
             itemView.abrir_localizacion_encuentro.setOnClickListener {
 
-                val codigoUbicacion = "geo:${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}?q=${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}(Cancha)"
+                val codigoUbicacion = "geo:${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}?" +
+                        "q=${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}(Cancha)"
                 val intent = Intent(android.content.Intent.ACTION_VIEW,Uri.parse(codigoUbicacion))
                 startActivity(intent)
 

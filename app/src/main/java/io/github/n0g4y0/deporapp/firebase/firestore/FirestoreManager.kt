@@ -412,8 +412,6 @@ class FirestoreManager {
                     return@EventListener
                 }
 
-
-
                 if (valor.isEmpty) {
 
                     valoresEncuentros.postValue(emptyList())

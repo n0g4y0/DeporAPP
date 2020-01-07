@@ -121,7 +121,6 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
                 nuevoMarcador(latLng)
                 enviarUbicacion(latLng)
 
-
         }
 
         //map.setOnInfoWindowClickListener { }
@@ -130,8 +129,6 @@ class EnviarUbicacionFragment : DialogFragment() ,OnMapReadyCallback {
     private fun enviarUbicacion(latLng: LatLng) {
 
         deporappViewModel.ubicacionSeleccionada(latLng)
-
-
     }
 
 
