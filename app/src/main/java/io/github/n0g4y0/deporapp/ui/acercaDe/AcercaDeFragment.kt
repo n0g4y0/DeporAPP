@@ -21,7 +21,7 @@ class AcercaDeFragment : Fragment(R.layout.fragment_acerca_de) {
         super.onViewCreated(view, savedInstanceState)
 
         val text =
-            "<h2> DeporAPP</h3>\n" +
+            "<h3>Deporapp</h3>\n" +
             "<p>Es una aplicacion que te permitira Realizar encuentros deportivos, con personas que comparten la misma pasion por tu deporte. </p>\n" +
             "<p>Esta APP se apoya en la tecnologia de la Geolocalizacion. </p> \n"
 
