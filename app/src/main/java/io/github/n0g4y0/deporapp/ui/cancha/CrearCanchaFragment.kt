@@ -18,6 +18,7 @@ import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
 import io.github.n0g4y0.deporapp.util.getEscalarBitMap
+import io.github.n0g4y0.deporapp.util.mostrarMensaje
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_cancha.*
 
@@ -128,6 +129,8 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
                 deporte_voley,
                 ::agregadoExitosoCancha,
                 ::agregadoFallidoCancha)
+
+            mostrarMensaje(context!!,R.string.msj_crear_cancha_mensaje)
         }
 
         //limpiando el setText del boton ubicacion de cancha:

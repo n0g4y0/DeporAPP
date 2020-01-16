@@ -15,3 +15,7 @@ fun Context.login(){
 }
 
 fun Activity.showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+fun mostrarMensaje(contexto: Context, msjID: Int){
+    Toast.makeText(contexto,msjID,Toast.LENGTH_LONG).show()
+}

@@ -56,6 +56,7 @@
     <string name="msj_default_cancelado"> la operacion fue cancelada </string>
     <string name="msj_default_error"> la operacion tuvo un error </string>
     <string name="msj_default_exitoso"> la operacion fue ejecutado correctamente </string>
+    <string name="msj_crear_cancha_mensaje"> Se ha Enviado dichos datos de la Cancha al Administrador, para su verificacion. </string>
 
 
 
