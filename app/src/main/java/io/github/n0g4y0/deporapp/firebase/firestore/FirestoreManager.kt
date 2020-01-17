@@ -97,6 +97,8 @@ private lateinit var registrosComentarios: ListenerRegistration
 private lateinit var registrosEncuentrosPendientes : ListenerRegistration
 private lateinit var registrosEncuentrosConcluidos : ListenerRegistration
 
+private lateinit var registrosEncuentrosByIdCancha : ListenerRegistration
+
 class FirestoreManager {
 
     private val authManager = AutentificacionManager()
@@ -116,6 +118,9 @@ class FirestoreManager {
     private val valoresEncuentrosConcluidos = MutableLiveData<List<Encuentro>>()
 
     private val valoresComentarios = MutableLiveData<List<Comentario>>()
+
+
+    private val valoresEncuentrosByIdCancha = MutableLiveData<List<Encuentro>>()
 
 
 
@@ -579,45 +584,49 @@ class FirestoreManager {
 
 
 
+    fun listenerCambiosDeValorEncuentrosByID(idCancha: String): LiveData<List<Encuentro>>{
+        escucharPorCambiosEnValoresEncuentrosByIdCancha(idCancha)
+        return valoresEncuentrosByIdCancha
+    }
 
 
-    /*
-    * funciones de consulta de uso comun:
-    * */
+    private fun escucharPorCambiosEnValoresEncuentrosByIdCancha(id_cancha: String) {
 
-    suspend fun buscarUsuarioPorID(idUsuario: String): Usuario{
 
-            val snapshot = baseDeDato.collection(COLECCION_USUARIOS).whereEqualTo(CLAVE_ID_USUARIO,idUsuario).get().await()
-            if (!snapshot.isEmpty) {
-                val usuarios = ArrayList<Usuario>()
+        registrosEncuentrosByIdCancha = baseDeDato.collection(COLECCION_ENCUENTROS)
+            .whereEqualTo(CLAVE_ID_CANCHA_ENCUENTRO,id_cancha)
 
-                for (doc in snapshot){
-                    val usuario = doc.toObject(Usuario::class.java)
-                    usuarios.add(usuario)
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
                 }
 
-                return usuarios.first()
-            }else{
-                return Usuario()
-            }
+                if (valor.isEmpty) {
+
+                    valoresEncuentrosByIdCancha.postValue(emptyList())
+
+                } else {
+
+                    val encuentros = ArrayList<Encuentro>()
+
+                    for (doc in valor) {
+                        val encuentro = doc.toObject(Encuentro::class.java)
+                        encuentros.add(encuentro)
+                    }
+
+                    valoresEncuentrosByIdCancha.postValue(encuentros)
+                }
+            })
+
     }
 
-    suspend fun buscarCanchaPorID(idCancha: String): Cancha{
 
-        val snapshot = baseDeDato.collection(COLECCION_CANCHAS).whereEqualTo(CLAVE_ID,idCancha).get().await()
-        if (!snapshot.isEmpty) {
-            val canchas = ArrayList<Cancha>()
 
-            for (doc in snapshot){
-                val cancha = doc.toObject(Cancha::class.java)
-                canchas.add(cancha)
-            }
 
-            return canchas.first()
-        }else{
-            return Cancha()
-        }
-    }
+
+
+
 
 
     private fun getTiempoActual() = System.currentTimeMillis()

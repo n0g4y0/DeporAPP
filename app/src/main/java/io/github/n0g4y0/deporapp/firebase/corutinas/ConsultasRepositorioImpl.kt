@@ -10,6 +10,7 @@ import io.github.n0g4y0.deporapp.model.Usuario
 private const val COLECCION_USUARIOS = "usuarios"
 private const val COLECCION_ENCUENTROS = "encuentros"
 private const val COLECCION_COMENTARIOS = "comentarios"
+private const val COLECCION_CANCHAS = "canchas"
 
 
 // valores estaticos, canchas:
@@ -25,6 +26,7 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     private val coleccionUsuarios = baseDeDato.collection(COLECCION_USUARIOS)
     private val coleccionEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
     private val coleccionComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
+    private val coleccionCanchas = baseDeDato.collection(COLECCION_CANCHAS)
 
 
     override suspend fun esteUsuarioYaComentoEncuentro(
@@ -69,7 +71,20 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     }
 
     override suspend fun getCanchaPorId(idCancha: String): Result<Cancha> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        return when (val documentoResultanteSnapshot = coleccionCanchas.document(idCancha).get().await()){
+
+            is Result.Success -> {
+                val cancha = documentoResultanteSnapshot.data.toObject(Cancha::class.java)!!
+                Result.Success(cancha)
+            }
+
+            is Result.Error -> Result.Error(documentoResultanteSnapshot.exception)
+
+            is Result.Canceled -> Result.Canceled (documentoResultanteSnapshot.exception)
+        }
+
+
     }
 
     override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document(comentario.id).set(comentario).await()

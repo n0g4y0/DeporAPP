@@ -22,7 +22,11 @@
     <fragment
             android:id="@+id/mapaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.mapa.MapaFragment"
-            android:label="Mapa" />
+            android:label="Canchas Deportivas" >
+        <action
+                android:id="@+id/action_mapa_to_detalle_cancha"
+                app:destination="@id/detalleCanchaFragment" />
+    </fragment>
     <fragment
             android:id="@+id/crearCanchaFragment"
             android:name="io.github.n0g4y0.deporapp.ui.cancha.CrearCanchaFragment"
@@ -131,5 +135,19 @@
                 app:argType="string"
                 app:nullable="true" />
     </dialog>
+    <fragment
+            android:id="@+id/detalleCanchaFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.cancha.DetalleCanchaFragment"
+            android:label="Detalle de Cancha"
+            tools:layout="@layout/fragment_detalle_cancha" >
+        <argument
+                android:name="id_cancha"
+                app:argType="string"
+                app:nullable="true" />
+        <argument
+                android:name="titulo_cancha"
+                app:argType="string"
+                app:nullable="true" />
+    </fragment>
 
 </navigation>

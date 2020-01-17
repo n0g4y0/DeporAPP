@@ -2,7 +2,7 @@ package io.github.n0g4y0.deporapp.model
 
 
 
-data class Cancha(val id: String = "",
+data class Cancha(val id: String? = null,
                   var titulo: String = "",
                   var foto_url: String = "",
                   var ubicacion_lat: Double = 0.0,

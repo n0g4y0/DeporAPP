@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -80,8 +81,6 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
                 }
 
-
-
             }
 
         })
@@ -103,6 +102,8 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
         val punto = map?.addMarker(MarkerOptions()
             .position(LatLng(marcador.ubicacion_lat,marcador.ubicacion_long))
+                //almacenara el ID
+            .snippet(marcador.id)
             .title(marcador.titulo)
             .alpha(0.8f)
             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_locate_cancha_small))
@@ -119,9 +120,22 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
         map?.setOnInfoWindowClickListener {
 
+            iniciarDetalleCancha(it)
+
+
+
         }
 
 
+
+    }
+
+    private fun iniciarDetalleCancha(marcador: Marker) {
+
+        val bundle = Bundle()
+        bundle.putString("id_cancha",marcador.snippet)
+        bundle.putString("titulo_cancha",marcador.title)
+        findNavController().navigate(R.id.action_mapa_to_detalle_cancha,bundle)
 
     }
 

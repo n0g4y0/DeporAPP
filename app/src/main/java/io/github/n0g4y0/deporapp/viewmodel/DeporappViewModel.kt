@@ -40,6 +40,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     private var getUsuarioJob: Job? = null
     private var crearEncuentroJob: Job? = null
     private var preguntarUsuarioEnComentarioJob: Job? = null
+    private var getCanchaJob: Job? = null
 
     //live-data
 
@@ -52,6 +53,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     private val _comentoElUsuario = MutableLiveData<Boolean>()
     val comentoElUsuario : LiveData<Boolean> = _comentoElUsuario
+
+
+    private val _canchaConsultada = MutableLiveData<Cancha>()
+    val canchaConsultada : LiveData<Cancha> = _canchaConsultada
 
 
 
@@ -71,6 +76,32 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
                     }
         }
 
+    }
+
+    fun traerCancharDesdeFirestrore(idCancha: String) {
+
+
+        if (getCanchaJob?.isActive == true) getCanchaJob?.cancel()
+
+        getCanchaJob = launch {
+
+
+            when (val resultado = consultasRepositorio.getCanchaPorId(idCancha)) {
+
+                is Result.Success -> _canchaConsultada.value = resultado.data
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.cancelar_proceso_firestore
+
+            }
+
+        }
+    }
+
+    private fun devolverCancha(cancha: Cancha): Cancha{
+        return cancha
     }
 
     // crear usuario en firestore, por medio de corutinas:
@@ -270,6 +301,12 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     fun getListaComentariosEncuentro(idEncuentro: String): LiveData<List<Comentario>>{
 
         return firestore.listenerCambiosDeValorComentarios(idEncuentro)
+    }
+
+    fun getListaEncuentrosByIDCancha(idCancha: String): LiveData<List<Encuentro>>{
+
+        return firestore.listenerCambiosDeValorEncuentrosByID(idCancha)
+
     }
 
 

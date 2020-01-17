@@ -59,8 +59,6 @@
     <string name="msj_crear_cancha_mensaje"> Se ha Enviado dichos datos de la Cancha al Administrador, para su verificacion. </string>
 
 
-
-
     <string name="deporte_prompt">Selecciona un Deporte</string>
     <string name="descripcion_comentario">Descripcion</string>
     <string name="muestra_nota_adicional_encuentro">El partido Comienza en punto. \nRef: al cel : 79775947</string>
