@@ -8,20 +8,31 @@ import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.navGraphViewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import io.github.n0g4y0.deporapp.R
+import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_mapa.*
 
 class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
+    private val deporappViewModel: DeporappViewModel by navGraphViewModels(R.id.nav_graph)
+
     private var map: GoogleMap? = null                  //  the overall Google Maps Object
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+
+    private var marcadores = HashMap<Long,Marker>()
+
 
 
     companion object {
@@ -42,19 +53,74 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
     override fun onMapReady(googleMap: GoogleMap?) {
 
         map = googleMap
+
+        configurarMapListeners()
+
         configurarLocalizacionCliente()
         getLocalizacionActual()
 
-        // añadiendo una marca en bolivia:
-        val cbba = LatLng(-17.3952935,-66.1484111)
-        map.let {
+        crearMarcadoresObservers()
 
-            val update = CameraUpdateFactory.newLatLngZoom(cbba, 18.0f)
+    }
 
-            it?.moveCamera(update)
-            it?.addMarker(MarkerOptions().position(cbba).title("prueba"))
+
+    private fun crearMarcadoresObservers() {
+
+        deporappViewModel.getListaCanchas().observe(this, Observer { listaCanchas: List<Cancha> ->
+
+            if (listaCanchas != null){
+
+
+                map?.clear()
+                marcadores.clear()
+
+                listaCanchas?.let {
+
+                    mostrarTodosLosMarcados(it)
+
+                }
+
+
+
+            }
+
+        })
+
+
+
+    }
+
+    private fun mostrarTodosLosMarcados(marcados: List<Cancha>){
+
+        for (marcado in marcados){
+            agregarLugarMarcado(marcado)
+        }
+
+
+    }
+
+    private fun agregarLugarMarcado(marcador: Cancha): Marker? {
+
+        val punto = map?.addMarker(MarkerOptions()
+            .position(LatLng(marcador.ubicacion_lat,marcador.ubicacion_long))
+            .title(marcador.titulo)
+            .alpha(0.8f)
+            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_locate_cancha_small))
+
+        )
+
+        return punto
+
+    }
+
+    private fun configurarMapListeners() {
+
+        map?.setInfoWindowAdapter(PuntoInfoWindowAdapter(this))
+
+        map?.setOnInfoWindowClickListener {
 
         }
+
 
 
     }
@@ -80,8 +146,8 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
                     // 4
                     val latLng = LatLng(location.latitude, location.longitude)
 
-                    // 6
-                    val update = CameraUpdateFactory.newLatLngZoom(latLng, 18.0f)
+                    // directamente me muestra mi ubicacion actual.
+                    val update = CameraUpdateFactory.newLatLngZoom(latLng, 14.0f)
                     // 7
                     map?.moveCamera(update)
                 } else {
