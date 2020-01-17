@@ -127,6 +127,7 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
                 deporte_futsal,
                 deporte_basquet,
                 deporte_voley,
+                false,
                 ::agregadoExitosoCancha,
                 ::agregadoFallidoCancha)
 

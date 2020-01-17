@@ -100,10 +100,6 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         }
     }
 
-    private fun devolverCancha(cancha: Cancha): Cancha{
-        return cancha
-    }
-
     // crear usuario en firestore, por medio de corutinas:
 
     fun crearComentarioEnFirestoreConHilos(

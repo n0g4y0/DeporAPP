@@ -31,6 +31,7 @@ private const val CLAVE_BASQUET = "basquet"
 private const val CLAVE_VOLEY = "voley"
 private const val CLAVE_FECHA = "fecha_timestamp"
 private const val CLAVE_CREADOR = "autor"
+private const val CLAVE_VERIFICADO = "verificado"
 
 
 // valores estaticos, anuncios:
@@ -133,6 +134,7 @@ class FirestoreManager {
                       siFutsal: Boolean,
                       siBasquet: Boolean,
                       siVoley: Boolean,
+                      verificado: Boolean,
                       enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
 
         val referenciaDocumento = baseDeDato.collection(COLECCION_CANCHAS).document()
@@ -148,6 +150,7 @@ class FirestoreManager {
         cancha[CLAVE_FUTSAL] = siFutsal
         cancha[CLAVE_BASQUET] = siBasquet
         cancha[CLAVE_VOLEY] = siVoley
+        cancha[CLAVE_VERIFICADO] = verificado
         cancha[CLAVE_FECHA] = getTiempoActual()
         cancha[CLAVE_CREADOR] = authManager.getNombreUsuarioActual()
 
