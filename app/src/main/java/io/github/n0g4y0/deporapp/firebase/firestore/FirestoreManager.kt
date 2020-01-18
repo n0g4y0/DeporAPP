@@ -254,6 +254,7 @@ class FirestoreManager {
     private fun escucharPorCambiosEnValoresCanchas() {
 
         registrosCanchas = baseDeDato.collection(COLECCION_CANCHAS)
+            .whereEqualTo(CLAVE_VERIFICADO,true)
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
                 // 4
