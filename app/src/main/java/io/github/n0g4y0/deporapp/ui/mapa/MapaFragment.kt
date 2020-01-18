@@ -48,6 +48,9 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
         mapa_view.onCreate(savedInstanceState)
         mapa_view.onResume()
         mapa_view.getMapAsync(this)
+
+        configurarLocalizacionCliente()
+
     }
 
 
@@ -57,7 +60,6 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
 
         configurarMapListeners()
 
-        configurarLocalizacionCliente()
         getLocalizacionActual()
 
         crearMarcadoresObservers()
