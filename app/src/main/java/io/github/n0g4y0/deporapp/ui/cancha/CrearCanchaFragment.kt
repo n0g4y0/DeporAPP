@@ -2,6 +2,8 @@ package io.github.n0g4y0.deporapp.ui.cancha
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
+import io.github.n0g4y0.deporapp.util.ImageUtils
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
 import io.github.n0g4y0.deporapp.util.getEscalarBitMap
 import io.github.n0g4y0.deporapp.util.mostrarMensaje
@@ -78,18 +81,7 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
     }
 
-    private fun empezarSubidaImagenStorage() {
 
-                //primero subimos el archivo:
-
-                var archivoTemporal = deporappViewModel.archivoImagenTemporal
-                archivoTemporal.let { archivoTemporal ->
-
-                    val uriDeFoto = seleccionArchivo.UriDelArchivo(archivoTemporal!!)
-                    storageManager.subirFoto(uriDeFoto, ::guardandoElUriDelArchivo)
-
-                }
-    }
 
     private fun guardandoElUriDelArchivo(url: String){
 
@@ -167,14 +159,10 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
     fun clickALaFoto(){
 
-        val tomarFotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val tomarFotoIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
         if (tomarFotoIntent.resolveActivity(requireContext().packageManager) != null) {
 
-            val archivo = seleccionArchivo.crearArchivoTemporal()
-            deporappViewModel.archivoImagenTemporal = archivo
-            val UriDeFoto = seleccionArchivo.UriDelArchivo(archivo)
-            tomarFotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, UriDeFoto)
             startActivityForResult(tomarFotoIntent, SOLICITUD_CODIGO_CAMERA)
         }
 
@@ -183,22 +171,40 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == SOLICITUD_CODIGO_CAMERA){
-            val uriFoto = "file://${deporappViewModel.archivoImagenTemporal?.absolutePath}"
-                actualizarImagenViewActual()
+        if (resultCode == Activity.RESULT_OK && requestCode == SOLICITUD_CODIGO_CAMERA && data?.data != null){
+            //val uriFoto = "file://${deporappViewModel.archivoImagenTemporal?.absolutePath}"
+            val imageUri = data.data
+            val imagen = getImageConAutorizacion(imageUri)
+                actualizarImagenViewActual(imagen!!, imageUri)
         }
     }
 
-    private fun actualizarImagenViewActual() {
-        if (deporappViewModel.archivoImagenTemporal!!.exists()){
+    private fun getImageConAutorizacion(uri: Uri): Bitmap? {
 
-            val bitmap = getEscalarBitMap(deporappViewModel.archivoImagenTemporal!!.path, requireActivity())
-            cancha_foto.setImageBitmap(bitmap)
-            empezarSubidaImagenStorage()
+        return ImageUtils.transformarUriAlTamanio(
+            uri,
+            resources.getDimensionPixelSize(R.dimen.default_image_width),
+            resources.getDimensionPixelSize(R.dimen.default_image_height),
+            context!!)
 
-        }else{
-            cancha_foto.setImageDrawable(null)
-        }
+    }
+
+
+
+    private fun actualizarImagenViewActual(imagenBitmap: Bitmap,uriImagen: Uri) {
+
+            cancha_foto.setImageBitmap(imagenBitmap)
+            empezarSubidaImagenStorage(uriImagen)
+
+    }
+
+    private fun empezarSubidaImagenStorage(uri_imagen: Uri?) {
+
+            if (uri_imagen != null){
+
+                storageManager.subirFoto(uri_imagen, ::guardandoElUriDelArchivo)
+            }
+
     }
 
 
