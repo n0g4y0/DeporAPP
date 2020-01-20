@@ -20,7 +20,6 @@ import io.github.n0g4y0.deporapp.firebase.firestore.FirestoreManager
 import io.github.n0g4y0.deporapp.firebase.storage.StorageManager
 import io.github.n0g4y0.deporapp.util.ImageUtils
 import io.github.n0g4y0.deporapp.util.SeleccionArchivo
-import io.github.n0g4y0.deporapp.util.getEscalarBitMap
 import io.github.n0g4y0.deporapp.util.mostrarMensaje
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_cancha.*
@@ -63,7 +62,7 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
         super.onViewCreated(view, savedInstanceState)
 
         cancha_foto.setOnClickListener {
-            clickALaFoto()
+            capturarFotoGaleria()
         }
 
         capturarUbicacion()
@@ -157,13 +156,13 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
     * funciones para manipular las capturas de la camara:
     * */
 
-    fun clickALaFoto(){
+    fun capturarFotoGaleria(){
 
-        val tomarFotoIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val tomarFotoGaleriaIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
-        if (tomarFotoIntent.resolveActivity(requireContext().packageManager) != null) {
+        if (tomarFotoGaleriaIntent.resolveActivity(requireContext().packageManager) != null) {
 
-            startActivityForResult(tomarFotoIntent, SOLICITUD_CODIGO_CAMERA)
+            startActivityForResult(tomarFotoGaleriaIntent, SOLICITUD_CODIGO_CAMERA)
         }
 
     }
@@ -173,9 +172,9 @@ class CrearCanchaFragment : Fragment(R.layout.fragment_crear_cancha){
 
         if (resultCode == Activity.RESULT_OK && requestCode == SOLICITUD_CODIGO_CAMERA && data?.data != null){
             //val uriFoto = "file://${deporappViewModel.archivoImagenTemporal?.absolutePath}"
-            val imageUri = data.data
-            val imagen = getImageConAutorizacion(imageUri)
-                actualizarImagenViewActual(imagen!!, imageUri)
+            val uriFotoGaleria = data.data
+            val imagenBitmap = getImageConAutorizacion(uriFotoGaleria)
+                actualizarImagenViewActual(imagenBitmap!!, uriFotoGaleria)
         }
     }
 

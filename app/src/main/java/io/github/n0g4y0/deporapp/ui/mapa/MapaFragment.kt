@@ -163,7 +163,7 @@ class MapaFragment : Fragment(R.layout.fragment_mapa),OnMapReadyCallback  {
                     val latLng = LatLng(location.latitude, location.longitude)
 
                     // directamente me muestra mi ubicacion actual.
-                    val update = CameraUpdateFactory.newLatLngZoom(latLng, 14.0f)
+                    val update = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f)
                     // 7
                     map?.moveCamera(update)
                 } else {

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.net.Uri
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -211,4 +212,17 @@ object ImageUtils {
             entrada?.close()
         }
     }
+
+
+    fun getImageUriFromBitmap(contexto: Context, bitmap: Bitmap): Uri {
+
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bytes)
+
+        val ruta = MediaStore.Images.Media.insertImage(contexto.contentResolver, bitmap, "titulo",null)
+
+        return Uri.parse(ruta.toString())
+
+    }
+
 }
