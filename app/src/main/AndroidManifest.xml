@@ -37,18 +37,22 @@
 
         <activity android:name=".ui.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar"
-                  android:label="@string/title_activity_menu">
+                  android:label="@string/title_activity_menu"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity"
+                android:screenOrientation="portrait">
             <!-- opcion para volver atras (feclita en la parte superior:) -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.login.IntroActivity"/>
         </activity>
-        <activity android:name=".ui.login.RegisterActivity">
+        <activity android:name=".ui.login.RegisterActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.login.IntroActivity"
-                  android:theme="@style/SplashTheme">
+                  android:theme="@style/SplashTheme"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
