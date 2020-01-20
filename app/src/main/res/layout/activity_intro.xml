@@ -12,7 +12,7 @@
             android:id="@+id/tittle_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DeporAPP"
+            android:text="Deporapp"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/imagen_intro"
