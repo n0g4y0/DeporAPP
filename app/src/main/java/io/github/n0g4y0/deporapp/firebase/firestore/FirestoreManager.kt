@@ -414,6 +414,8 @@ class FirestoreManager {
 
         registrosEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
             .whereEqualTo(CLAVE_TIPO_ENCUENTRO,false)
+            .whereGreaterThan(CLAVE_FECHA_ENCUENTRO, getTiempoActual())
+            .orderBy(CLAVE_FECHA_ENCUENTRO)
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 
