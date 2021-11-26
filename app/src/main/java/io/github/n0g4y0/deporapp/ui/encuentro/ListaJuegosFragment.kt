@@ -1,6 +1,7 @@
 package io.github.n0g4y0.deporapp.ui.encuentro
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -155,6 +156,20 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
                     findNavController().navigate(R.id.action_encuentro_to_comentarios,bundle)
             }
+
+            itemView.btn_postular_encuentro.setOnClickListener {
+
+                AlertDialog.Builder(requireContext())
+                    .setMessage("ATENCION!! \n\nEl envio de una Solicitud Implica el compromiso de participar en caso de que lo acepten.\n" +
+                            "desea continuar?")
+                    .setPositiveButton("SI"){ _,_ ->
+
+
+                    }
+                    .setNegativeButton("NO",null)
+                    .create().show()
+            }
+
 
         }
 

@@ -1,6 +1,7 @@
 package io.github.n0g4y0.deporapp.ui.equipo
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -70,6 +71,20 @@ class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipos) {
     fun bind(equipo: Equipo){
 
         itemView.tv_nombre_equipo.text = equipo.nombre
+
+        itemView.btn_unirse_equipo.setOnClickListener {
+
+            AlertDialog.Builder(requireContext())
+                .setMessage("ATENCION!! \n\nEl envio de una Solicitud Implica el compromiso de cumplir con los encuentros deportivos del equipo caso de que lo acepten.\n" +
+                        "desea continuar?")
+                .setPositiveButton("SI"){ _,_ ->
+
+
+                }
+                .setNegativeButton("NO",null)
+                .create().show()
+
+        }
 
     }
 
