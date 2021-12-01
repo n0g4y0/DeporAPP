@@ -79,6 +79,7 @@ class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipos) {
                         "desea continuar?")
                 .setPositiveButton("SI"){ _,_ ->
 
+                    enviarP_EquipoAlFirebase(equipo.id, deporappViewModel.getIdUsuarioActual())
 
                 }
                 .setNegativeButton("NO",null)
@@ -89,6 +90,11 @@ class ListaEquiposFragment : Fragment(R.layout.fragment_lista_equipos) {
     }
 
 }
+
+    private fun enviarP_EquipoAlFirebase(idEquipo: String, idUsuarioActual: String){
+        //Log.d("solicitud","nombre: " + nombre)
+        deporappViewModel.crearP_EquipoConHilos(idEquipo, idUsuarioActual)
+    }
 
 
 

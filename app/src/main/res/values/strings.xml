@@ -57,6 +57,10 @@
     <string name="p_encuentro_creado_firestore_error"> participante de encuentro tuvo un error </string>
     <string name="p_encuentro_creado_firestore_cancelado"> participante de encuentro fue cancelado </string>
 
+    <string name="p_equipo_creado_firestore_exitosamente"> participante de equipo subido correctamente </string>
+    <string name="p_equipo_creado_firestore_error"> participante de equipo tuvo un error </string>
+    <string name="p_equipo_creado_firestore_cancelado"> participante de equipo fue cancelado </string>
+
     <string name="msj_default_cancelado"> la operacion fue cancelada </string>
     <string name="msj_default_error"> la operacion tuvo un error </string>
     <string name="msj_default_exitoso"> la operacion fue ejecutado correctamente </string>

@@ -2,10 +2,7 @@ package io.github.n0g4y0.deporapp.firebase.corutinas
 
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
-import io.github.n0g4y0.deporapp.model.Cancha
-import io.github.n0g4y0.deporapp.model.Comentario
-import io.github.n0g4y0.deporapp.model.P_Encuentro
-import io.github.n0g4y0.deporapp.model.Usuario
+import io.github.n0g4y0.deporapp.model.*
 
 
 private const val COLECCION_USUARIOS = "usuarios"
@@ -13,6 +10,7 @@ private const val COLECCION_ENCUENTROS = "encuentros"
 private const val COLECCION_COMENTARIOS = "comentarios"
 private const val COLECCION_CANCHAS = "canchas"
 private const val COLECCION_P_ENCUENTROS = "p_encuentros"
+private const val COLECCION_P_EQUIPOS = "p_equipos"
 
 
 // valores estaticos, canchas:
@@ -30,6 +28,7 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     private val coleccionComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
     private val coleccionCanchas = baseDeDato.collection(COLECCION_CANCHAS)
     private val coleccion_P_Encuentros = baseDeDato.collection(COLECCION_P_ENCUENTROS)
+    private val coleccion_P_Equipos = baseDeDato.collection(COLECCION_P_EQUIPOS)
 
 
     override suspend fun esteUsuarioYaComentoEncuentro(
@@ -93,6 +92,8 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document(comentario.id).set(comentario).await()
 
     override suspend fun crear_P_encuentro(pEncuentro: P_Encuentro) = coleccion_P_Encuentros.document(pEncuentro.id).set(pEncuentro).await()
+
+    override suspend fun crear_P_equipo(pEquipo: P_Equipo) = coleccion_P_Equipos.document(pEquipo.id).set(pEquipo).await()
 
 
 

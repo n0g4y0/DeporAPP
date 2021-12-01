@@ -174,6 +174,26 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     }
 
+    fun crearP_EquipoConHilos(id_equipo: String, id_usuario_actual: String){
+
+        val id = UUID.randomUUID().toString()
+        val p_Equipo = P_Equipo(id = id,id_equipo = id_equipo, id_usuario_actual = id_usuario_actual)
+
+        if (participanteJob?.isActive == true) participanteJob?.cancel()
+        participanteJob = launch {
+            when(consultasRepositorio.crear_P_equipo(p_Equipo)){
+
+                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_exitosamente
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_error
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_cancelado
+
+            }
+        }
+
+    }
+
 
 
     /*
