@@ -41,6 +41,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     private var crearEncuentroJob: Job? = null
     private var preguntarUsuarioEnComentarioJob: Job? = null
     private var getCanchaJob: Job? = null
+    private var participanteJob: Job? = null
 
     //live-data
 
@@ -145,6 +146,28 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
                 is Result.Error -> _codigo_texto_a_mostrar.value = R.string.msj_default_error
 
                 is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.msj_default_cancelado
+
+            }
+        }
+
+    }
+
+    // funciones para manejar la creacion de participantes de los encuentros y equipos
+
+    fun crearP_EncuentroConHilos(id_encuentro: String, id_usuario_actual: String){
+
+        val id = UUID.randomUUID().toString()
+        val p_encuentro = P_Encuentro(id = id,id_encuentro = id_encuentro, id_usuario_actual = id_usuario_actual)
+
+        if (participanteJob?.isActive == true) participanteJob?.cancel()
+        participanteJob = launch {
+            when(consultasRepositorio.crear_P_encuentro(p_encuentro)){
+
+                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_exitosamente
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_error
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_cancelado
 
             }
         }

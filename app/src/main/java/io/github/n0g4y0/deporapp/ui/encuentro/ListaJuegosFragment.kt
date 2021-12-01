@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -164,7 +165,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                             "desea continuar?")
                     .setPositiveButton("SI"){ _,_ ->
 
-
+                        enviarP_EncuentroAlFirebase(encuentro.id, deporappViewModel.getIdUsuarioActual())
                     }
                     .setNegativeButton("NO",null)
                     .create().show()
@@ -173,6 +174,11 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
         }
 
+    }
+
+    private fun enviarP_EncuentroAlFirebase(idEncuentro: String, idUsuarioActual: String){
+        //Log.d("solicitud","nombre: " + nombre)
+       deporappViewModel.crearP_EncuentroConHilos(idEncuentro, idUsuarioActual)
     }
 
 
