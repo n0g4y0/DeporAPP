@@ -56,7 +56,7 @@
                     android:maxLines="1"
                     android:focusableInTouchMode="false"
                     app:layout_constraintTop_toBottomOf="@id/layout_nombre_encuentro"
-                    tools:text="Cancha"/>
+                    tools:text="Seleccionar Cancha..."/>
         </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -96,12 +96,30 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_mi_equipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Equipo"
+            android:padding="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/layout_hora_encuentro">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_mi_equipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:focusableInTouchMode="false"
+                tools:text="Seleccionar Equipo..."/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_cupo_encuentro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cupos"
             android:padding="@dimen/margin_small"
-            app:layout_constraintTop_toBottomOf="@id/layout_hora_encuentro">
+            app:layout_constraintTop_toBottomOf="@id/layout_mi_equipo">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_cupo_encuentro"

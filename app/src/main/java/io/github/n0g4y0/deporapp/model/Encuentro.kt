@@ -15,6 +15,7 @@ data class Encuentro(
     var fk_cancha_lat: Double = 0.0,
     var fk_cancha_lng: Double = 0.0,
     var fk_usuario_nick: String = "",
-    var fk_usuario_foto_url: String = ""
+    var fk_usuario_foto_url: String = "",
+    var id_equipo: String = ""
 
 )
