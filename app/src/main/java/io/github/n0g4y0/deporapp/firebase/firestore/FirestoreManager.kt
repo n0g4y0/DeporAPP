@@ -14,6 +14,7 @@ private const val COLECCION_EQUIPOS = "equipos"
 private const val COLECCION_USUARIOS = "usuarios"
 private const val COLECCION_ENCUENTROS = "encuentros"
 private const val COLECCION_COMENTARIOS = "comentarios"
+private const val COLECCION_P_EQUIPOS = "p_equipos"
 
 
 
@@ -45,6 +46,12 @@ private const val CLAVE_TITULO_DESCRIPCION = "descripcion"
 private const val CLAVE_EQUIPO_NOMRE = "nombre"
 private const val CLAVE_DESCRIPCION_EQUIPO = "descripcion"
 private const val CLAVE_ID_ADMIN = "idAdmin"
+
+// valores staticos,  participantes equipos:
+
+private const val CLAVE_P_EQUIPO_ID = "id"
+private const val CLAVE_P_EQUIPO_ID_EQUIPO = "id_equipo"
+private const val CLAVE_P_EQUIPO_ID_USUARIO_ACTUAL = "id_usuario_actual"
 
 
 // valores estaticos, usuarios:
@@ -110,6 +117,8 @@ class FirestoreManager {
     private val valoresAnuncios = MutableLiveData<List<Anuncio>>()
 
     private val valoresEquipos = MutableLiveData<List<Equipo>>()
+
+    private val valores_P_Equipos = MutableLiveData<List<P_Equipo>>()
 
     private val valoresUsuarios = MutableLiveData<List<Usuario>>()
 
@@ -215,6 +224,11 @@ class FirestoreManager {
         return valoresEquipos
     }
 
+    fun cambiosDeValor_P_Equipos(): LiveData<List<P_Equipo>>{
+        escucharPorCambiosEnValores_P_Equipos()
+        return valores_P_Equipos
+    }
+
 
 
     private fun escucharPorCambiosEnValoresEquipos() {
@@ -241,6 +255,35 @@ class FirestoreManager {
                     }
 
                     valoresEquipos.postValue(equipos)
+                }
+            })
+
+    }
+
+    private fun escucharPorCambiosEnValores_P_Equipos() {
+
+        registrosEquipos = baseDeDato.collection(COLECCION_P_EQUIPOS)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+                if (valor.isEmpty) {
+
+                    valores_P_Equipos.postValue(emptyList())
+
+                } else {
+
+                    val p_equipos = ArrayList<P_Equipo>()
+
+                    for (doc in valor) {
+                        val p_equipo = doc.toObject(P_Equipo::class.java)
+                        p_equipos.add(p_equipo)
+                    }
+
+                    valores_P_Equipos.postValue(p_equipos)
                 }
             })
 

@@ -90,6 +90,17 @@
                 android:id="@+id/action_seleccionCancha_a_crearJuego"
                 app:destination="@id/crearJuegoFragment" />
     </fragment>
+
+    <fragment
+            android:id="@+id/seleccionMiEquipoFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.equipo.SeleccionEquipoFragment"
+            android:label="Seleccionar Equipo"
+            tools:layout="@layout/fragment_seleccion_equipo" >
+        <action
+                android:id="@+id/action_seleccionEquipo_a_crearJuego"
+                app:destination="@id/crearJuegoFragment" />
+    </fragment>
+
     <fragment
             android:id="@+id/encuentrosViewPagerFragment"
             android:name="io.github.n0g4y0.deporapp.ui.encuentro.EncuentrosViewPagerFragment"

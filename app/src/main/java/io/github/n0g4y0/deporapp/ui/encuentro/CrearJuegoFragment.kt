@@ -54,6 +54,10 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
             findNavController().navigate(R.id.timePickerFragment)
         }
 
+        et_mi_equipo.setOnClickListener {
+            findNavController().navigate(R.id.seleccionMiEquipoFragment)
+        }
+
         btn_Crear_encuentro.setOnClickListener {
             guardarEncuentro()
         }
