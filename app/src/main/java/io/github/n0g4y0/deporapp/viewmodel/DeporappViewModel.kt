@@ -174,10 +174,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     }
 
-    fun crearP_EquipoConHilos(id_equipo: String, id_usuario_actual: String){
+    fun crearP_EquipoConHilos(id_equipo: String, nombreEquipo: String, id_usuario_actual: String){
 
         val id = UUID.randomUUID().toString()
-        val p_Equipo = P_Equipo(id = id,id_equipo = id_equipo, id_usuario_actual = id_usuario_actual)
+        val p_Equipo = P_Equipo(id = id,id_equipo = id_equipo, nombre_equipo = nombreEquipo,  id_usuario_actual = id_usuario_actual)
 
         if (participanteJob?.isActive == true) participanteJob?.cancel()
         participanteJob = launch {
@@ -354,11 +354,6 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         return firestore.listenerCambiosDeValorEncuentrosByID(idCancha)
 
     }
-
-
-
-
-
 
 
 
