@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import io.github.n0g4y0.deporapp.R
 import io.github.n0g4y0.deporapp.model.Cancha
+import io.github.n0g4y0.deporapp.model.P_Equipo
 import io.github.n0g4y0.deporapp.util.DateUtils
 import io.github.n0g4y0.deporapp.viewmodel.DeporappViewModel
 import kotlinx.android.synthetic.main.fragment_crear_juego.*
@@ -29,6 +30,8 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
 
     var canchaEncuentro: Cancha? = null
 
+    var equipoDelUsuarioActual: P_Equipo? = null
+
     private val fechaUtils = DateUtils()
 
 
@@ -38,6 +41,7 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         getFechaActualEncuentro()
         getHoraActualEncuentro()
         getCanchaDelEncuentro()
+        getEquipoDelUsuarioActual()
 
 
 
@@ -144,6 +148,14 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
             et_cancha_encuentro.setText(canchaEncuentro!!.titulo)
         })
 
+    }
+
+    private fun getEquipoDelUsuarioActual(){
+        deporappViewModel.idEquipoEncuentro.observe(this, Observer {equipoDelUsuario ->
+            equipoDelUsuarioActual = equipoDelUsuario
+            et_mi_equipo.setText(equipoDelUsuario.nombre_equipo)
+
+        })
     }
 
 

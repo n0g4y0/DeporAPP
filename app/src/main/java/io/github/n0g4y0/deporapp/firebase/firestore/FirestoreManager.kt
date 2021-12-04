@@ -224,8 +224,8 @@ class FirestoreManager {
         return valoresEquipos
     }
 
-    fun cambiosDeValor_P_Equipos(): LiveData<List<P_Equipo>>{
-        escucharPorCambiosEnValores_P_Equipos()
+    fun cambiosDeValor_P_Equipos(idUsuarioActual: String): LiveData<List<P_Equipo>>{
+        escucharPorCambiosEnValores_P_Equipos(idUsuarioActual)
         return valores_P_Equipos
     }
 
@@ -260,9 +260,10 @@ class FirestoreManager {
 
     }
 
-    private fun escucharPorCambiosEnValores_P_Equipos() {
+    private fun escucharPorCambiosEnValores_P_Equipos(idUsuarioActual: String) {
 
         registrosEquipos = baseDeDato.collection(COLECCION_P_EQUIPOS)
+            .whereEqualTo(CLAVE_P_EQUIPO_ID_USUARIO_ACTUAL,idUsuarioActual)
 
             .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 

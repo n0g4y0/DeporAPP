@@ -224,7 +224,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     var idCanchaEncuentro: MutableLiveData<Cancha> = MutableLiveData()
 
-    var idEquipoEncuentro: MutableLiveData<String> = MutableLiveData()
+    var idEquipoEncuentro: MutableLiveData<P_Equipo> = MutableLiveData()
 
 
     var fotoPerfilUsuarioActual = ObservableField("")
@@ -281,7 +281,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     }
 
     fun getLista_p_equipos(): LiveData<List<P_Equipo>>{
-        return firestore.cambiosDeValor_P_Equipos()
+        return firestore.cambiosDeValor_P_Equipos(getIdUsuarioActual())
     }
 
     fun agregarEquipo(nombre: String,
@@ -383,7 +383,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     }
 
     fun setidEquipoEncuentro(nuevoId: P_Equipo){
-        idEquipoEncuentro.value = nuevoId.id_equipo
+        idEquipoEncuentro.value = nuevoId
     }
 
     fun reiniciarLasVariablesMutables(){

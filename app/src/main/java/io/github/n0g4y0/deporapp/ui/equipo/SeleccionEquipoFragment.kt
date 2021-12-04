@@ -59,7 +59,7 @@ class SeleccionEquipoFragment : Fragment(R.layout.fragment_seleccion_equipo) {
 
         fun bind(p_equipo: P_Equipo){
 
-            itemView.tv_nombre_p_equipo.text = p_equipo.id_equipo
+            itemView.tv_nombre_p_equipo.text = p_equipo.nombre_equipo
 
         }
 
