@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -169,6 +170,14 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                     }
                     .setNegativeButton("NO",null)
                     .create().show()
+            }
+
+
+            itemView.tv_cardview_encuentro.setOnClickListener {
+                //Toast.makeText(activity?.applicationContext, "show something...", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putString("id_encuentro",encuentro.id)
+
             }
 
 
