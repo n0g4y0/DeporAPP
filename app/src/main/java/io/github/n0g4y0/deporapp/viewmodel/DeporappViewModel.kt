@@ -59,6 +59,9 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     private val _canchaConsultada = MutableLiveData<Cancha>()
     val canchaConsultada : LiveData<Cancha> = _canchaConsultada
 
+    private val _equipoConsultado = MutableLiveData<Equipo>()
+    val equipoConsultado : LiveData<Equipo> = _equipoConsultado
+
 
 
     // traer al usuario con determinado ID:
@@ -77,6 +80,22 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
                     }
         }
 
+    }
+
+    fun traerEquipoDesdeFirestore(id_equipo: String){
+        if (participanteJob?.isActive == true) participanteJob?.cancel()
+
+        participanteJob = launch {
+                when(val resultado = consultasRepositorio.getEquipoPorId(id_equipo)){
+
+                    is Result.Success -> _equipoConsultado.value = resultado.data
+
+                    is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
+
+                    is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.cancelar_proceso_firestore
+
+                }
+        }
     }
 
     fun traerCancharDesdeFirestrore(idCancha: String) {
@@ -154,10 +173,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     // funciones para manejar la creacion de participantes de los encuentros y equipos
 
-    fun crearP_EncuentroConHilos(id_encuentro: String, id_usuario_actual: String){
+    fun crearP_EncuentroConHilos(id_encuentro: String, nombreUsuario: String, photoUrl: String ,id_usuario_actual: String){
 
         val id = UUID.randomUUID().toString()
-        val p_encuentro = P_Encuentro(id = id,id_encuentro = id_encuentro, id_usuario_actual = id_usuario_actual)
+        val p_encuentro = P_Encuentro(id = id,id_encuentro = id_encuentro, nombre_usuario = nombreUsuario, photo_url = photoUrl ,id_usuario_actual = id_usuario_actual)
 
         if (participanteJob?.isActive == true) participanteJob?.cancel()
         participanteJob = launch {
@@ -353,6 +372,10 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
         return firestore.listenerCambiosDeValorEncuentrosByID(idCancha)
 
+    }
+
+    fun getLista_P_encuentroById(idEncuentro: String): LiveData<List<P_Encuentro>>{
+        return firestore.listenerCambiosDevalor_P_EncuentrosById(idEncuentro)
     }
 
 

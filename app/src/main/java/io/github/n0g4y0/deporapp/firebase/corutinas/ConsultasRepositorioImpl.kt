@@ -9,6 +9,7 @@ private const val COLECCION_USUARIOS = "usuarios"
 private const val COLECCION_ENCUENTROS = "encuentros"
 private const val COLECCION_COMENTARIOS = "comentarios"
 private const val COLECCION_CANCHAS = "canchas"
+private const val COLECCION_EQUIPOS = "equipos"
 private const val COLECCION_P_ENCUENTROS = "p_encuentros"
 private const val COLECCION_P_EQUIPOS = "p_equipos"
 
@@ -27,6 +28,7 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     private val coleccionEncuentros = baseDeDato.collection(COLECCION_ENCUENTROS)
     private val coleccionComentarios = baseDeDato.collection(COLECCION_COMENTARIOS)
     private val coleccionCanchas = baseDeDato.collection(COLECCION_CANCHAS)
+    private val coleccionEquipos = baseDeDato.collection(COLECCION_EQUIPOS)
     private val coleccion_P_Encuentros = baseDeDato.collection(COLECCION_P_ENCUENTROS)
     private val coleccion_P_Equipos = baseDeDato.collection(COLECCION_P_EQUIPOS)
 
@@ -86,6 +88,23 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
             is Result.Canceled -> Result.Canceled (documentoResultanteSnapshot.exception)
         }
 
+
+    }
+
+    override suspend fun getEquipoPorId(idEquipo: String): Result<Equipo>{
+
+        return when (val equipoEncontrado = coleccionEquipos.document(idEquipo).get().await()){
+
+            is Result.Success -> {
+                val equipo = equipoEncontrado.data.toObject(Equipo::class.java)!!
+                Result.Success(equipo)
+            }
+
+            is Result.Error -> Result.Error(equipoEncontrado.exception)
+
+            is Result.Canceled -> Result.Canceled (equipoEncontrado.exception)
+
+        }
 
     }
 

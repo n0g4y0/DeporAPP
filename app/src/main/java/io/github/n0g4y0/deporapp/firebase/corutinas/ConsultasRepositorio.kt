@@ -10,6 +10,8 @@ interface ConsultasRepositorio {
 
     suspend fun getCanchaPorId(idCancha: String): Result<Cancha>
 
+    suspend fun getEquipoPorId(idEquipo: String): Result<Equipo>
+
     suspend fun crearComentario(comentario: Comentario): Result<Void?>
 
     suspend fun esteUsuarioYaComentoEncuentro(id_encuentro: String, id_usuario: String): Result<Boolean>

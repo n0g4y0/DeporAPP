@@ -15,6 +15,7 @@ private const val COLECCION_USUARIOS = "usuarios"
 private const val COLECCION_ENCUENTROS = "encuentros"
 private const val COLECCION_COMENTARIOS = "comentarios"
 private const val COLECCION_P_EQUIPOS = "p_equipos"
+private const val COLECCION_P_ENCUENTROS = "p_encuentros"
 
 
 
@@ -92,6 +93,11 @@ private const val CLAVE_ID_ENCUENTRO_COMENTARIO = "id_encuentro"
 private const val CLAVE_ID_USUARIO_COMENTARIO = "id_usuario"
 
 
+// valores estaticos, participantes de encuentros deportivos:
+
+private const val CLAVE_ID_P_ENCUENTRO = "id_encuentro"
+
+
 
 
 private lateinit var registrosCanchas: ListenerRegistration
@@ -106,6 +112,7 @@ private lateinit var registrosEncuentrosPendientes : ListenerRegistration
 private lateinit var registrosEncuentrosConcluidos : ListenerRegistration
 
 private lateinit var registrosEncuentrosByIdCancha : ListenerRegistration
+private lateinit var registros_P_Encuentros : ListenerRegistration
 
 class FirestoreManager {
 
@@ -131,6 +138,8 @@ class FirestoreManager {
 
 
     private val valoresEncuentrosByIdCancha = MutableLiveData<List<Encuentro>>()
+
+    private val valores_P_Encuentros = MutableLiveData<List<P_Encuentro>>()
 
 
 
@@ -671,12 +680,38 @@ class FirestoreManager {
 
     }
 
+    fun listenerCambiosDevalor_P_EncuentrosById(idEncuentro: String): LiveData<List<P_Encuentro>>{
+        escucharPorCambiosEnValores_P_EncuentrosByIdCancha(idEncuentro)
+        return valores_P_Encuentros
+    }
 
+    private fun escucharPorCambiosEnValores_P_EncuentrosByIdCancha(idEncuentro: String) {
+        registros_P_Encuentros= baseDeDato.collection(COLECCION_P_ENCUENTROS)
+            .whereEqualTo(CLAVE_ID_P_ENCUENTRO,idEncuentro)
 
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
 
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
 
+                if (valor.isEmpty) {
 
+                    valores_P_Encuentros.postValue(emptyList())
 
+                } else {
+
+                    val p_encuentros = ArrayList<P_Encuentro>()
+
+                    for (doc in valor) {
+                        val participante = doc.toObject(P_Encuentro::class.java)
+                        p_encuentros.add(participante)
+                    }
+
+                    valores_P_Encuentros.postValue(p_encuentros)
+                }
+            })
+    }
 
 
     private fun getTiempoActual() = System.currentTimeMillis()

@@ -41,20 +41,21 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
         encuentros_recycler_view.adapter = adaptador
 
-        deporappViewModel?.getListaEncuentros().observe(this, Observer { listaEncuentros: List<Encuentro> ->
+        deporappViewModel?.getListaEncuentros()
+            .observe(this, Observer { listaEncuentros: List<Encuentro> ->
 
-            adaptador.actualizar(listaEncuentros)
-        })
+                adaptador.actualizar(listaEncuentros)
+            })
 
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.crear_encuentro,menu)
+        inflater.inflate(R.menu.crear_encuentro, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
 
             R.id.accion_crear_encuentro -> findNavController().navigate(R.id.crearJuegoFragment)
 
@@ -70,13 +71,12 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
      * */
 
 
-
-
     /*
     * primero creamos el adaptador:
     *
     * */
-    private inner class EncuentroAdapter(): RecyclerView.Adapter<ListaJuegosFragment.EncuentroViewHolder>(){
+    private inner class EncuentroAdapter() :
+        RecyclerView.Adapter<ListaJuegosFragment.EncuentroViewHolder>() {
 
 
         private val listaEncuentros: MutableList<Encuentro> = mutableListOf()
@@ -99,7 +99,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
         }
 
 
-        fun actualizar(listaDeItems: List<Encuentro>){
+        fun actualizar(listaDeItems: List<Encuentro>) {
             listaEncuentros.clear()
             listaEncuentros.addAll(listaDeItems)
             notifyDataSetChanged()
@@ -109,37 +109,38 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
     }
 
 
-
-
     /*
 * creamos el ViewHolder
 *
 * */
-    private inner class EncuentroViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-        : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_encuentro ,parent ,false)){
+    private inner class EncuentroViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_encuentro, parent, false)) {
 
 
         var conversor = DateUtils()
 
 
-
-        fun bind(encuentro: Encuentro){
+        fun bind(encuentro: Encuentro) {
 
             itemView.tv_nombre_encuentro.text = encuentro.nombre
             itemView.tv_dia_encuentro.text = conversor.convertirTimestampDia(encuentro.fecha)
-            itemView.tv_nombre_mes_encuentro.text = conversor.convertirTimestampNombreMes(encuentro.fecha)
+            itemView.tv_nombre_mes_encuentro.text =
+                conversor.convertirTimestampNombreMes(encuentro.fecha)
             itemView.tv_cantidad_cupos_encuentro.text = "${encuentro.cupos} Cupos"
             itemView.tv_hora_encuentro.text = conversor.convertirTimeStampAHora(encuentro.hora)
             itemView.tv_deporte_practicar_encuentro.text = encuentro.deporte
             itemView.tv_nota_adicional_encuentro.text = encuentro.nota
             itemView.tv_apodo_usuario_encuentro.text = encuentro.fk_usuario_nick
-            ImageBinding.setImageUrl(itemView.iv_perfil_foto_encuentro,encuentro.fk_usuario_foto_url)
+            ImageBinding.setImageUrl(
+                itemView.iv_perfil_foto_encuentro,
+                encuentro.fk_usuario_foto_url
+            )
 
             itemView.abrir_localizacion_encuentro.setOnClickListener {
 
                 val codigoUbicacion = "geo:${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}?" +
                         "q=${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}(Cancha)"
-                val intent = Intent(android.content.Intent.ACTION_VIEW,Uri.parse(codigoUbicacion))
+                val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(codigoUbicacion))
                 startActivity(intent)
 
             }
@@ -148,27 +149,34 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
             itemView.btn_comentar_encuentro.setOnClickListener {
 
-                    val bundle = Bundle()
-                    bundle.putString("id_encuentro",encuentro.id)
-                    bundle.putString("nombre",encuentro.nombre)
-                    bundle.putLong("fecha", encuentro.fecha)
-                    bundle.putLong("hora", encuentro.hora)
-                    bundle.putString("apodo", encuentro.fk_usuario_nick)
-                    bundle.putString("id_usuario",encuentro.id_creador)
+                val bundle = Bundle()
+                bundle.putString("id_encuentro", encuentro.id)
+                bundle.putString("nombre", encuentro.nombre)
+                bundle.putLong("fecha", encuentro.fecha)
+                bundle.putLong("hora", encuentro.hora)
+                bundle.putString("apodo", encuentro.fk_usuario_nick)
+                bundle.putString("id_usuario", encuentro.id_creador)
 
-                    findNavController().navigate(R.id.action_encuentro_to_comentarios,bundle)
+                findNavController().navigate(R.id.action_encuentro_to_comentarios, bundle)
             }
 
             itemView.btn_postular_encuentro.setOnClickListener {
 
                 AlertDialog.Builder(requireContext())
-                    .setMessage("ATENCION!! \n\nEl envio de una Solicitud Implica el compromiso de participar en caso de que lo acepten.\n" +
-                            "desea continuar?")
-                    .setPositiveButton("SI"){ _,_ ->
+                    .setMessage(
+                        "ATENCION!! \n\nEl envio de una Solicitud Implica el compromiso de participar en caso de que lo acepten.\n" +
+                                "desea continuar?"
+                    )
+                    .setPositiveButton("SI") { _, _ ->
 
-                        enviarP_EncuentroAlFirebase(encuentro.id, deporappViewModel.getIdUsuarioActual())
+                        enviarP_EncuentroAlFirebase(
+                            encuentro.id,
+                            deporappViewModel.getNombreUsuarioActual(),
+                            deporappViewModel.getPhotoUrlUsuarioActual(),
+                            deporappViewModel.getIdUsuarioActual()
+                        )
                     }
-                    .setNegativeButton("NO",null)
+                    .setNegativeButton("NO", null)
                     .create().show()
             }
 
@@ -176,8 +184,10 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
             itemView.tv_cardview_encuentro.setOnClickListener {
                 //Toast.makeText(activity?.applicationContext, "show something...", Toast.LENGTH_SHORT).show()
                 val bundle = Bundle()
-                bundle.putString("id_encuentro",encuentro.id)
+                bundle.putString("id", encuentro.id)
+                bundle.putString("id_equipo", encuentro.id_equipo)
 
+                findNavController().navigate(R.id.listaParticipantesFragment, bundle)
             }
 
 
@@ -185,9 +195,14 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
     }
 
-    private fun enviarP_EncuentroAlFirebase(idEncuentro: String, idUsuarioActual: String){
+    private fun enviarP_EncuentroAlFirebase(
+        idEncuentro: String,
+        nombreUsuario: String,
+        photoUrl: String,
+        idUsuarioActual: String
+    ) {
         //Log.d("solicitud","nombre: " + nombre)
-       deporappViewModel.crearP_EncuentroConHilos(idEncuentro, idUsuarioActual)
+        deporappViewModel.crearP_EncuentroConHilos(idEncuentro, nombreUsuario, photoUrl,idUsuarioActual)
     }
 
 
