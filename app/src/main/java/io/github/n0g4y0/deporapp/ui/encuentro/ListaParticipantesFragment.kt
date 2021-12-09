@@ -26,13 +26,14 @@ class ListaParticipantesFragment : Fragment(R.layout.fragment_lista_participante
 
     private var argus: ListaParticipantesFragmentArgs? = null
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
 
             argus = ListaParticipantesFragmentArgs.fromBundle(it)
-            Log.d("id del equipo es: ", "id equipo 1:  ${argus?.idEquipo!!}")
+
             deporappViewModel.traerEquipoDesdeFirestore(argus?.idEquipo!!)
 
             deporappViewModel.equipoConsultado.observe(this, Observer { respuesta ->
@@ -66,11 +67,15 @@ class ListaParticipantesFragment : Fragment(R.layout.fragment_lista_participante
        * primero creamos el adaptador:
        *
        * */
-    private inner class ListaParticipantesAdapter: RecyclerView.Adapter<Lista_P_EncuentroViewHolder>(){
+    private inner class ListaParticipantesAdapter :
+        RecyclerView.Adapter<Lista_P_EncuentroViewHolder>() {
 
         private val lista_P_encuentro: MutableList<P_Encuentro> = mutableListOf()
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):Lista_P_EncuentroViewHolder {
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): Lista_P_EncuentroViewHolder {
 
             val inflater = LayoutInflater.from(parent.context)
             return Lista_P_EncuentroViewHolder(inflater, parent)
@@ -86,7 +91,7 @@ class ListaParticipantesFragment : Fragment(R.layout.fragment_lista_participante
 
         }
 
-        fun actualizar(listaDeItems: List<P_Encuentro>){
+        fun actualizar(listaDeItems: List<P_Encuentro>) {
             lista_P_encuentro.clear()
             lista_P_encuentro.addAll(listaDeItems)
             notifyDataSetChanged()
@@ -94,20 +99,19 @@ class ListaParticipantesFragment : Fragment(R.layout.fragment_lista_participante
 
     }
 
-        /*
-        * creamos el ViewHolder
-        *
-        * */
+    /*
+    * creamos el ViewHolder
+    *
+    * */
 
-    private inner class Lista_P_EncuentroViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-        : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_usuario,parent ,false)){
+    private inner class Lista_P_EncuentroViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_usuario, parent, false)) {
 
 
-        fun bind(p_encuentro: P_Encuentro){
+        fun bind(p_encuentro: P_Encuentro) {
 
-            itemView.iv_perfil_usuario_participante
             itemView.tv_nombre_usuario.text = p_encuentro.nombre_usuario
-            ImageBinding.setImageUrl(itemView.iv_perfil_usuario_participante,p_encuentro.photo_url)
+            ImageBinding.setImageUrl(itemView.iv_perfil_usuario_participante, p_encuentro.photo_url)
 
         }
 

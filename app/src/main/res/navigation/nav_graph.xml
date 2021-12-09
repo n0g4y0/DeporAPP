@@ -68,6 +68,12 @@
                 app:enterAnim="@anim/fui_slide_in_right"
                 app:exitAnim="@anim/fui_slide_out_left"
                 app:popUpToInclusive="false" />
+        <action
+                android:id="@+id/action_encuentro_to_listaParticipantes"
+                app:destination="@id/listaParticipantesFragment"
+                app:enterAnim="@anim/fui_slide_in_right"
+                app:exitAnim="@anim/fui_slide_out_left"
+                app:popUpToInclusive="false" />
     </fragment>
     <fragment
             android:id="@+id/crearJuegoFragment"

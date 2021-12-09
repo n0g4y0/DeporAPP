@@ -81,6 +81,7 @@ private const val CLAVE_LAT_ENCUENTRO = "fk_cancha_lat"
 private const val CLAVE_LNG_ENCUENTRO = "fk_cancha_lng"
 private const val CLAVE_NICK_ENCUENTRO = "fk_usuario_nick"
 private const val CLAVE_FOTO_URL_ENCUENTRO = "fk_usuario_foto_url"
+private const val CLAVE_ID_EQUIPO = "id_equipo"
 
 
 // valores estaticos, comentarios sobre encuentros:
@@ -429,6 +430,7 @@ class FirestoreManager {
                         fk_cancha_lng: Double,
                         fk_usuario_nick: String,
                         fk_usuario_foto_url: String,
+                        id_equipo: String,
                        enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
 
         val referenciaDocumento = baseDeDato.collection(COLECCION_ENCUENTROS).document()
@@ -450,6 +452,7 @@ class FirestoreManager {
         encuentro[CLAVE_LNG_ENCUENTRO] = fk_cancha_lng
         encuentro[CLAVE_NICK_ENCUENTRO] = fk_usuario_nick
         encuentro[CLAVE_FOTO_URL_ENCUENTRO] = fk_usuario_foto_url
+        encuentro[CLAVE_ID_EQUIPO] = id_equipo
 
 
         referenciaDocumento

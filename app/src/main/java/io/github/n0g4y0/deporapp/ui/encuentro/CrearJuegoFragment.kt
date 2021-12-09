@@ -91,11 +91,13 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
         val fk_usuario_nick = deporappViewModel.getApodoUsuarioActual()
         val fk_usuario_foto_url = deporappViewModel.getPhotoUrlUsuarioActual()
 
+        val id_equipo = deporappViewModel.idEquipoEncuentro.value?.id_equipo
+
         AlertDialog.Builder(requireContext())
             .setMessage("Crear Encuentro?")
-            .setPositiveButton("OK"){ _,_ ->
+            .setPositiveButton("OK") { _, _ ->
 
-                deporappViewModel?.let {
+                deporappViewModel.let {
                     it.agregarEncuentro(
                         nombreEncuentro,
                         idCancha!!,
@@ -108,29 +110,30 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
                         fk_cancha_lat!!,
                         fk_cancha_lng!!,
                         fk_usuario_nick,
-                        fk_usuario_foto_url
-                        )
-                    findNavController().popBackStack(R.id.listaJuegosFragment,false)
+                        fk_usuario_foto_url,
+                        id_equipo!!
+                    )
+                    findNavController().popBackStack(R.id.listaJuegosFragment, false)
 
                 }
             }
-            .setNegativeButton("Cancelar",null)
+            .setNegativeButton("Cancelar", null)
             .create().show()
 
 
     }
 
-    private fun getFechaActualEncuentro(){
+    private fun getFechaActualEncuentro() {
 
         deporappViewModel.fechaEncuentro.observe(this, Observer { fechaActualEncuentro ->
-                fechaActual = fechaActualEncuentro
-                et_fecha_encuentro.setText(fechaUtils.convertirFechaAString(fechaActual!!))
+            fechaActual = fechaActualEncuentro
+            et_fecha_encuentro.setText(fechaUtils.convertirFechaAString(fechaActual!!))
 
 
         })
     }
 
-    private fun getHoraActualEncuentro(){
+    private fun getHoraActualEncuentro() {
 
         deporappViewModel.horaEncuentro.observe(this, Observer { horaActualEncuentro ->
             horaActual = horaActualEncuentro
@@ -141,7 +144,7 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
 
     }
 
-    private fun getCanchaDelEncuentro(){
+    private fun getCanchaDelEncuentro() {
 
         deporappViewModel.idCanchaEncuentro.observe(this, Observer { canchaDelEncuentro ->
             canchaEncuentro = canchaDelEncuentro
@@ -150,17 +153,13 @@ class CrearJuegoFragment : Fragment(R.layout.fragment_crear_juego) {
 
     }
 
-    private fun getEquipoDelUsuarioActual(){
-        deporappViewModel.idEquipoEncuentro.observe(this, Observer {equipoDelUsuario ->
+    private fun getEquipoDelUsuarioActual() {
+        deporappViewModel.idEquipoEncuentro.observe(this, Observer { equipoDelUsuario ->
             equipoDelUsuarioActual = equipoDelUsuario
             et_mi_equipo.setText(equipoDelUsuario.nombre_equipo)
 
         })
     }
-
-
-
-
 
 
 }

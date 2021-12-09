@@ -42,10 +42,6 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
     private var argus: ListaComentarioFragmentArgs? = null
 
 
-
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,20 +54,22 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
 
             dia_encuentro_detalle.text = conversor.convertirTimestampDia(argus?.fecha!!)
             tv_nombre_encuentro_detalle.text = argus?.nombre
-            nombre_mes_encuentro_detalle.text = conversor.convertirTimestampNombreMes(argus?.fecha!!)
+            nombre_mes_encuentro_detalle.text =
+                conversor.convertirTimestampNombreMes(argus?.fecha!!)
             hora_encuentro_detalle.text = conversor.convertirTimeStampAHora(argus?.hora!!)
             apodo_encuentro_detalle.text = argus?.apodo
-
-
 
         }
 
 
 
-        deporappViewModel.elUsuarioCalificoEncuentro(argus?.idEncuentro!!,deporappViewModel.getIdUsuarioActual())
+        deporappViewModel.elUsuarioCalificoEncuentro(
+            argus?.idEncuentro!!,
+            deporappViewModel.getIdUsuarioActual()
+        )
 
         deporappViewModel.comentoElUsuario.observe(this, Observer { respuesta ->
-            Log.d("prueba","el usuario ha comentado alguna vez :  $respuesta ")
+            Log.d("prueba", "el usuario ha comentado alguna vez :  $respuesta ")
 
             if (!respuesta) {
                 btn_comentar_lista_comentario.visibility = View.GONE
@@ -84,11 +82,10 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         btn_comentar_lista_comentario.setOnClickListener {
 
             val bundle = Bundle()
-            bundle.putString("id_encuentro_actual",argus?.idEncuentro)
+            bundle.putString("id_encuentro_actual", argus?.idEncuentro)
 
-            findNavController().navigate(R.id.action_ListaComentario_to_Comentario,bundle)
+            findNavController().navigate(R.id.action_ListaComentario_to_Comentario, bundle)
         }
-
 
 
         val idEncuentro = argus?.idEncuentro!!
@@ -98,14 +95,14 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         recyclerView_lista_comentario.adapter = adaptador
 
 
-        deporappViewModel.getListaComentariosEncuentro(idEncuentro).observe(this, Observer { listaComentarios: List<Comentario> ->
+        deporappViewModel.getListaComentariosEncuentro(idEncuentro)
+            .observe(this, Observer { listaComentarios: List<Comentario> ->
 
-            adaptador.actualizar(listaComentarios)
-        })
+                adaptador.actualizar(listaComentarios)
+            })
 
 
     }
-
 
 
     /**
@@ -118,13 +115,17 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
        * primero creamos el adaptador:
        *
        * */
-    private inner class ListaComentariosAdapter: RecyclerView.Adapter<ListaComentariosViewHolder>(){
+    private inner class ListaComentariosAdapter :
+        RecyclerView.Adapter<ListaComentariosViewHolder>() {
 
 
         private val listaComentarios: MutableList<Comentario> = mutableListOf()
 
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaComentariosViewHolder {
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): ListaComentariosViewHolder {
 
             val inflater = LayoutInflater.from(parent.context)
             return ListaComentariosViewHolder(inflater, parent)
@@ -141,7 +142,7 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         }
 
 
-        fun actualizar(listaDeItems: List<Comentario>){
+        fun actualizar(listaDeItems: List<Comentario>) {
             listaComentarios.clear()
             listaComentarios.addAll(listaDeItems)
             notifyDataSetChanged()
@@ -151,23 +152,22 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
     }
 
 
-
-
     /*
 * creamos el ViewHolder
 *
 * */
-    private inner class ListaComentariosViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-        : RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_comentario,parent ,false)){
+    private inner class ListaComentariosViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_comentario, parent, false)) {
 
 
         var conversor = DateUtils()
 
-        fun bind(comentario: Comentario){
+        fun bind(comentario: Comentario) {
 
 
             itemView.tv_puntuacion_comentario.rating = comentario.puntuacion
-            itemView.tv_fecha_publicacion_comentario.text = conversor.convertirTimestampsAStringCompleto(comentario.fecha)
+            itemView.tv_fecha_publicacion_comentario.text =
+                conversor.convertirTimestampsAStringCompleto(comentario.fecha)
             itemView.tv_descripcion_comentario.text = comentario.descripcion
             itemView.tv_apodo_usuario_comentario.text = comentario.apodo_usuario
 
@@ -175,10 +175,6 @@ class ListaComentarioFragment : Fragment(R.layout.fragment_lista_comentario) {
         }
 
     }
-
-
-
-
 
 
 }

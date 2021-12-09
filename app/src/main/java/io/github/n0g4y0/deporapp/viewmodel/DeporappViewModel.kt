@@ -23,13 +23,13 @@ import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 
-class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineScope {
+class DeporappViewModel(val app: Application) : AndroidViewModel(app), CoroutineScope {
 
     /*
     * variables para trabajar con corutinas:
     *
     * */
-    val consultasRepositorio : ConsultasRepositorio = ConsultasRepositorioImpl()
+    val consultasRepositorio: ConsultasRepositorio = ConsultasRepositorioImpl()
 
     // configurar el contexto de la corutina:
     private val compositeJob = Job()
@@ -46,55 +46,56 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     //live-data
 
     private val _codigo_texto_a_mostrar = MutableLiveData<Int>()
-    val codigo_texto_a_mostrar : LiveData<Int> = _codigo_texto_a_mostrar
+    val codigo_texto_a_mostrar: LiveData<Int> = _codigo_texto_a_mostrar
 
     private val _usuarioConsultado = MutableLiveData<Usuario>()
-    val usuarioConsultado : LiveData<Usuario> = _usuarioConsultado
+    val usuarioConsultado: LiveData<Usuario> = _usuarioConsultado
 
 
     private val _comentoElUsuario = MutableLiveData<Boolean>()
-    val comentoElUsuario : LiveData<Boolean> = _comentoElUsuario
+    val comentoElUsuario: LiveData<Boolean> = _comentoElUsuario
 
 
     private val _canchaConsultada = MutableLiveData<Cancha>()
-    val canchaConsultada : LiveData<Cancha> = _canchaConsultada
+    val canchaConsultada: LiveData<Cancha> = _canchaConsultada
 
     private val _equipoConsultado = MutableLiveData<Equipo>()
-    val equipoConsultado : LiveData<Equipo> = _equipoConsultado
-
+    val equipoConsultado: LiveData<Equipo> = _equipoConsultado
 
 
     // traer al usuario con determinado ID:
-    fun traerAlUsuarioDesdeFirestore(idUsuario: String){
+    fun traerAlUsuarioDesdeFirestore(idUsuario: String) {
         if (getUsuarioJob?.isActive == true) getUsuarioJob?.cancel()
 
         getUsuarioJob = launch {
-                    when(val resultado = consultasRepositorio.getUsuarioPorID(idUsuario)) {
+            when (val resultado = consultasRepositorio.getUsuarioPorID(idUsuario)) {
 
-                        is Result.Success -> _usuarioConsultado.value = resultado.data
+                is Result.Success -> _usuarioConsultado.value = resultado.data
 
-                        is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
 
-                        is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.cancelar_proceso_firestore
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.cancelar_proceso_firestore
 
-                    }
+            }
         }
 
     }
 
-    fun traerEquipoDesdeFirestore(id_equipo: String){
+    fun traerEquipoDesdeFirestore(id_equipo: String) {
         if (participanteJob?.isActive == true) participanteJob?.cancel()
 
         participanteJob = launch {
-                when(val resultado = consultasRepositorio.getEquipoPorId(id_equipo)){
+            when (val resultado = consultasRepositorio.getEquipoPorId(id_equipo)) {
 
-                    is Result.Success -> _equipoConsultado.value = resultado.data
+                is Result.Success -> _equipoConsultado.value = resultado.data
 
-                    is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.error_firestore
 
-                    is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.cancelar_proceso_firestore
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.cancelar_proceso_firestore
 
-                }
+            }
         }
     }
 
@@ -127,38 +128,50 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         descripcion: String,
         id_encuentro: String,
         id_usuario: String,
-        apodo_usuario: String){
+        apodo_usuario: String
+    ) {
 
         val fechaActual = System.currentTimeMillis()
 
         val id = UUID.randomUUID().toString()
-        val comentario = Comentario(id = id,puntuacion = puntuacion, descripcion = descripcion,fecha = fechaActual,id_encuentro = id_encuentro, id_usuario = id_usuario, apodo_usuario = apodo_usuario)
+        val comentario = Comentario(
+            id = id,
+            puntuacion = puntuacion,
+            descripcion = descripcion,
+            fecha = fechaActual,
+            id_encuentro = id_encuentro,
+            id_usuario = id_usuario,
+            apodo_usuario = apodo_usuario
+        )
 
         if (crearEncuentroJob?.isActive == true) crearEncuentroJob?.cancel()
         crearEncuentroJob = launch {
-            when(consultasRepositorio.crearComentario(comentario)){
+            when (consultasRepositorio.crearComentario(comentario)) {
 
-                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_exitosamente
+                is Result.Success -> _codigo_texto_a_mostrar.value =
+                    R.string.comentario_creado_firestore_exitosamente
 
-                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_error
+                is Result.Error -> _codigo_texto_a_mostrar.value =
+                    R.string.comentario_creado_firestore_error
 
-                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.comentario_creado_firestore_cancelado
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.comentario_creado_firestore_cancelado
 
             }
         }
 
 
-
     }
 
-    fun elUsuarioCalificoEncuentro(id_encuentro: String,id_usuario: String){
+    fun elUsuarioCalificoEncuentro(id_encuentro: String, id_usuario: String) {
 
         if (preguntarUsuarioEnComentarioJob?.isActive == true) preguntarUsuarioEnComentarioJob?.cancel()
 
 
         preguntarUsuarioEnComentarioJob = launch {
 
-            when(val dato = consultasRepositorio.esteUsuarioYaComentoEncuentro(id_encuentro,id_usuario)){
+            when (val dato =
+                consultasRepositorio.esteUsuarioYaComentoEncuentro(id_encuentro, id_usuario)) {
 
                 is Result.Success -> _comentoElUsuario.value = dato.data
 
@@ -173,46 +186,67 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     // funciones para manejar la creacion de participantes de los encuentros y equipos
 
-    fun crearP_EncuentroConHilos(id_encuentro: String, nombreUsuario: String, photoUrl: String ,id_usuario_actual: String){
+    fun crearP_EncuentroConHilos(
+        id_encuentro: String,
+        nombreUsuario: String,
+        photoUrl: String,
+        id_usuario_actual: String
+    ) {
 
         val id = UUID.randomUUID().toString()
-        val p_encuentro = P_Encuentro(id = id,id_encuentro = id_encuentro, nombre_usuario = nombreUsuario, photo_url = photoUrl ,id_usuario_actual = id_usuario_actual)
+        val p_encuentro = P_Encuentro(
+            id = id,
+            id_encuentro = id_encuentro,
+            nombre_usuario = nombreUsuario,
+            photo_url = photoUrl,
+            id_usuario_actual = id_usuario_actual
+        )
 
         if (participanteJob?.isActive == true) participanteJob?.cancel()
         participanteJob = launch {
-            when(consultasRepositorio.crear_P_encuentro(p_encuentro)){
+            when (consultasRepositorio.crear_P_encuentro(p_encuentro)) {
 
-                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_exitosamente
+                is Result.Success -> _codigo_texto_a_mostrar.value =
+                    R.string.p_encuentro_creado_firestore_exitosamente
 
-                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_error
+                is Result.Error -> _codigo_texto_a_mostrar.value =
+                    R.string.p_encuentro_creado_firestore_error
 
-                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.p_encuentro_creado_firestore_cancelado
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.p_encuentro_creado_firestore_cancelado
 
             }
         }
 
     }
 
-    fun crearP_EquipoConHilos(id_equipo: String, nombreEquipo: String, id_usuario_actual: String){
+    fun crearP_EquipoConHilos(id_equipo: String, nombreEquipo: String, id_usuario_actual: String) {
 
         val id = UUID.randomUUID().toString()
-        val p_Equipo = P_Equipo(id = id,id_equipo = id_equipo, nombre_equipo = nombreEquipo,  id_usuario_actual = id_usuario_actual)
+        val p_Equipo = P_Equipo(
+            id = id,
+            id_equipo = id_equipo,
+            nombre_equipo = nombreEquipo,
+            id_usuario_actual = id_usuario_actual
+        )
 
         if (participanteJob?.isActive == true) participanteJob?.cancel()
         participanteJob = launch {
-            when(consultasRepositorio.crear_P_equipo(p_Equipo)){
+            when (consultasRepositorio.crear_P_equipo(p_Equipo)) {
 
-                is Result.Success -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_exitosamente
+                is Result.Success -> _codigo_texto_a_mostrar.value =
+                    R.string.p_equipo_creado_firestore_exitosamente
 
-                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_error
+                is Result.Error -> _codigo_texto_a_mostrar.value =
+                    R.string.p_equipo_creado_firestore_error
 
-                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.p_equipo_creado_firestore_cancelado
+                is Result.Canceled -> _codigo_texto_a_mostrar.value =
+                    R.string.p_equipo_creado_firestore_cancelado
 
             }
         }
 
     }
-
 
 
     /*
@@ -224,7 +258,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     private val firestore = FirestoreManager()
 
 
-    var ubicacion : MutableLiveData<LatLng> = MutableLiveData()
+    var ubicacion: MutableLiveData<LatLng> = MutableLiveData()
 
     var ruta_foto_local: MutableLiveData<String> = MutableLiveData()
 
@@ -251,7 +285,6 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     var correoUsuarioActual = ObservableField("")
 
 
-
     /*
     * Funciones:
     *
@@ -267,51 +300,60 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     }
 
 
-
-    fun ubicacionSeleccionada(nuevaUbicacion: LatLng){
+    fun ubicacionSeleccionada(nuevaUbicacion: LatLng) {
         ubicacion.value = nuevaUbicacion
     }
 
-    fun setRutaFotoActual(nuevo: String){
+    fun setRutaFotoActual(nuevo: String) {
         ruta_foto_local.value = nuevo
     }
 
 
-    fun cerrarSession(){
+    fun cerrarSession() {
 
         authManager.cerrarSesion(this.app)
 
     }
 
-    fun getListaCanchas(): LiveData<List<Cancha>>{
+    fun getListaCanchas(): LiveData<List<Cancha>> {
 
         return firestore.enCambiosDeValorCanchas()
 
     }
 
-    fun getListaAnuncios(): LiveData<List<Anuncio>>{
+    fun getListaAnuncios(): LiveData<List<Anuncio>> {
         return firestore.cambiosDeValorAnuncios()
     }
 
-    fun getListaEquipos(): LiveData<List<Equipo>>{
+    fun getListaEquipos(): LiveData<List<Equipo>> {
 
         return firestore.cambiosDeValorEquipos()
-        
+
     }
 
-    fun getLista_p_equipos(): LiveData<List<P_Equipo>>{
+    fun getLista_p_equipos(): LiveData<List<P_Equipo>> {
         return firestore.cambiosDeValor_P_Equipos(getIdUsuarioActual())
     }
 
-    fun agregarEquipo(nombre: String,
-                      descripcion: String,
-                      siFutbol: Boolean,
-                      siFutsal: Boolean,
-                      siBasquet: Boolean,
-                      siVoley: Boolean
-                      ){
+    fun agregarEquipo(
+        nombre: String,
+        descripcion: String,
+        siFutbol: Boolean,
+        siFutsal: Boolean,
+        siBasquet: Boolean,
+        siVoley: Boolean
+    ) {
 
-        return firestore.agregarEquipo(nombre,descripcion,siFutbol,siFutsal,siBasquet,siVoley, ::agregadoExitoso, ::agregadoFallido)
+        return firestore.agregarEquipo(
+            nombre,
+            descripcion,
+            siFutbol,
+            siFutsal,
+            siBasquet,
+            siVoley,
+            ::agregadoExitoso,
+            ::agregadoFallido
+        )
 
     }
 
@@ -321,7 +363,7 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     fun agregarEncuentro(
         nombre: String,
-        idCancha:String,
+        idCancha: String,
         fecha: Long,
         hora: Long,
         cupos: Int,
@@ -331,24 +373,43 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         fk_cancha_lat: Double,
         fk_cancha_lng: Double,
         fk_usuario_nick: String,
-        fk_usuario_foto_url: String){
+        fk_usuario_foto_url: String,
+        id_equipo: String
+    ) {
 
-        return firestore.agregarEncuentro(nombre,idCancha,fecha,hora,cupos,nota,deporte,esPrivado,fk_cancha_lat,fk_cancha_lng,fk_usuario_nick,fk_usuario_foto_url,::agregadoExitoso, ::agregadoFallido)
+        return firestore.agregarEncuentro(
+            nombre,
+            idCancha,
+            fecha,
+            hora,
+            cupos,
+            nota,
+            deporte,
+            esPrivado,
+            fk_cancha_lat,
+            fk_cancha_lng,
+            fk_usuario_nick,
+            fk_usuario_foto_url,
+            id_equipo,
+            ::agregadoExitoso,
+            ::agregadoFallido
+        )
 
     }
-    fun getListaEncuentros(): LiveData<List<Encuentro>>{
+
+    fun getListaEncuentros(): LiveData<List<Encuentro>> {
 
         return firestore.cambiosDeValorEncuentros()
 
     }
 
-    fun getListaEncuentrosPendientes(): LiveData<List<Encuentro>>{
+    fun getListaEncuentrosPendientes(): LiveData<List<Encuentro>> {
 
         return firestore.listenerCambiosDeValorEncuentrosPendientes()
 
     }
 
-    fun getListaEncuentrosConcluidos(): LiveData<List<Encuentro>>{
+    fun getListaEncuentrosConcluidos(): LiveData<List<Encuentro>> {
 
         return firestore.listenerCambiosDeValorEncuentrosConcluidos()
 
@@ -358,26 +419,33 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
         puntuacion: Float,
         descripcion: String,
         id_encuentro: String,
-        id_usuario: String) {
+        id_usuario: String
+    ) {
 
-        return firestore.agregarComentario(puntuacion,descripcion,id_encuentro,id_usuario,::agregadoExitoso, ::agregadoFallido)
+        return firestore.agregarComentario(
+            puntuacion,
+            descripcion,
+            id_encuentro,
+            id_usuario,
+            ::agregadoExitoso,
+            ::agregadoFallido
+        )
     }
 
-    fun getListaComentariosEncuentro(idEncuentro: String): LiveData<List<Comentario>>{
+    fun getListaComentariosEncuentro(idEncuentro: String): LiveData<List<Comentario>> {
 
         return firestore.listenerCambiosDeValorComentarios(idEncuentro)
     }
 
-    fun getListaEncuentrosByIDCancha(idCancha: String): LiveData<List<Encuentro>>{
+    fun getListaEncuentrosByIDCancha(idCancha: String): LiveData<List<Encuentro>> {
 
         return firestore.listenerCambiosDeValorEncuentrosByID(idCancha)
 
     }
 
-    fun getLista_P_encuentroById(idEncuentro: String): LiveData<List<P_Encuentro>>{
+    fun getLista_P_encuentroById(idEncuentro: String): LiveData<List<P_Encuentro>> {
         return firestore.listenerCambiosDevalor_P_EncuentrosById(idEncuentro)
     }
-
 
 
     // mensajes exito o fracaso, subida al FIRESTORE
@@ -392,24 +460,24 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
     }
 
 
-    fun setFechaEncuentro(nuevaFecha: Date){
+    fun setFechaEncuentro(nuevaFecha: Date) {
         fechaEncuentro.value = nuevaFecha
     }
 
-    fun setHoraEncuentro(nuevaHora: Date){
+    fun setHoraEncuentro(nuevaHora: Date) {
         horaEncuentro.value = nuevaHora
 
     }
 
-    fun setIdCanchaEncuentro(nuevoId: Cancha){
+    fun setIdCanchaEncuentro(nuevoId: Cancha) {
         idCanchaEncuentro.value = nuevoId
     }
 
-    fun setidEquipoEncuentro(nuevoId: P_Equipo){
+    fun setidEquipoEncuentro(nuevoId: P_Equipo) {
         idEquipoEncuentro.value = nuevoId
     }
 
-    fun reiniciarLasVariablesMutables(){
+    fun reiniciarLasVariablesMutables() {
         ubicacion.value = null
         ruta_foto_local.value = null
         fechaEncuentro.value = null
@@ -418,34 +486,33 @@ class DeporappViewModel(val app: Application): AndroidViewModel(app), CoroutineS
 
     }
 
-    fun getIdUsuarioActual(): String{
+    fun getIdUsuarioActual(): String {
         return authManager.getIdUsuarioActual()
-        Log.d("prueba","prueba de " + getPhotoUrlUsuarioActual())
     }
 
-    fun getNombreUsuarioActual(): String{
+    fun getNombreUsuarioActual(): String {
         return authManager.getNombreUsuarioActual()
     }
-    fun getPhotoUrlUsuarioActual(): String{
+
+    fun getPhotoUrlUsuarioActual(): String {
         return authManager.getFotoUrlUsuarioActual().toString()
     }
-    fun getCorreoUsuarioActual(): String{
+
+    fun getCorreoUsuarioActual(): String {
         return authManager.getCorreoUsuarioActual()!!
     }
-    fun getApodoUsuarioActual(): String{
+
+    fun getApodoUsuarioActual(): String {
         return getCorreoUsuarioActual().substringBefore('@')
     }
 
 
-
-
-    fun cargarPerfil(){
+    fun cargarPerfil() {
 
         nombreUsuarioActual.set(getNombreUsuarioActual())
         correoUsuarioActual.set(getCorreoUsuarioActual())
         fotoPerfilUsuarioActual.set(getPhotoUrlUsuarioActual())
     }
-
 
 
 }

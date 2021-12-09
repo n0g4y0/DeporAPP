@@ -41,7 +41,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
         encuentros_recycler_view.adapter = adaptador
 
-        deporappViewModel?.getListaEncuentros()
+        deporappViewModel.getListaEncuentros()
             .observe(this, Observer { listaEncuentros: List<Encuentro> ->
 
                 adaptador.actualizar(listaEncuentros)
@@ -140,7 +140,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
                 val codigoUbicacion = "geo:${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}?" +
                         "q=${encuentro.fk_cancha_lat},${encuentro.fk_cancha_lng}(Cancha)"
-                val intent = Intent(android.content.Intent.ACTION_VIEW, Uri.parse(codigoUbicacion))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(codigoUbicacion))
                 startActivity(intent)
 
             }
@@ -171,20 +171,22 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
 
                         deporappViewModel.traerAlUsuarioDesdeFirestore(deporappViewModel.getIdUsuarioActual())
 
-                        deporappViewModel.usuarioConsultado.observe(this@ListaJuegosFragment, Observer { respuesta ->
+                        deporappViewModel.usuarioConsultado.observe(
+                            this@ListaJuegosFragment,
+                            Observer { respuesta ->
 
-                            if (respuesta != null){
+                                if (respuesta != null) {
 
-                                enviarP_EncuentroAlFirebase(
-                                    encuentro.id,
-                                    respuesta.nombre,
-                                    deporappViewModel.getPhotoUrlUsuarioActual(),
-                                    deporappViewModel.getIdUsuarioActual()
-                                )
+                                    enviarP_EncuentroAlFirebase(
+                                        encuentro.id,
+                                        respuesta.nombre,
+                                        deporappViewModel.getPhotoUrlUsuarioActual(),
+                                        deporappViewModel.getIdUsuarioActual()
+                                    )
 
-                            }
+                                }
 
-                        })
+                            })
 
 
                     }
@@ -199,7 +201,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                 bundle.putString("id", encuentro.id)
                 bundle.putString("id_equipo", encuentro.id_equipo)
 
-                findNavController().navigate(R.id.listaParticipantesFragment, bundle)
+                findNavController().navigate(R.id.action_encuentro_to_listaParticipantes, bundle)
             }
 
 
@@ -213,8 +215,13 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
         photoUrl: String,
         idUsuarioActual: String
     ) {
-        //Log.d("solicitud","nombre: " + nombre)
-        deporappViewModel.crearP_EncuentroConHilos(idEncuentro, nombreUsuario, photoUrl,idUsuarioActual)
+        Log.d("solicitud", "creado")
+        deporappViewModel.crearP_EncuentroConHilos(
+            idEncuentro,
+            nombreUsuario,
+            photoUrl,
+            idUsuarioActual
+        )
     }
 
 
