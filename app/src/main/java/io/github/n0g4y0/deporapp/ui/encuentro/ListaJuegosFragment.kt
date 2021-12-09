@@ -169,12 +169,24 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                     )
                     .setPositiveButton("SI") { _, _ ->
 
-                        enviarP_EncuentroAlFirebase(
-                            encuentro.id,
-                            deporappViewModel.getNombreUsuarioActual(),
-                            deporappViewModel.getPhotoUrlUsuarioActual(),
-                            deporappViewModel.getIdUsuarioActual()
-                        )
+                        deporappViewModel.traerAlUsuarioDesdeFirestore(deporappViewModel.getIdUsuarioActual())
+
+                        deporappViewModel.usuarioConsultado.observe(this@ListaJuegosFragment, Observer { respuesta ->
+
+                            if (respuesta != null){
+
+                                enviarP_EncuentroAlFirebase(
+                                    encuentro.id,
+                                    respuesta.nombre,
+                                    deporappViewModel.getPhotoUrlUsuarioActual(),
+                                    deporappViewModel.getIdUsuarioActual()
+                                )
+
+                            }
+
+                        })
+
+
                     }
                     .setNegativeButton("NO", null)
                     .create().show()

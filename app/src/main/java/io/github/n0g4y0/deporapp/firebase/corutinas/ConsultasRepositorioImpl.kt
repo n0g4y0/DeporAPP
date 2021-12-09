@@ -1,5 +1,6 @@
 package io.github.n0g4y0.deporapp.firebase.corutinas
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.n0g4y0.deporapp.firebase.auth.AutentificacionManager
 import io.github.n0g4y0.deporapp.model.*
@@ -62,9 +63,10 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
         return when (val documentoResultanteSnapshot = coleccionUsuarios.document(idUsuario).get().await()){
 
             is Result.Success -> {
-                    val usuario = documentoResultanteSnapshot.data.toObject(Usuario::class.java)!!
-                    Result.Success(usuario)
-            }
+                        val usuario = documentoResultanteSnapshot.data.toObject(Usuario::class.java)!!
+                        Result.Success(usuario)
+
+                    }
 
             is Result.Error -> Result.Error(documentoResultanteSnapshot.exception)
 
@@ -92,6 +94,8 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
     }
 
     override suspend fun getEquipoPorId(idEquipo: String): Result<Equipo>{
+
+        Log.d("idequipo", "id equipo$idEquipo")
 
         return when (val equipoEncontrado = coleccionEquipos.document(idEquipo).get().await()){
 

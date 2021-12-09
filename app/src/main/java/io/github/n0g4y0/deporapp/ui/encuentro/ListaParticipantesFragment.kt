@@ -1,6 +1,7 @@
 package io.github.n0g4y0.deporapp.ui.encuentro
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class ListaParticipantesFragment : Fragment(R.layout.fragment_lista_participante
         arguments?.let {
 
             argus = ListaParticipantesFragmentArgs.fromBundle(it)
-
+            Log.d("id del equipo es: ", "id equipo 1:  ${argus?.idEquipo!!}")
             deporappViewModel.traerEquipoDesdeFirestore(argus?.idEquipo!!)
 
             deporappViewModel.equipoConsultado.observe(this, Observer { respuesta ->

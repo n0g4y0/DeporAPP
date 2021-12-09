@@ -6,5 +6,6 @@ data class Usuario(
     var nombre: String = "",
     var correo: String = "",
     var foto_url: String = "",
-    var apodo: String = ""
+    var apodo: String = "",
+    var fecha_timestamp: Long = 0L
 )

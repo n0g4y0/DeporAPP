@@ -375,7 +375,7 @@ class FirestoreManager {
                       foto_url: String,
                       enAcciondeExito: () -> Unit, enAcciondeFracaso: () -> Unit ){
 
-        val referenciaDocumento = baseDeDato.collection(COLECCION_USUARIOS).document()
+        val referenciaDocumento = baseDeDato.collection(COLECCION_USUARIOS).document(id)
 
         val usuarios = HashMap<String,Any>()
 
