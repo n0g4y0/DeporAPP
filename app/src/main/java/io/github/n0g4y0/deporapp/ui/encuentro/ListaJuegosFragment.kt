@@ -187,7 +187,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                                 }
 
                             })
-
+                        Toast.makeText(activity?.applicationContext, "Enviando Solicitud....", Toast.LENGTH_LONG).show()
 
                     }
                     .setNegativeButton("NO", null)

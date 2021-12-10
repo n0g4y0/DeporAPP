@@ -49,11 +49,28 @@
         <action
                 android:id="@+id/action_listaEquipoFragment_to_crearEquipoFragment"
                 app:destination="@id/crearEquipoFragment" />
+        <action
+                android:id="@+id/action_equipo_to_listaParticipantesEquipo"
+                app:destination="@id/listaIntegrantesEquipoFragment"
+                app:enterAnim="@anim/fui_slide_in_right"
+                app:exitAnim="@anim/fui_slide_out_left"
+                app:popUpToInclusive="false" />
     </fragment>
     <fragment
             android:id="@+id/crearEquipoFragment"
             android:name="io.github.n0g4y0.deporapp.ui.equipo.CrearEquipoFragment"
             android:label="Crear Equipo" />
+
+    <fragment
+            android:id="@+id/listaIntegrantesEquipoFragment"
+            android:name="io.github.n0g4y0.deporapp.ui.equipo.ListaIntegrantesEquipoFragment"
+            android:label="Lista Integrantes" >
+        <argument
+                android:name="id_equipo"
+                app:argType="string"
+                app:nullable="true" />
+    </fragment>
+
     <fragment
             android:id="@+id/listaJuegosFragment"
             android:name="io.github.n0g4y0.deporapp.ui.encuentro.ListaJuegosFragment"

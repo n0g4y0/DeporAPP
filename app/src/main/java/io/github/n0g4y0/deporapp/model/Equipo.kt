@@ -8,4 +8,5 @@ data class Equipo(val id: String = "",
                   var esFutsal: Boolean = false,
                   var esBasquet: Boolean = false,
                   var esVoley: Boolean = false,
-                  val fecha_timestamp: Long = 0L)
+                  val fecha_timestamp: Long = 0L,
+                  var cantidad_integrantes: Int = 1)

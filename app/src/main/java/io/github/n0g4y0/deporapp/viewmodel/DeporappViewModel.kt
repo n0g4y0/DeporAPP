@@ -227,7 +227,9 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
             id = id,
             id_equipo = id_equipo,
             nombre_equipo = nombreEquipo,
-            id_usuario_actual = id_usuario_actual
+            id_usuario_actual = id_usuario_actual,
+            nombre_usuario = getNombreUsuarioActual(),
+            photo_usuario = getPhotoUrlUsuarioActual()
         )
 
         if (participanteJob?.isActive == true) participanteJob?.cancel()
@@ -445,6 +447,10 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
 
     fun getLista_P_encuentroById(idEncuentro: String): LiveData<List<P_Encuentro>> {
         return firestore.listenerCambiosDevalor_P_EncuentrosById(idEncuentro)
+    }
+
+    fun getLista_P_equipoById(idEquipo: String) : LiveData<List<P_Equipo>>{
+        return firestore.listenerCambiosDevalor_P_EquipoById(idEquipo)
     }
 
 

@@ -47,6 +47,7 @@ private const val CLAVE_TITULO_DESCRIPCION = "descripcion"
 private const val CLAVE_EQUIPO_NOMRE = "nombre"
 private const val CLAVE_DESCRIPCION_EQUIPO = "descripcion"
 private const val CLAVE_ID_ADMIN = "idAdmin"
+private const val CLAVE_CANTIDAD_INTEGRANTES = "cantidad_integrantes"
 
 // valores staticos,  participantes equipos:
 
@@ -99,6 +100,9 @@ private const val CLAVE_ID_USUARIO_COMENTARIO = "id_usuario"
 private const val CLAVE_ID_P_ENCUENTRO = "id_encuentro"
 
 
+// valores estaticos, integrantes de un equipo:
+
+private const val CLAVE_ID_P_EQUIPO = "id_equipo"
 
 
 private lateinit var registrosCanchas: ListenerRegistration
@@ -114,6 +118,8 @@ private lateinit var registrosEncuentrosConcluidos : ListenerRegistration
 
 private lateinit var registrosEncuentrosByIdCancha : ListenerRegistration
 private lateinit var registros_P_Encuentros : ListenerRegistration
+
+private lateinit var registros_P_Equipo : ListenerRegistration
 
 class FirestoreManager {
 
@@ -141,6 +147,8 @@ class FirestoreManager {
     private val valoresEncuentrosByIdCancha = MutableLiveData<List<Encuentro>>()
 
     private val valores_P_Encuentros = MutableLiveData<List<P_Encuentro>>()
+
+    private val valores_P_Equipo = MutableLiveData<List<P_Equipo>>()
 
 
 
@@ -221,6 +229,7 @@ class FirestoreManager {
         equipo[CLAVE_BASQUET] = siBasquet
         equipo[CLAVE_VOLEY] = siVoley
         equipo[CLAVE_FECHA] = getTiempoActual()
+        equipo[CLAVE_CANTIDAD_INTEGRANTES] = 1
 
 
         referenciaDocumento
@@ -688,6 +697,11 @@ class FirestoreManager {
         return valores_P_Encuentros
     }
 
+    fun listenerCambiosDevalor_P_EquipoById(id_equipo: String): LiveData<List<P_Equipo>>{
+        escucharPorCambiosEnValores_P_EquipoById(id_equipo)
+        return valores_P_Equipo
+    }
+
     private fun escucharPorCambiosEnValores_P_EncuentrosByIdCancha(idEncuentro: String) {
         registros_P_Encuentros= baseDeDato.collection(COLECCION_P_ENCUENTROS)
             .whereEqualTo(CLAVE_ID_P_ENCUENTRO,idEncuentro)
@@ -712,6 +726,34 @@ class FirestoreManager {
                     }
 
                     valores_P_Encuentros.postValue(p_encuentros)
+                }
+            })
+    }
+
+    private fun escucharPorCambiosEnValores_P_EquipoById(idEquipo: String) {
+        registros_P_Equipo= baseDeDato.collection(COLECCION_P_EQUIPOS)
+            .whereEqualTo(CLAVE_ID_P_EQUIPO,idEquipo)
+
+            .addSnapshotListener(EventListener<QuerySnapshot> { valor, error ->
+
+                if (error != null || valor == null) {
+                    return@EventListener
+                }
+
+                if (valor.isEmpty) {
+
+                    valores_P_Equipo.postValue(emptyList())
+
+                } else {
+
+                    val p_equipo = ArrayList<P_Equipo>()
+
+                    for (doc in valor) {
+                        val participante = doc.toObject(P_Equipo::class.java)
+                        p_equipo.add(participante)
+                    }
+
+                    valores_P_Equipo.postValue(p_equipo)
                 }
             })
     }
