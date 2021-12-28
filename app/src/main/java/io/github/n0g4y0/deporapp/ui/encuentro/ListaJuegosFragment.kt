@@ -126,6 +126,10 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
             itemView.tv_dia_encuentro.text = conversor.convertirTimestampDia(encuentro.fecha)
             itemView.tv_nombre_mes_encuentro.text =
                 conversor.convertirTimestampNombreMes(encuentro.fecha)
+
+            if (encuentro.cupos <= 0){
+                itemView.tv_cantidad_cupos_encuentro.visibility = View.GONE
+            }
             itemView.tv_cantidad_cupos_encuentro.text = "${encuentro.cupos} Cupos"
             itemView.tv_hora_encuentro.text = conversor.convertirTimeStampAHora(encuentro.hora)
             itemView.tv_deporte_practicar_encuentro.text = encuentro.deporte
@@ -194,7 +198,7 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                     .create().show()
 
 
-                deporappViewModel.disminuirCantParticipantes(encuentro.id)
+                deporappViewModel.disminuirCantParticipantes(encuentro)
             }
 
 

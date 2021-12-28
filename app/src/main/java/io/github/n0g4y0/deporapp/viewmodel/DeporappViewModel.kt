@@ -188,7 +188,7 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
 
     }
 
-    fun disminuirCantParticipantes(idEncuentro: String): Boolean{
+    fun disminuirCantParticipantes(encuentro: Encuentro){
 
         if (disminuirParticipanteJob?.isActive == true) disminuirParticipanteJob?.cancel()
 
@@ -196,9 +196,9 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
         disminuirParticipanteJob = launch {
 
             when (val dato =
-                consultasRepositorio.disminuirParticipante(idEncuentro)) {
+                consultasRepositorio.disminuirParticipante(encuentro)) {
 
-                is Result.Success -> _disminuirParticipante.value = dato
+                is Result.Success -> _disminuirParticipante.value = dato.data
 
                 is Result.Error -> _codigo_texto_a_mostrar.value = R.string.msj_default_error
 

@@ -20,6 +20,6 @@ interface ConsultasRepositorio {
 
     suspend fun crear_P_equipo(pEquipo: P_Equipo): Result<Void?>
 
-    suspend fun disminuirParticipante(id_encuentro: String): Boolean
+    suspend fun disminuirParticipante(encuentro: Encuentro): Result<Boolean>
 
 }

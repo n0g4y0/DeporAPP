@@ -112,9 +112,47 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
 
     }
 
-    override suspend fun disminuirParticipante(id_encuentro: String): Boolean{
-        //falta
-        return true
+    override suspend fun disminuirParticipante(encuentro: Encuentro): Result<Boolean>{
+
+        var cupoActual = encuentro.cupos
+        cupoActual--
+
+        val nuevoEncuentro: Encuentro = Encuentro(
+            encuentro.id,
+            encuentro.nombre,
+            encuentro.id_cancha,
+            encuentro.fecha,
+            encuentro.hora,
+            cupoActual,
+            encuentro.nota,
+            encuentro.deporte,
+            encuentro.esPrivado,
+            encuentro.id_creador,
+            encuentro.fecha_creacion,
+            encuentro.fk_cancha_lat,
+            encuentro.fk_cancha_lng,
+            encuentro.fk_usuario_nick,
+            encuentro.fk_usuario_foto_url,
+            encuentro.id_equipo
+        )
+
+        return when (val encuentroEncontrado = coleccionEncuentros.document(encuentro.id).set(nuevoEncuentro).await()){
+
+            is Result.Success -> {
+                if (encuentro != null){
+                    Result.Success(true)
+                }
+                else{
+                    Result.Success(false)
+                }
+
+            }
+
+            is Result.Error -> Result.Error(encuentroEncontrado.exception)
+
+            is Result.Canceled -> Result.Canceled (encuentroEncontrado.exception)
+
+        }
     }
 
     override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document(comentario.id).set(comentario).await()
