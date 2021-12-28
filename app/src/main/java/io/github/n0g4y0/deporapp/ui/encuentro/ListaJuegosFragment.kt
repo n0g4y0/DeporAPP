@@ -192,6 +192,9 @@ class ListaJuegosFragment : Fragment(R.layout.fragment_lista_juegos) {
                     }
                     .setNegativeButton("NO", null)
                     .create().show()
+
+
+                deporappViewModel.disminuirCantParticipantes(encuentro.id)
             }
 
 

@@ -42,6 +42,7 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
     private var preguntarUsuarioEnComentarioJob: Job? = null
     private var getCanchaJob: Job? = null
     private var participanteJob: Job? = null
+    private var disminuirParticipanteJob: Job? = null
 
     //live-data
 
@@ -61,6 +62,9 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
 
     private val _equipoConsultado = MutableLiveData<Equipo>()
     val equipoConsultado: LiveData<Equipo> = _equipoConsultado
+
+    private val _disminuirParticipante = MutableLiveData<Boolean>()
+    val disminuirParticipante: LiveData<Boolean> = _disminuirParticipante
 
 
     // traer al usuario con determinado ID:
@@ -174,6 +178,27 @@ class DeporappViewModel(val app: Application) : AndroidViewModel(app), Coroutine
                 consultasRepositorio.esteUsuarioYaComentoEncuentro(id_encuentro, id_usuario)) {
 
                 is Result.Success -> _comentoElUsuario.value = dato.data
+
+                is Result.Error -> _codigo_texto_a_mostrar.value = R.string.msj_default_error
+
+                is Result.Canceled -> _codigo_texto_a_mostrar.value = R.string.msj_default_cancelado
+
+            }
+        }
+
+    }
+
+    fun disminuirCantParticipantes(idEncuentro: String): Boolean{
+
+        if (disminuirParticipanteJob?.isActive == true) disminuirParticipanteJob?.cancel()
+
+
+        disminuirParticipanteJob = launch {
+
+            when (val dato =
+                consultasRepositorio.disminuirParticipante(idEncuentro)) {
+
+                is Result.Success -> _disminuirParticipante.value = dato
 
                 is Result.Error -> _codigo_texto_a_mostrar.value = R.string.msj_default_error
 

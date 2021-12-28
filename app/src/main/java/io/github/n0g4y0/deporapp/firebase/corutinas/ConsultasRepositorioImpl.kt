@@ -112,6 +112,11 @@ class ConsultasRepositorioImpl: ConsultasRepositorio {
 
     }
 
+    override suspend fun disminuirParticipante(id_encuentro: String): Boolean{
+        //falta
+        return true
+    }
+
     override suspend fun crearComentario(comentario: Comentario) = coleccionComentarios.document(comentario.id).set(comentario).await()
 
     override suspend fun crear_P_encuentro(pEncuentro: P_Encuentro) = coleccion_P_Encuentros.document(pEncuentro.id).set(pEncuentro).await()
